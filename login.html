@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Нэвтрэх — Shambala2056 CS2 Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@200;300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0b09;--bg2:#121109;--bg3:#181610;
+  --sand:#c8a96e;--sand2:#e8c888;
+  --teal:#00c8a0;--teal2:#00e8b8;
+  --ember:#e05820;
+  --ln:#242018;--ln2:#302c20;
+  --dim:#504830;--mid:#908060;
+  --txt:#d0c8a8;--wht:#f0ead8;
+  --grn:#22c55e;--red:#ef4444;
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Sora',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden;min-height:100svh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height%3D'100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:180px}
+
+nav{position:fixed;top:0;inset-x:0;z-index:500;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid var(--ln);background:rgba(12,11,9,.96);backdrop-filter:blur(16px)}
+.nav-left{display:flex;flex-direction:column;gap:1px}
+.nav-parent{font-family:var(--fm);font-size:.57rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim)}
+.nav-brand{font-family:var(--fd);font-size:1.1rem;letter-spacing:3px;color:var(--sand);text-decoration:none;display:flex;align-items:center;gap:7px}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-family:var(--fm);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--sand)}
+.nav-cta{font-family:var(--fm);font-size:.63rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--teal);color:#000;padding:9px 22px;border:none;cursor:pointer;text-decoration:none;transition:background .15s;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}
+.nav-cta:hover{background:var(--teal2)}
+
+/* ── MAIN LAYOUT ── */
+.page{flex:1;display:flex;align-items:center;justify-content:center;padding:80px 20px 48px;position:relative;overflow:hidden}
+.page-bg{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 60% at 50% 50%,rgba(200,169,110,.04) 0%,transparent 60%),
+  radial-gradient(ellipse 40% 40% at 20% 30%,rgba(0,200,160,.03) 0%,transparent 55%)}
+.page-grid{position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:72px 72px;opacity:.3;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 20%,transparent 80%)}
+
+/* ── AUTH CARD ── */
+.auth-wrap{position:relative;z-index:2;width:100%;max-width:440px}
+.auth-eyebrow{font-family:var(--fm);font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.auth-eyebrow::before{content:'';width:20px;height:1px;background:var(--teal)}
+.auth-title{font-family:var(--fd);font-size:3.2rem;letter-spacing:2px;color:var(--wht);line-height:.95;margin-bottom:6px}
+.auth-title .sand{color:var(--sand)}
+.auth-sub{font-family:var(--fm);font-size:.63rem;letter-spacing:1.5px;color:var(--dim);margin-bottom:36px}
+
+.auth-card{background:var(--bg2);border:1px solid var(--ln2);position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 18px) 0,100% 18px,100% 100%,18px 100%,0 calc(100% - 18px))}
+.auth-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--sand),transparent)}
+
+.auth-form{padding:32px 32px 28px;display:flex;flex-direction:column;gap:1px}
+
+.fgrp{display:flex;flex-direction:column;margin-bottom:1px}
+.flbl{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:9px 13px 0;background:var(--bg3);border:1px solid var(--ln);border-bottom:none}
+.finp{background:var(--bg3);border:1px solid var(--ln);border-top:none;color:var(--txt);padding:10px 13px 12px;font-family:var(--fb);font-size:.88rem;font-weight:300;outline:none;width:100%;transition:border-color .15s}
+.finp:focus{border-color:var(--teal);z-index:1;position:relative}
+.finp::placeholder{color:var(--dim);opacity:.7}
+
+.ferr{font-family:var(--fm);font-size:.63rem;color:var(--red);letter-spacing:1px;padding:8px 0;display:none;margin-top:4px}
+.fsub{font-family:var(--fm);font-size:.66rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#000;background:var(--teal);border:none;padding:14px;cursor:pointer;width:100%;transition:background .15s;margin-top:6px;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.fsub:hover{background:var(--teal2)}
+.fsub:disabled{opacity:.5;cursor:not-allowed}
+
+.auth-foot{padding:18px 32px 24px;border-top:1px solid var(--ln);display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.auth-foot-txt{font-family:var(--fm);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)}
+.auth-foot-link{font-family:var(--fm);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);text-decoration:none;transition:color .15s}
+.auth-foot-link:hover{color:var(--teal2)}
+
+/* loading spinner */
+.spin{display:none;width:14px;height:14px;border:2px solid rgba(0,0,0,.3);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;margin:0 auto}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+footer{border-top:1px solid var(--ln);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);flex-wrap:wrap;gap:14px}
+.foot-l{display:flex;flex-direction:column;gap:2px}
+.foot-parent{font-family:var(--fm);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.foot-brand{font-family:var(--fd);font-size:1rem;letter-spacing:3px;color:var(--sand)}
+.foot-r{font-family:var(--fm);font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)}
+
+@media(max-width:600px){
+  nav{padding:0 20px}
+  nav .nav-links{display:none}
+  footer{padding:20px}
+  .page{padding:72px 16px 40px}
+  .auth-form{padding:24px 20px 20px}
+  .auth-foot{padding:14px 20px 20px}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <span class="nav-parent">Shambala2056 · Дэд Төсөл</span>
+    <a class="nav-brand" href="cs2-enrollment.html"><span class="nav-dot"></span>CS2 ACADEMY</a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="cs2-enrollment.html#about">Бидний тухай</a></li>
+    <li><a href="cs2-enrollment.html#programs">Хөтөлбөр</a></li>
+    <li><a href="cs2-enrollment.html#register">Бүртгэл</a></li>
+  </ul>
+  <a class="nav-cta" href="register.html">Бүртгүүлэх</a>
+</nav>
+
+<main class="page">
+  <div class="page-bg"></div>
+  <div class="page-grid"></div>
+
+  <div class="auth-wrap">
+    <div class="auth-eyebrow">Нэвтрэх хаалга</div>
+    <h1 class="auth-title">SIGN <span class="sand">IN</span></h1>
+    <div class="auth-sub">// CS2 ACADEMY · SHAMBALA2056</div>
+
+    <div class="auth-card">
+      <div class="auth-form" id="loginForm">
+        <div class="fgrp">
+          <div class="flbl">Имэйл хаяг</div>
+          <input class="finp" type="email" id="em" placeholder="name@email.com" autocomplete="email">
+        </div>
+        <div class="fgrp" style="margin-top:1px">
+          <div class="flbl">Нууц үг</div>
+          <input class="finp" type="password" id="pw" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <div class="ferr" id="ferr"></div>
+        <button class="fsub" id="loginBtn" onclick="doLogin()">
+          <span id="btnTxt">НЭВТРЭХ →</span>
+          <span class="spin" id="spinner"></span>
+        </button>
+      </div>
+      <div class="auth-foot">
+        <span class="auth-foot-txt">Бүртгэл байхгүй юу?</span>
+        <a class="auth-foot-link" href="register.html">Бүртгүүлэх →</a>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="foot-l">
+    <span class="foot-parent">Shambala2056 · Инженерийн Суурин · Дорноговь</span>
+    <span class="foot-brand">CS2 ACADEMY</span>
+  </div>
+  <div class="foot-r">© 2026 — Дэд Төсөл · Дижитал / eSports</div>
+</footer>
+
+<script type="module">
+import { auth } from './js/firebase-config.js';
+import {
+  signInWithEmailAndPassword,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+
+// Аль хэдийн нэвтэрсэн бол dashboard руу шилжүүлнэ
+onAuthStateChanged(auth, user => {
+  if (user) window.location.href = 'dashboard.html';
+});
+
+window.doLogin = async function() {
+  const em  = document.getElementById('em').value.trim();
+  const pw  = document.getElementById('pw').value;
+  const err = document.getElementById('ferr');
+  const btn = document.getElementById('loginBtn');
+  const sp  = document.getElementById('spinner');
+  const txt = document.getElementById('btnTxt');
+
+  err.style.display = 'none';
+
+  if (!em || !em.includes('@')) { showErr('Зөв имэйл хаяг оруулна уу.'); return; }
+  if (!pw || pw.length < 6)     { showErr('Нууц үг 6-аас дээш тэмдэгт байна.'); return; }
+
+  btn.disabled = true;
+  txt.style.display = 'none';
+  sp.style.display  = 'block';
+
+  try {
+    await signInWithEmailAndPassword(auth, em, pw);
+    // onAuthStateChanged дотор redirect хийнэ
+  } catch (e) {
+    btn.disabled = false;
+    txt.style.display = 'block';
+    sp.style.display  = 'none';
+    showErr(firebaseMsg(e.code));
+  }
+
+  function showErr(msg) {
+    err.textContent = msg;
+    err.style.display = 'block';
+  }
+};
+
+// Enter товч
+document.addEventListener('keydown', e => {
+  if (e.key === 'Enter') window.doLogin();
+});
+
+function firebaseMsg(code) {
+  const map = {
+    'auth/user-not-found':   'Энэ имэйлтэй хэрэглэгч олдсонгүй.',
+    'auth/wrong-password':   'Нууц үг буруу байна.',
+    'auth/invalid-email':    'Имэйл хаяг буруу формат.',
+    'auth/too-many-requests':'Олон удаа оролдсон. Түр хүлээгээд дахин оролдоно уу.',
+    'auth/invalid-credential':'Имэйл эсвэл нууц үг буруу байна.',
+  };
+  return map[code] || 'Алдаа гарлаа. Дахин оролдоно уу.';
+}
+</script>
+</body>
+</html>

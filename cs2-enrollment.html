@@ -238,7 +238,9 @@ footer{border-top:1px solid var(--ln);padding:32px 48px;display:flex;align-items
     <li><a href="#curriculum">Агуулга</a></li>
     <li><a href="#register">Бүртгэл</a></li>
   </ul>
-  <a class="nav-cta" href="#register">Элсэх</a>
+  <div style="display:flex;gap:10px;align-items:center">
+    <a class="nav-cta" id="navAuthBtn" href="login.html">Нэвтрэх</a>
+  </div>
 </nav>
 
 <section class="hero" id="top">
@@ -545,7 +547,14 @@ footer{border-top:1px solid var(--ln);padding:32px 48px;display:flex;align-items
   <div class="foot-r">© 2026 — Дэд Төсөл · Дижитал / eSports</div>
 </footer>
 
-<script>
+<script type="module">
+import { auth, db } from './js/firebase-config.js';
+import { onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { collection, addDoc, serverTimestamp }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// ── Scroll анимаци ──
 const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('on')),{threshold:.07});
 document.querySelectorAll('.rv').forEach(el=>io.observe(el));
 
@@ -556,34 +565,101 @@ function runCount(el,target){
 const cio=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;x.target.querySelectorAll('[data-count]').forEach(el=>runCount(el,+el.dataset.count));cio.unobserve(x.target);});},{threshold:.3});
 document.querySelectorAll('.hero-right').forEach(el=>cio.observe(el));
 
-function pick(name){
+// ── Хөтөлбөр товч ──
+window.pick = function(name){
   const map={BRONZE:'pb',SILVER:'ps',GOLD:'pg'};
   const el=document.getElementById(map[name]);if(el)el.checked=true;
   document.getElementById('register').scrollIntoView({behavior:'smooth'});
-}
+};
 
-function faq(el){
+// ── FAQ ──
+window.faq = function(el){
   const item=el.parentElement;const open=item.classList.contains('open');
   document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
   if(!open)item.classList.add('open');
-}
+};
 
-function doReg(){
-  const ln=document.getElementById('ln').value.trim();
-  const fn=document.getElementById('fn').value.trim();
-  const em=document.getElementById('em').value.trim();
-  const ph=document.getElementById('ph').value.trim();
-  const loc=document.getElementById('loc').value;
-  const rnk=document.getElementById('rnk').value;
-  const prog=document.querySelector('input[name="prog"]:checked')?.value||'';
-  const err=document.getElementById('ferr');
+// ── Auth төлөв: nav товч шинэчлэх ──
+let currentUser = null;
+onAuthStateChanged(auth, user => {
+  currentUser = user;
+  const btn = document.getElementById('navAuthBtn');
+  if (user) {
+    btn.textContent = 'Dashboard →';
+    btn.href = 'dashboard.html';
+  } else {
+    btn.textContent = 'Нэвтрэх';
+    btn.href = 'login.html';
+  }
+});
+
+// ── Бүртгэл илгээх (Firebase Firestore) ──
+window.doReg = async function(){
+  const ln   = document.getElementById('ln').value.trim();
+  const fn   = document.getElementById('fn').value.trim();
+  const em   = document.getElementById('em').value.trim();
+  const ph   = document.getElementById('ph').value.trim();
+  const loc  = document.getElementById('loc').value;
+  const rnk  = document.getElementById('rnk').value;
+  const prog = document.querySelector('input[name="prog"]:checked')?.value||'';
+  const stm  = document.getElementById('stm').value.trim();
+  const msg  = document.getElementById('msg').value.trim();
+  const err  = document.getElementById('ferr');
   err.style.display='none';
-  const checks=[[!ln||!fn,'Нэрээ бүтнээр оруулна уу.'],[!em||!em.includes('@'),'Зөв имэйл хаяг оруулна уу.'],[!ph,'Утасны дугаараа оруулна уу.'],[!loc,'Байршлаа сонгоно уу.'],[!rnk,'Одоогийн ранкаа сонгоно уу.'],[!prog,'Хөтөлбөр сонгоно уу.']];
+
+  // Баталгаажуулалт
+  const checks=[
+    [!ln||!fn,              'Нэрээ бүтнээр оруулна уу.'],
+    [!em||!em.includes('@'),'Зөв имэйл хаяг оруулна уу.'],
+    [!ph,                   'Утасны дугаараа оруулна уу.'],
+    [!loc,                  'Байршлаа сонгоно уу.'],
+    [!rnk,                  'Одоогийн ранкаа сонгоно уу.'],
+    [!prog,                 'Хөтөлбөр сонгоно уу.'],
+  ];
   for(const[bad,msg]of checks){if(bad){err.textContent=msg;err.style.display='block';return;}}
-  document.getElementById('regBody').style.display='none';
-  document.getElementById('fsuccess').style.display='block';
-  document.getElementById('fst').innerHTML=`<strong style="color:var(--wht)">${ln} ${fn}</strong>-н бүртгэл хүлээн авлаа.<br>Байршил: <strong style="color:var(--sand)">${loc}</strong><br>Хөтөлбөр: <strong style="color:var(--teal)">${prog}</strong><br><br><strong>${em}</strong>-д <strong style="color:var(--teal)">24 цагийн дотор</strong> хариу илгээнэ.<br><br><span style="font-family:var(--fm);font-size:.7rem;color:var(--dim)">// SHAMBALA2056 · ГОВИЙН ЗАЛУУС ДЭЛХИЙН ТАВЦАНД //</span>`;
-}
+
+  // Нэвтрээгүй бол login руу
+  if (!currentUser) {
+    window.location.href = 'login.html';
+    return;
+  }
+
+  const subBtn = document.querySelector('.fsub');
+  subBtn.disabled = true;
+  subBtn.textContent = 'ИЛГЭЭЖ БАЙНА...';
+
+  try {
+    await addDoc(collection(db, 'enrollments'), {
+      userId:    currentUser.uid,
+      lastName:  ln,
+      firstName: fn,
+      email:     em,
+      phone:     ph,
+      location:  loc,
+      rank:      rnk,
+      program:   prog,
+      steam:     stm,
+      message:   msg,
+      status:    'pending',
+      createdAt: serverTimestamp(),
+    });
+
+    document.getElementById('regBody').style.display='none';
+    document.getElementById('fsuccess').style.display='block';
+    document.getElementById('fst').innerHTML=
+      `<strong style="color:var(--wht)">${ln} ${fn}</strong>-н бүртгэл хүлээн авлаа.<br>
+       Байршил: <strong style="color:var(--sand)">${loc}</strong><br>
+       Хөтөлбөр: <strong style="color:var(--teal)">${prog}</strong><br><br>
+       <strong>${em}</strong>-д <strong style="color:var(--teal)">24 цагийн дотор</strong> хариу илгээнэ.<br><br>
+       <a href="dashboard.html" style="font-family:var(--fm);font-size:.66rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);text-decoration:none">Dashboard харах →</a><br><br>
+       <span style="font-family:var(--fm);font-size:.7rem;color:var(--dim)">// SHAMBALA2056 · ГОВИЙН ЗАЛУУС ДЭЛХИЙН ТАВЦАНД //</span>`;
+  } catch(e) {
+    subBtn.disabled = false;
+    subBtn.textContent = 'ЭЛСЭЛТ ИЛГЭЭХ →';
+    err.textContent = 'Firestore алдаа: ' + e.message;
+    err.style.display = 'block';
+  }
+};
 </script>
 </body>
 </html>

@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard — Shambala2056 CS2 Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@200;300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0b09;--bg2:#121109;--bg3:#181610;
+  --sand:#c8a96e;--sand2:#e8c888;
+  --teal:#00c8a0;--teal2:#00e8b8;
+  --ember:#e05820;
+  --ln:#242018;--ln2:#302c20;
+  --dim:#504830;--mid:#908060;
+  --txt:#d0c8a8;--wht:#f0ead8;
+  --grn:#22c55e;--red:#ef4444;
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Sora',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden;min-height:100svh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.018;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:180px}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;inset-x:0;z-index:500;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid var(--ln);background:rgba(12,11,9,.96);backdrop-filter:blur(16px)}
+.nav-left{display:flex;flex-direction:column;gap:1px}
+.nav-parent{font-family:var(--fm);font-size:.57rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim)}
+.nav-brand{font-family:var(--fd);font-size:1.1rem;letter-spacing:3px;color:var(--sand);text-decoration:none;display:flex;align-items:center;gap:7px}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.nav-right{display:flex;align-items:center;gap:20px}
+.nav-user{font-family:var(--fm);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid)}
+.nav-signout{font-family:var(--fm);font-size:.6rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:transparent;color:var(--dim);padding:7px 16px;border:1px solid var(--ln2);cursor:pointer;text-decoration:none;transition:all .15s;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)}
+.nav-signout:hover{border-color:var(--red);color:var(--red)}
+
+/* ── LOADING SCREEN ── */
+.loading{position:fixed;inset:0;background:var(--bg);z-index:1000;display:flex;align-items:center;justify-content:center;flex-direction:column;gap:16px}
+.loading-logo{font-family:var(--fd);font-size:2rem;letter-spacing:4px;color:var(--sand)}
+.loading-spin{width:24px;height:24px;border:2px solid var(--ln2);border-top-color:var(--teal);border-radius:50%;animation:spin .8s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* ── MAIN ── */
+.main{flex:1;padding:80px 48px 64px;max-width:1200px;margin:0 auto;width:100%}
+
+/* Hero хэсэг */
+.dash-hero{padding:40px 0 36px;border-bottom:1px solid var(--ln);margin-bottom:40px}
+.dash-eyebrow{font-family:var(--fm);font-size:.58rem;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:10px;display:flex;align-items:center;gap:8px}
+.dash-eyebrow::before{content:'';width:16px;height:1px;background:var(--teal)}
+.dash-title{font-family:var(--fd);font-size:clamp(2.4rem,5vw,4rem);letter-spacing:2px;color:var(--wht);line-height:.95;margin-bottom:6px}
+.dash-title .sand{color:var(--sand)}
+.dash-uid{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;color:var(--dim)}
+
+/* Статистик */
+.stats-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-bottom:40px}
+.stat-box{background:var(--bg2);padding:22px 20px}
+.stat-lbl{font-family:var(--fm);font-size:.54rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:6px}
+.stat-val{font-family:var(--fd);font-size:1.6rem;letter-spacing:1px;color:var(--wht);line-height:1}
+.stat-val.teal{color:var(--teal)}
+.stat-val.sand{color:var(--sand)}
+
+/* Хэрэглэгчийн мэдээлэл */
+.section{margin-bottom:40px}
+.sec-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.sec-label{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:8px}
+.sec-label::before{content:attr(data-n);color:var(--teal)}
+.sec-action{font-family:var(--fm);font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--teal);text-decoration:none;transition:color .15s}
+.sec-action:hover{color:var(--teal2)}
+
+/* Profile card */
+.profile-card{background:var(--bg2);border:1px solid var(--ln2);padding:28px;position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px))}
+.profile-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--sand),transparent)}
+.profile-grid{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.prow{display:flex;gap:12px;padding:11px 0;border-bottom:1px solid var(--ln);font-size:.85rem}
+.prow:last-child{border-bottom:none}
+.pl{font-family:var(--fm);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);width:80px;flex-shrink:0;padding-top:2px}
+.pv{color:var(--txt)}
+
+/* Элсэлтийн карт */
+.enroll-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:1px;background:var(--ln);border:1px solid var(--ln)}
+.enroll-card{background:var(--bg2);padding:24px;position:relative;transition:background .2s}
+.enroll-card:hover{background:var(--bg3)}
+.ec-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;gap:12px}
+.ec-prog{font-family:var(--fd);font-size:1.5rem;letter-spacing:2px;color:var(--wht);line-height:1}
+.ec-badge{font-family:var(--fm);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;padding:4px 10px;clip-path:polygon(4px 0,100% 0,calc(100% - 4px) 100%,0 100%)}
+.ec-badge.pending{background:rgba(200,169,110,.15);color:var(--sand);border:1px solid rgba(200,169,110,.3)}
+.ec-badge.confirmed{background:rgba(0,200,160,.12);color:var(--teal);border:1px solid rgba(0,200,160,.25)}
+.ec-badge.active{background:rgba(34,197,94,.12);color:var(--grn);border:1px solid rgba(34,197,94,.25)}
+.ec-row{display:flex;gap:10px;padding:6px 0;border-bottom:1px solid var(--ln);font-size:.82rem}
+.ec-row:last-child{border-bottom:none}
+.ec-l{font-family:var(--fm);font-size:.54rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);width:72px;flex-shrink:0}
+.ec-v{color:var(--txt)}
+.ec-date{font-family:var(--fm);font-size:.55rem;letter-spacing:1.5px;color:var(--dim);margin-top:14px}
+
+/* Хоосон төлөв */
+.empty-state{background:var(--bg2);border:1px solid var(--ln);padding:56px 32px;text-align:center}
+.empty-icon{font-size:2.4rem;margin-bottom:14px;opacity:.5}
+.empty-title{font-family:var(--fd);font-size:1.4rem;letter-spacing:2px;color:var(--wht);margin-bottom:8px}
+.empty-txt{font-size:.88rem;color:var(--dim);margin-bottom:24px}
+.btn-teal{font-family:var(--fm);font-size:.66rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--teal);color:#000;padding:13px 30px;border:none;cursor:pointer;text-decoration:none;display:inline-block;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:all .15s}
+.btn-teal:hover{background:var(--teal2);transform:translateY(-1px)}
+
+footer{border-top:1px solid var(--ln);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);flex-wrap:wrap;gap:14px}
+.foot-l{display:flex;flex-direction:column;gap:2px}
+.foot-parent{font-family:var(--fm);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.foot-brand{font-family:var(--fd);font-size:1rem;letter-spacing:3px;color:var(--sand)}
+.foot-r{font-family:var(--fm);font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)}
+
+@media(max-width:900px){
+  nav,footer{padding:0 20px;gap:12px}
+  footer{padding:20px}
+  .main{padding:72px 20px 48px}
+  .stats-row{grid-template-columns:1fr 1fr}
+  .profile-grid{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  .stats-row{grid-template-columns:1fr 1fr}
+  .nav-user{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- Loading -->
+<div class="loading" id="loading">
+  <div class="loading-logo">CS2 ACADEMY</div>
+  <div class="loading-spin"></div>
+</div>
+
+<nav>
+  <div class="nav-left">
+    <span class="nav-parent">Shambala2056 · Дэд Төсөл</span>
+    <a class="nav-brand" href="cs2-enrollment.html"><span class="nav-dot"></span>CS2 ACADEMY</a>
+  </div>
+  <div class="nav-right">
+    <span class="nav-user" id="navUser">—</span>
+    <button class="nav-signout" onclick="doSignOut()">Гарах ↗</button>
+  </div>
+</nav>
+
+<main class="main" id="mainContent" style="display:none">
+
+  <!-- Hero -->
+  <div class="dash-hero">
+    <div class="dash-eyebrow">Хяналтын самбар</div>
+    <h1 class="dash-title">САЙН БАЙНА УУ,<br><span class="sand" id="heroName">ТОГЛОГЧ</span></h1>
+    <div class="dash-uid" id="heroUid"></div>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-lbl">Бүртгэлийн тоо</div>
+      <div class="stat-val teal" id="statEnroll">0</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-lbl">Хөтөлбөр</div>
+      <div class="stat-val sand" id="statProg">—</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-lbl">Бүртгэлийн огноо</div>
+      <div class="stat-val" id="statDate" style="font-size:1rem;padding-top:4px">—</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-lbl">Статус</div>
+      <div class="stat-val" id="statStatus">—</div>
+    </div>
+  </div>
+
+  <!-- Профайл -->
+  <div class="section">
+    <div class="sec-hdr">
+      <div class="sec-label" data-n="01">Хувийн мэдээлэл</div>
+    </div>
+    <div class="profile-card">
+      <div class="profile-grid" id="profileGrid">
+        <!-- JS-ээр дүүргэгдэнэ -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Элсэлтүүд -->
+  <div class="section">
+    <div class="sec-hdr">
+      <div class="sec-label" data-n="02">Миний элсэлт</div>
+      <a class="sec-action" href="cs2-enrollment.html#register">+ Шинэ элсэлт</a>
+    </div>
+    <div id="enrollContent">
+      <!-- JS-ээр дүүргэгдэнэ -->
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="foot-l">
+    <span class="foot-parent">Shambala2056 · Инженерийн Суурин · Дорноговь</span>
+    <span class="foot-brand">CS2 ACADEMY</span>
+  </div>
+  <div class="foot-r">© 2026 — Дэд Төсөл · Дижитал / eSports</div>
+</footer>
+
+<script type="module">
+import { auth, db } from './js/firebase-config.js';
+import { signOut, onAuthStateChanged }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import { doc, getDoc, collection, query, where, getDocs, orderBy }
+  from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+onAuthStateChanged(auth, async (user) => {
+  if (!user) {
+    window.location.href = 'login.html';
+    return;
+  }
+
+  // Хэрэглэгчийн мэдээлэл ачаалах
+  const snap = await getDoc(doc(db, 'users', user.uid));
+  const data = snap.exists() ? snap.data() : {};
+
+  const name = data.displayName || user.displayName || user.email;
+
+  // Nav
+  document.getElementById('navUser').textContent = name;
+
+  // Hero
+  document.getElementById('heroName').textContent = (data.firstName || name).toUpperCase();
+  document.getElementById('heroUid').textContent  = `// UID: ${user.uid}`;
+
+  // Profile grid
+  const rows = [
+    ['Овог нэр',    data.displayName || '—'],
+    ['Имэйл',       user.email],
+    ['Утас',        data.phone || '—'],
+    ['Бүртгэлийн огноо', data.createdAt
+      ? new Date(data.createdAt.toDate()).toLocaleDateString('mn-MN')
+      : '—'],
+  ];
+  document.getElementById('profileGrid').innerHTML = rows.map(([l,v]) =>
+    `<div class="prow"><div class="pl">${l}</div><div class="pv">${v}</div></div>`
+  ).join('');
+
+  // Элсэлтүүд ачаалах
+  await loadEnrollments(user.uid, data);
+
+  // Loading нуух
+  document.getElementById('loading').style.display = 'none';
+  document.getElementById('mainContent').style.display = 'block';
+});
+
+async function loadEnrollments(uid, userData) {
+  try {
+    const q = query(
+      collection(db, 'enrollments'),
+      where('userId', '==', uid),
+      orderBy('createdAt', 'desc')
+    );
+    const snap = await getDocs(q);
+    const docs = [];
+    snap.forEach(d => docs.push({ id: d.id, ...d.data() }));
+
+    // Stat шинэчлэх
+    document.getElementById('statEnroll').textContent = docs.length;
+
+    if (docs.length === 0) {
+      // Статистик
+      document.getElementById('statProg').textContent   = '—';
+      document.getElementById('statDate').textContent   = '—';
+      document.getElementById('statStatus').textContent = '—';
+
+      document.getElementById('enrollContent').innerHTML = `
+        <div class="empty-state">
+          <div class="empty-icon">🎮</div>
+          <div class="empty-title">ЭЛСЭЛТ БАЙХГҮЙ</div>
+          <div class="empty-txt">Та CS2 Academy-д одоогоор бүртгэгдээгүй байна.<br>Хөтөлбөрөө сонгоод элсэлт өгнө үү.</div>
+          <a class="btn-teal" href="cs2-enrollment.html#register">Элсэлт өгөх →</a>
+        </div>`;
+      return;
+    }
+
+    const latest = docs[0];
+    document.getElementById('statProg').textContent   = latest.program?.split(' ')[0] || '—';
+    document.getElementById('statDate').textContent   = latest.createdAt
+      ? new Date(latest.createdAt.toDate()).toLocaleDateString('mn-MN') : '—';
+    document.getElementById('statStatus').textContent = statusLabel(latest.status);
+    document.getElementById('statStatus').style.color = statusColor(latest.status);
+
+    document.getElementById('enrollContent').innerHTML =
+      `<div class="enroll-grid">${docs.map(enrollCard).join('')}</div>`;
+
+  } catch (e) {
+    document.getElementById('enrollContent').innerHTML =
+      `<div class="empty-state"><div class="empty-icon">⚠️</div>
+       <div class="empty-title">АЧААЛАХАД АЛДАА</div>
+       <div class="empty-txt">${e.message}</div></div>`;
+  }
+}
+
+function enrollCard(d) {
+  const date = d.createdAt
+    ? new Date(d.createdAt.toDate()).toLocaleDateString('mn-MN') : '—';
+  return `
+    <div class="enroll-card">
+      <div class="ec-top">
+        <div class="ec-prog">${d.program?.split(' ')[0] || '—'}</div>
+        <div class="ec-badge ${d.status || 'pending'}">${statusLabel(d.status)}</div>
+      </div>
+      <div class="ec-row"><div class="ec-l">Хөтөлбөр</div><div class="ec-v">${d.program || '—'}</div></div>
+      <div class="ec-row"><div class="ec-l">Байршил</div><div class="ec-v">${d.location || '—'}</div></div>
+      <div class="ec-row"><div class="ec-l">Ранк</div><div class="ec-v">${d.rank || '—'}</div></div>
+      <div class="ec-date">// Огноо: ${date}</div>
+    </div>`;
+}
+
+function statusLabel(s) {
+  return { pending:'Хүлээгдэж байна', confirmed:'Баталгаажсан', active:'Идэвхтэй' }[s] || 'Хүлээгдэж байна';
+}
+function statusColor(s) {
+  return { pending:'var(--sand)', confirmed:'var(--teal)', active:'var(--grn)' }[s] || 'var(--sand)';
+}
+
+window.doSignOut = async function() {
+  await signOut(auth);
+  window.location.href = 'login.html';
+};
+</script>
+</body>
+</html>
