@@ -242,8 +242,7 @@ footer{border-top:1px solid var(--ln);padding:32px 48px;display:flex;align-items
     <li><a href="#register">Бүртгэл</a></li>
   </ul>
   <div style="display:flex;gap:8px;align-items:center">
-    <button class="nav-ghost" id="navLoginBtn" onclick="openModal('login')">Нэвтрэх</button>
-    <button class="nav-cta"   id="navRegBtn"   onclick="openModal('reg')">Бүртгүүлэх</button>
+    <button class="nav-cta" id="navAuthBtn" onclick="openModal('login')">Нэвтрэх / Бүртгүүлэх</button>
     <span class="nav-user-info" id="navUser" style="display:none"></span>
     <button class="nav-ghost" id="navOutBtn" style="display:none" onclick="doSignOut()">Гарах</button>
   </div>
@@ -447,11 +446,7 @@ footer{border-top:1px solid var(--ln);padding:32px 48px;display:flex;align-items
         </div>
       </div>
       <div class="rv">
-        <!-- Нэвтрэлтийн мэдэгдэл -->
-        <div id="authBanner" style="display:none;margin-bottom:1px;padding:14px 16px;background:rgba(200,169,110,.07);border:1px solid rgba(200,169,110,.25);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
-          <span style="font-family:var(--fm);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--sand)" id="authBannerTxt">Бүртгэл илгээхийн тулд нэвтэрнэ үү</span>
-          <a href="auth.html" style="font-family:var(--fm);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;background:var(--teal);color:#000;padding:8px 18px;text-decoration:none;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)">Нэвтрэх →</a>
-        </div>
+        <div id="authBanner" style="display:none"></div>
         <div id="regWrap">
           <div id="regBody" class="rform">
             <div class="frow" style="margin-bottom:1px">
@@ -675,28 +670,22 @@ import { doc, setDoc } from "https://www.gstatic.com/firebasejs/10.12.0/firebase
 let currentUser = null;
 onAuthStateChanged(auth, user => {
   currentUser = user;
-  const lBtn  = document.getElementById('navLoginBtn');
-  const rBtn  = document.getElementById('navRegBtn');
-  const uInfo = document.getElementById('navUser');
-  const oBtn  = document.getElementById('navOutBtn');
-  const banner = document.getElementById('authBanner');
+  const authBtn = document.getElementById('navAuthBtn');
+  const uInfo   = document.getElementById('navUser');
+  const oBtn    = document.getElementById('navOutBtn');
 
   if (user) {
-    lBtn.style.display  = 'none';
-    rBtn.style.display  = 'none';
-    uInfo.style.display = 'inline';
-    oBtn.style.display  = 'inline';
-    uInfo.textContent   = user.displayName || user.email;
-    banner.style.display = 'none';
+    authBtn.style.display = 'none';
+    uInfo.style.display   = 'inline';
+    oBtn.style.display    = 'inline';
+    uInfo.textContent     = user.displayName || user.email;
     const emInp = document.getElementById('em');
     if (emInp && !emInp.value) emInp.value = user.email || '';
     closeModal();
   } else {
-    lBtn.style.display  = 'inline';
-    rBtn.style.display  = 'inline';
-    uInfo.style.display = 'none';
-    oBtn.style.display  = 'none';
-    banner.style.display = 'flex';
+    authBtn.style.display = 'inline';
+    uInfo.style.display   = 'none';
+    oBtn.style.display    = 'none';
   }
 });
 
