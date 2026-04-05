@@ -1,15 +1,1396 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>НОГООН ХӨГЖИЛ- ТОГТВОРТОЙ ХӨРӨНГӨ ОРУУЛАЛТ 2026
-</title>
-    <script type="module" crossorigin src="/assets/index-BVW-Y7E4.js"></script>
-    <link rel="stylesheet" crossorigin href="/assets/index-0CdAIJ4o.css">
-  </head>
-  <body>
-    <div id="root"></div>
-  </body>
-</html>
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shambala-2056 — Зуны Зуслан & CS2 Bootcamp 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:    #08090b;
+  --bg2:   #0c0e12;
+  --bg3:   #10131a;
+  --panel: #13161e;
+  --ln:    #1e2230;
+  --ln2:   #252a38;
+  --dim:   #3a4058;
+  --mid:   #6878a0;
+  --txt:   #b8c4d8;
+  --wht:   #e8eef8;
+  --ct:    #4d9fd4;   /* CT blue */
+  --ct2:   #6ab8e8;
+  --to:    #e8920a;   /* T orange */
+  --to2:   #f5aa28;
+  --grn:   #2eb870;
+  --grn2:  #48d888;
+  --red:   #d03030;
+  --sand:  #c8982a;   /* Gobi warmth — subtle only */
 
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Rajdhani',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:400;line-height:1.65;overflow-x:hidden}
+
+/* scanlines */
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;
+  opacity:.04;
+  background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,0,0,.3) 2px,rgba(0,0,0,.3) 4px)}
+
+/* noise */
+body::after{content:'';position:fixed;inset:0;z-index:9998;pointer-events:none;opacity:.015;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:140px}
+
+/* ── SVG ICONS as CSS backgrounds ── */
+.ico{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
+.ico svg{display:block}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;inset-x:0;z-index:500;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 48px;
+  border-bottom:1px solid var(--ln);
+  background:rgba(8,9,11,.97);
+  backdrop-filter:blur(16px)}
+
+.nav-logo{text-decoration:none;display:flex;align-items:center;gap:10px}
+.nav-crosshair{display:none}
+
+.nav-stack{display:flex;flex-direction:column;gap:0}
+.nav-super{font-family:var(--fm);font-size:.5rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim)}
+.nav-name{font-family:var(--fd);font-size:1.05rem;letter-spacing:3px;color:var(--wht);line-height:1.1}
+.nav-name .ct{color:var(--ct)}.nav-name .to{color:var(--to)}
+
+.nav-links{display:flex;gap:26px;list-style:none}
+.nav-links a{font-family:var(--fm);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--ct)}
+.nav-cta{font-family:var(--fm);font-size:.62rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  background:var(--ct);color:#000;padding:8px 20px;border:none;cursor:pointer;text-decoration:none;
+  clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%);
+  transition:background .15s}
+.nav-cta:hover{background:var(--ct2)}
+
+/* ── HERO ── */
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding-top:56px;
+  position:relative;overflow:hidden;border-bottom:1px solid var(--ln)}
+
+/* tactical grid bg */
+.hero-bg{position:absolute;inset:0;
+  background:
+    radial-gradient(ellipse 40% 35% at 15% 25%, rgba(232,146,10,.04) 0%, transparent 50%),
+    linear-gradient(180deg,#050608 0%,#08090b 100%)}
+.hero-grid{position:absolute;inset:0;
+  background-image:linear-gradient(var(--ln) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--ln) 1px,transparent 1px);
+  background-size:56px 56px;opacity:.35}
+
+/* big CT/T glyph watermark */
+.hero-watermark{position:absolute;right:6%;top:50%;transform:translateY(-50%);
+  font-family:var(--fd);font-size:22rem;color:rgba(77,159,212,.04);
+  letter-spacing:-10px;line-height:1;pointer-events:none;user-select:none}
+
+/* corner brackets */
+.bracket{position:absolute;width:60px;height:60px;opacity:.2}
+.br-tl{top:80px;left:48px;border-top:2px solid var(--ct);border-left:2px solid var(--ct)}
+.br-tr{top:80px;right:48px;border-top:2px solid var(--ct);border-right:2px solid var(--ct)}
+.br-bl{bottom:80px;left:48px;border-bottom:2px solid var(--to);border-left:2px solid var(--to)}
+.br-br{bottom:80px;right:48px;border-bottom:2px solid var(--to);border-right:2px solid var(--to)}
+
+.hero-content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:60px 24px 40px;justify-content:center}
+
+.hero-hud{display:flex;align-items:center;gap:12px;margin-bottom:24px;justify-content:center}
+.hud-pill{font-family:var(--fm);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;
+  padding:5px 14px;border:1px solid;display:flex;align-items:center;gap:6px}
+.hud-pill.ct{border-color:rgba(77,159,212,.4);color:var(--ct);background:rgba(77,159,212,.08)}
+.hud-pill.to{border-color:rgba(232,146,10,.4);color:var(--to);background:rgba(232,146,10,.08)}
+.hud-pill.nn{border-color:var(--ln2);color:var(--dim);background:transparent}
+.hud-blink{width:5px;height:5px;border-radius:50%;background:currentColor;animation:blink 1.5s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.15}}
+
+h1.hh{font-family:var(--fd);font-size:clamp(3rem,8vw,7rem);line-height:.9;letter-spacing:2px;
+  color:var(--wht);text-shadow:0 0 60px rgba(77,159,212,.15);margin-bottom:14px}
+h1.hh .ct{color:var(--ct);text-shadow:0 0 40px rgba(77,159,212,.4)}
+h1.hh .to{color:var(--to);text-shadow:0 0 40px rgba(232,146,10,.4)}
+h1.hh .stroke{color:transparent;-webkit-text-stroke:1.5px var(--ln2)}
+
+.hero-tag{font-family:var(--fm);font-size:.68rem;letter-spacing:3px;text-transform:uppercase;
+  color:var(--mid);margin-bottom:18px}
+.hero-desc{font-size:1rem;color:var(--mid);max-width:580px;line-height:1.8;margin-bottom:32px;
+  font-weight:400}
+.hero-desc strong{color:var(--txt);font-weight:600}
+
+.hero-btns{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+.btn-ct{font-family:var(--fm);font-size:.68rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  background:var(--ct);color:#000;padding:12px 30px;border:none;cursor:pointer;text-decoration:none;display:inline-block;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:all .15s}
+.btn-ct:hover{background:var(--ct2);transform:translateY(-1px)}
+.btn-to{font-family:var(--fm);font-size:.68rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  background:var(--to);color:#000;padding:12px 30px;border:none;cursor:pointer;text-decoration:none;display:inline-block;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:all .15s}
+.btn-to:hover{background:var(--to2);transform:translateY(-1px)}
+.btn-wire{font-family:var(--fm);font-size:.68rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  background:transparent;color:var(--mid);padding:11px 30px;
+  border:1px solid var(--ln2);cursor:pointer;text-decoration:none;display:inline-block;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:all .15s}
+.btn-wire:hover{border-color:var(--ct);color:var(--ct)}
+
+/* hero strip / HUD bottom */
+.hero-strip{position:relative;z-index:2;
+  display:grid;grid-template-columns:repeat(5,1fr);
+  background:rgba(8,9,11,.98);
+  border-top:2px solid var(--ct)}
+.hs{padding:16px 20px;border-right:1px solid var(--ln);text-align:center}
+.hs:last-child{border-right:none}
+.hs-n{font-family:var(--fd);font-size:1.8rem;letter-spacing:1px;color:var(--wht);line-height:1;margin-bottom:2px}
+.hs-n .ct{color:var(--ct)}.hs-n .to{color:var(--to)}
+.hs-l{font-family:var(--fm);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+
+/* ── SECTIONS ── */
+.sec{padding:80px 48px;border-bottom:1px solid var(--ln)}
+.si{max-width:1160px;margin:0 auto}
+.stag{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;
+  display:flex;align-items:center;gap:10px;margin-bottom:11px}
+.stag::before{content:'';width:20px;height:1px}
+.stag.ct-tag{color:var(--ct)}.stag.ct-tag::before{background:var(--ct);height:2px}
+.stag.to-tag{color:var(--to)}.stag.to-tag::before{background:var(--to);height:2px}
+.stag.grn-tag{color:var(--grn)}.stag.grn-tag::before{background:var(--grn);height:2px}
+.sh{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);line-height:.95;letter-spacing:1px;
+  color:var(--wht);margin-bottom:12px}
+.sh .ct{color:var(--ct)}.sh .to{color:var(--to)}.sh .grn{color:var(--grn)}
+.sh .stk{color:transparent;-webkit-text-stroke:1px var(--ln2)}
+.sp{font-size:.95rem;color:var(--mid);max-width:560px;line-height:1.82;font-weight:400}
+.sp strong{color:var(--txt);font-weight:600}
+
+/* divider line */
+.hdiv{width:40px;height:2px;background:var(--ct);margin:14px 0}
+.hdiv.to{background:var(--to)}
+
+/* ── CONCEPT SPLIT ── */
+.concept-sec{background:var(--bg2);padding:0;border-bottom:1px solid var(--ln)}
+.concept-grid{display:grid;grid-template-columns:1fr 1fr}
+.concept-half{padding:56px 48px;position:relative;overflow:hidden}
+.concept-half.camp{border-right:1px solid var(--ln)}
+.concept-half::before{display:none}
+.ch-tag{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;
+  margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.camp .ch-tag{color:var(--to)}.cs2 .ch-tag{color:var(--ct)}
+.ch-tag-line{width:16px;height:2px;flex-shrink:0}
+.camp .ch-tag-line{background:var(--to)}.cs2 .ch-tag-line{background:var(--ct)}
+.ch-h{font-family:var(--fd);font-size:clamp(1.6rem,3vw,2.6rem);letter-spacing:1px;
+  color:var(--wht);margin-bottom:12px;line-height:1}
+.ch-p{font-size:.9rem;color:var(--dim);line-height:1.82;margin-bottom:20px;font-weight:400}
+.ch-chips{display:flex;gap:8px;flex-wrap:wrap}
+.ch-chip{font-family:var(--fm);font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;
+  padding:4px 11px;border:1px solid;display:flex;align-items:center;gap:6px;font-weight:500}
+.camp .ch-chip{border-color:rgba(232,146,10,.25);color:var(--to);background:rgba(232,146,10,.06)}
+.cs2 .ch-chip{border-color:rgba(77,159,212,.25);color:var(--ct);background:rgba(77,159,212,.06)}
+
+.concept-bridge{background:var(--ln);border-top:1px solid var(--ln2);border-bottom:1px solid var(--ln2);
+  padding:14px 48px;display:flex;align-items:center;justify-content:center;gap:20px;flex-wrap:wrap}
+.cb-seg{display:flex;align-items:center;gap:8px}
+.cb-seg svg{flex-shrink:0}
+.cb-text{font-family:var(--fm);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid)}
+.cb-sep{color:var(--ln2);font-size:1.2rem}
+
+/* ── SCHEDULE ── */
+.sched-sec{background:var(--bg3)}
+.sched-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.eel{background:var(--bg3);padding:22px 18px;text-align:center;transition:background .2s;position:relative}
+.eel:hover{background:var(--panel)}
+.eel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ln2);transition:background .3s}
+.eel:hover::before{background:var(--ct)}
+.eel-n{font-family:var(--fm);font-size:.54rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.eel-title{font-family:var(--fd);font-size:1.3rem;letter-spacing:1px;color:var(--wht);margin-bottom:6px}
+.eel-dates{font-family:var(--fm);font-size:.78rem;color:var(--ct);font-weight:500;letter-spacing:1px;margin-bottom:10px}
+.eel-badge{display:inline-flex;align-items:center;gap:5px;
+  background:rgba(77,159,212,.08);border:1px solid rgba(77,159,212,.2);
+  padding:3px 10px;font-family:var(--fm);font-size:.55rem;letter-spacing:1px;text-transform:uppercase;color:var(--ct)}
+.eel-dot{width:5px;height:5px;border-radius:50%;background:var(--grn)}
+
+.sched-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);border-top:none;margin-top:0}
+.sf{background:var(--bg2);padding:18px 20px;display:flex;align-items:flex-start;gap:14px}
+.sf-icon{flex-shrink:0;width:36px;height:36px;background:var(--bg3);border:1px solid var(--ln2);display:flex;align-items:center;justify-content:center}
+.sf-title{font-family:var(--fm);font-size:.62rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--wht);margin-bottom:4px}
+.sf-text{font-size:.82rem;color:var(--dim);line-height:1.55;font-weight:400}
+
+/* ── DAILY TABS ── */
+.daily-sec{background:var(--bg2)}
+.daily-tabs{display:flex;gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px;border-bottom:none}
+.dtab{flex:1;padding:13px 16px;background:var(--bg3);
+  font-family:var(--fm);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);border:none;cursor:pointer;transition:all .15s;text-align:center;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  border-bottom:2px solid transparent}
+.dtab:hover{background:var(--panel);color:var(--txt)}
+.dtab.active{background:var(--bg2);color:var(--ct);border-bottom-color:var(--ct)}
+
+.daily-panel{display:none;background:var(--bg2);border:1px solid var(--ln);border-top:none;overflow:hidden}
+.daily-panel.active{display:grid;grid-template-columns:repeat(3,1fr)}
+.dp-col{padding:26px 22px;border-right:1px solid var(--ln)}
+.dp-col:last-child{border-right:none}
+.dp-time{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.dp-title{font-family:var(--fd);font-size:1.1rem;letter-spacing:1px;color:var(--wht);margin-bottom:14px;
+  display:flex;align-items:center;gap:10px}
+.dp-items{list-style:none}
+.dp-items li{padding:8px 0;border-bottom:1px solid var(--ln);font-size:.85rem;color:var(--mid);
+  display:flex;align-items:flex-start;gap:10px;line-height:1.5;font-weight:400}
+.dp-items li:last-child{border-bottom:none}
+.dp-arr{flex-shrink:0;margin-top:2px}
+
+/* ── SUBJECTS ── */
+.subj-sec{background:var(--bg)}
+.subj-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.subj-card{background:var(--bg);display:flex;flex-direction:column;
+  transition:background .2s;position:relative;overflow:hidden}
+.subj-card:hover{background:var(--bg2)}
+.subj-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--ln2);transition:background .3s}
+.subj-card.ct-card:hover::before{background:var(--ct)}
+.subj-card.to-card:hover::before{background:var(--to)}
+.subj-card.grn-card:hover::before{background:var(--grn)}
+.subj-head{padding:22px 20px 16px;border-bottom:1px solid var(--ln)}
+.subj-badge{font-family:var(--fm);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;
+  padding:3px 9px;border:1px solid;display:inline-block;margin-bottom:12px;font-weight:500}
+.ct-badge{border-color:rgba(77,159,212,.3);color:var(--ct);background:rgba(77,159,212,.07)}
+.to-badge{border-color:rgba(232,146,10,.3);color:var(--to);background:rgba(232,146,10,.07)}
+.grn-badge{border-color:rgba(46,184,112,.3);color:var(--grn);background:rgba(46,184,112,.07)}
+.subj-icon-wrap{width:44px;height:44px;background:var(--bg3);border:1px solid var(--ln2);
+  display:flex;align-items:center;justify-content:center;margin-bottom:12px}
+.subj-name{font-family:var(--fd);font-size:1.05rem;letter-spacing:1px;color:var(--wht);margin-bottom:4px}
+.subj-desc{font-size:.78rem;color:var(--dim);line-height:1.55;font-weight:400}
+.subj-body{padding:14px 20px 20px;flex:1}
+.subj-topics{list-style:none}
+.subj-topics li{font-size:.82rem;color:var(--dim);padding:6px 0;border-bottom:1px solid var(--ln);
+  display:flex;align-items:flex-start;gap:8px;line-height:1.5;font-weight:400}
+.subj-topics li:last-child{border-bottom:none}
+.stopic-dot{width:4px;height:4px;border-radius:50%;flex-shrink:0;margin-top:6px}
+.ct-dot{background:var(--ct)}.to-dot{background:var(--to)}.grn-dot{background:var(--grn)}
+
+/* ── 14-DAY TABLE ── */
+.tl-sec{background:var(--bg2)}
+.tl-wrap{margin-top:48px;border:1px solid var(--ln);overflow-x:auto}
+table.tlt{width:100%;border-collapse:collapse;min-width:860px}
+table.tlt thead th{font-family:var(--fm);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--dim);padding:11px 10px;text-align:center;border-bottom:1px solid var(--ln);
+  background:var(--bg3);border-right:1px solid var(--ln)}
+table.tlt thead th:first-child{text-align:left;padding-left:16px;width:90px}
+table.tlt thead th:last-child{border-right:none}
+table.tlt tbody tr{border-bottom:1px solid var(--ln);transition:background .15s}
+table.tlt tbody tr:last-child{border-bottom:none}
+table.tlt tbody tr:hover{background:rgba(77,159,212,.03)}
+table.tlt td{padding:9px 8px;text-align:center;border-right:1px solid var(--ln);vertical-align:top}
+table.tlt td:first-child{text-align:left;padding-left:14px;border-right:2px solid var(--ln2)}
+table.tlt td:last-child{border-right:none}
+.tl-row-label{font-family:var(--fm);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--mid);display:flex;align-items:center;gap:7px;white-space:nowrap;font-weight:500}
+.tl-a{font-size:.68rem;padding:3px 7px;border-radius:2px;display:inline-block;
+  margin:2px 0;line-height:1.35;font-family:var(--fm);letter-spacing:.5px;font-weight:500}
+.ta-ct{background:rgba(77,159,212,.12);color:var(--ct);border:1px solid rgba(77,159,212,.2)}
+.ta-to{background:rgba(232,146,10,.1);color:var(--to);border:1px solid rgba(232,146,10,.2)}
+.ta-grn{background:rgba(46,184,112,.1);color:var(--grn);border:1px solid rgba(46,184,112,.2)}
+.ta-dim{background:rgba(30,34,48,.8);color:var(--dim);border:1px solid var(--ln2)}
+.ta-sp{background:rgba(200,152,42,.15);color:var(--sand);border:1px solid rgba(200,152,42,.3);font-weight:700}
+.ta-free{color:var(--dim);font-size:.6rem;letter-spacing:.5px}
+
+/* ── WHY ── */
+.why-sec{background:var(--bg3)}
+.why-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.why-card{background:var(--bg3);padding:22px 18px;transition:background .2s;position:relative;overflow:hidden}
+.why-card:hover{background:var(--panel)}
+.why-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--ct);transition:width .3s}
+.why-card.to-hover::after{background:var(--to)}
+.why-card:hover::after{width:100%}
+.wc-icon-wrap{width:40px;height:40px;background:var(--bg);border:1px solid var(--ln2);
+  display:flex;align-items:center;justify-content:center;margin-bottom:12px;transition:border-color .2s}
+.why-card:hover .wc-icon-wrap{border-color:var(--ct)}
+.why-card.to-hover:hover .wc-icon-wrap{border-color:var(--to)}
+.wc-title{font-family:var(--fm);font-size:.66rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;
+  color:var(--wht);margin-bottom:8px}
+.wc-text{font-size:.82rem;color:var(--dim);line-height:1.72;font-weight:400}
+.wc-text strong{color:var(--txt);font-weight:600}
+
+/* ── REGISTER ── */
+.reg-sec{background:var(--bg);position:relative;overflow:hidden}
+.reg-sec::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 55% 65% at 50% 50%,rgba(77,159,212,.05) 0%,transparent 65%)}
+.reg-inner{max-width:1000px;margin:0 auto;position:relative;z-index:2}
+.reg-h{font-family:var(--fd);font-size:clamp(2rem,4vw,3.2rem);letter-spacing:1px;
+  color:var(--wht);margin-bottom:10px}
+.reg-h .ct{color:var(--ct)}.reg-h .to{color:var(--to)}
+.reg-p{font-size:.92rem;color:var(--dim);line-height:1.8;margin-bottom:40px;font-weight:400}
+.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start}
+.ri-box{background:var(--bg2);border:1px solid var(--ln);padding:22px}
+.ri-title{font-family:var(--fm);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--ct);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.ri-title::before{content:'';width:14px;height:1px;background:var(--ct)}
+.ri-row{display:flex;align-items:flex-start;gap:12px;padding:9px 0;border-bottom:1px solid var(--ln);font-size:.84rem}
+.ri-row:last-child{border-bottom:none}
+.ri-icon-wrap{flex-shrink:0;width:24px;height:24px;background:var(--bg3);border:1px solid var(--ln2);
+  display:flex;align-items:center;justify-content:center;margin-top:1px}
+.ri-text{color:var(--mid);line-height:1.5;font-weight:400}
+.ri-text strong{color:var(--txt);font-weight:600}
+
+/* form */
+.rform{display:flex;flex-direction:column;gap:10px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fgrp{display:flex;flex-direction:column;gap:5px}
+.flbl{font-family:var(--fm);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.finp,.fsel,.fta{background:var(--bg2);border:1px solid var(--ln2);color:var(--txt);
+  padding:10px 13px;font-family:var(--fb);font-size:.9rem;font-weight:400;
+  outline:none;appearance:none;-webkit-appearance:none;width:100%;
+  transition:border-color .15s;border-radius:0}
+.finp:focus,.fsel:focus,.fta:focus{border-color:var(--ct)}
+.finp::placeholder,.fta::placeholder{color:var(--dim);opacity:.7}
+.fsel option{background:var(--bg2)}
+.fta{resize:none;min-height:80px}
+.eel-pick{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.ep-r{display:none}
+.ep-l{display:block;padding:10px 7px;background:var(--bg2);border:1px solid var(--ln2);
+  font-family:var(--fm);font-size:.57rem;letter-spacing:1px;text-transform:uppercase;
+  color:var(--dim);cursor:pointer;text-align:center;transition:all .15s;line-height:1.4}
+.ep-r:checked+.ep-l{background:rgba(77,159,212,.12);border-color:var(--ct);color:var(--ct)}
+.ep-l:hover{color:var(--txt)}
+.fsub{font-family:var(--fm);font-size:.68rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;
+  color:#000;background:var(--ct);border:none;padding:13px;cursor:pointer;width:100%;
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  transition:background .15s}
+.fsub:hover{background:var(--ct2)}
+.ferr{font-family:var(--fm);font-size:.62rem;color:var(--red);letter-spacing:1px;padding:6px 0;display:none}
+.fsuccess{display:none;text-align:center;padding:44px 0}
+.fsi{font-size:3rem;display:block;margin-bottom:12px;animation:pop .4s ease-out}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.fst{font-family:var(--fd);font-size:1.8rem;letter-spacing:2px;color:var(--grn2);margin-bottom:8px}
+.fsd{font-size:.88rem;color:var(--dim);line-height:1.8;font-weight:400}
+
+/* FOOTER */
+footer{border-top:2px solid var(--ct);padding:36px 48px;
+  display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;background:var(--bg)}
+.foot-logo-row{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.foot-brand{font-family:var(--fd);font-size:1.05rem;letter-spacing:3px;color:var(--wht)}
+.foot-brand .ct{color:var(--ct)}.foot-brand .to{color:var(--to)}
+.foot-sub{font-family:var(--fm);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.foot-desc{font-size:.83rem;color:var(--dim);line-height:1.7;font-weight:400}
+.foot-copy{font-family:var(--fm);font-size:.52rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-top:14px;padding-top:14px;border-top:1px solid var(--ln);opacity:.6}
+.foot-col-h{font-family:var(--fm);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:9px}
+.foot-links a{font-size:.85rem;color:var(--dim);text-decoration:none;transition:color .2s;font-weight:400}
+.foot-links a:hover{color:var(--ct)}
+
+/* ── HERO NEW ── */
+@keyframes orb1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(20px,-15px) scale(1.1)}}
+@keyframes orb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-15px,20px) scale(1.08)}}
+
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+  padding-top:56px;position:relative;overflow:hidden;border-bottom:1px solid var(--ln)}
+
+.hero-main{
+  position:relative;z-index:2;
+  display:grid;grid-template-columns:1fr 420px;
+  gap:48px;align-items:center;
+  max-width:1200px;margin:0 auto;
+  padding:60px 48px;width:100%}
+
+/* LEFT */
+.hero-left-col{}
+.hero-hud{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:24px}
+h1.hh{font-family:var(--fd);font-size:clamp(3rem,7vw,6.5rem);line-height:.9;
+  letter-spacing:1px;color:var(--wht);margin-bottom:20px}
+h1.hh .to{color:var(--to);text-shadow:0 0 40px rgba(232,146,10,.35)}
+h1.hh .ct{color:var(--ct);text-shadow:0 0 40px rgba(77,159,212,.35)}
+h1.hh .stroke{color:transparent;-webkit-text-stroke:1.5px var(--ln2)}
+h1.hh .wht-txt{color:var(--wht)}
+
+.hero-divider{display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.hero-divider-line{flex:1;height:1px;background:var(--ln2)}
+.hero-divider-label{font-family:var(--fm);font-size:.58rem;letter-spacing:2.5px;
+  text-transform:uppercase;color:var(--dim);white-space:nowrap}
+
+.hero-sub-txt{font-size:.95rem;color:var(--mid);line-height:1.8;
+  max-width:440px;margin-bottom:32px;font-weight:400}
+
+.hero-btns{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:36px}
+
+.hero-mini-stats{display:flex;align-items:center;gap:0;
+  background:var(--bg2);border:1px solid var(--ln);
+  clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);
+  max-width:420px}
+.hms{padding:14px 20px;text-align:center;flex:1}
+.hms-n{font-family:var(--fd);font-size:1.8rem;letter-spacing:1px;display:block;line-height:1;margin-bottom:2px}
+.hms-n.to{color:var(--to)}.hms-n.ct{color:var(--ct)}.hms-n.wht-txt{color:var(--wht)}
+.hms-l{font-family:var(--fm);font-size:.5rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.hms-sep{width:1px;height:36px;background:var(--ln);flex-shrink:0}
+
+/* RIGHT */
+.hero-right-col{position:relative;overflow:hidden}
+.hero-crosshair-bg{position:absolute;inset:-20px;pointer-events:none}
+
+.hero-info-stack{position:relative;z-index:2;display:flex;flex-direction:column;gap:8px}
+
+.hi-card{background:var(--bg2);border:1px solid var(--ln);padding:16px 18px;
+  clip-path:polygon(0 0,calc(100% - 12px) 0,100% 12px,100% 100%,12px 100%,0 calc(100% - 12px))}
+.hi-card.hi-camp{border-left:2px solid var(--to)}
+.hi-card.hi-cs2{border-left:2px solid var(--ct)}
+
+.hi-card-tag{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;
+  display:flex;align-items:center;gap:6px;margin-bottom:8px}
+.hi-camp .hi-card-tag{color:var(--to)}
+.hi-cs2 .hi-card-tag{color:var(--ct)}
+.hi-card-title{font-size:.88rem;color:var(--txt);font-weight:500;margin-bottom:10px}
+.hi-card-pills{display:flex;gap:6px;flex-wrap:wrap}
+.hi-card-pills span{font-family:var(--fm);font-size:.52rem;letter-spacing:1px;
+  text-transform:uppercase;padding:3px 8px;background:var(--bg3);border:1px solid var(--ln2);color:var(--dim)}
+
+.hi-divider{display:flex;align-items:center;gap:10px;padding:2px 0}
+.hi-divider span{flex:1;height:1px;background:var(--ln)}
+
+.hi-schedule{background:var(--bg3);border:1px solid var(--ln);padding:14px 16px;
+  clip-path:polygon(0 0,calc(100% - 10px) 0,100% 10px,100% 100%,10px 100%,0 calc(100% - 10px))}
+.hi-sch-label{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;
+  color:var(--mid);display:flex;align-items:center;gap:6px;margin-bottom:10px}
+.hi-sch-rows{display:flex;flex-direction:column;gap:0}
+.hi-sch-row{display:grid;grid-template-columns:16px 1fr auto;gap:10px;align-items:center;
+  padding:6px 0;border-bottom:1px solid var(--ln);font-size:.78rem}
+.hi-sch-row:last-child{border-bottom:none}
+.hi-sch-n{font-family:var(--fd);font-size:.95rem;line-height:1}
+.hi-sch-d{font-family:var(--fm);font-size:.65rem;letter-spacing:.5px;color:var(--txt)}
+.hi-sch-s{font-family:var(--fm);font-size:.55rem;letter-spacing:1px;text-transform:uppercase;
+  color:var(--grn);background:rgba(46,184,112,.08);border:1px solid rgba(46,184,112,.2);padding:2px 7px}
+
+@media(max-width:960px){
+  .hero-main{grid-template-columns:1fr;padding:40px 20px;gap:32px}
+  .hero-right-col{display:none}
+  .hero-mini-stats{max-width:100%}
+}
+
+.rv{opacity:0;transform:translateY(16px);transition:opacity .55s ease,transform .55s ease}
+.rv.on{opacity:1;transform:none}
+
+
+@media(max-width:960px){
+  nav,footer{padding:0 20px}
+  footer{padding:28px 20px;grid-template-columns:1fr}
+  .sec{padding:52px 20px}
+  .reg-inner{padding:52px 20px}
+  .hero-content{padding:44px 20px 28px}
+  .hero-strip,.sched-grid{grid-template-columns:repeat(2,1fr)}
+  .concept-grid,.daily-panel,.reg-grid{grid-template-columns:1fr}
+  .concept-half.camp{border-right:none;border-bottom:1px solid var(--ln)}
+  .subj-grid{grid-template-columns:repeat(2,1fr)}
+  .why-grid{grid-template-columns:repeat(2,1fr)}
+  .frow,.eel-pick{grid-template-columns:repeat(2,1fr)}
+  nav .nav-links{display:none}
+  .bracket{display:none}
+  .hero-watermark{font-size:10rem;right:0;opacity:.5}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="#top">
+    <div class="nav-stack">
+      <span class="nav-super">Дорноговь · Инженерийн Суурин</span>
+      <span class="nav-name">Shambala-<span class="ct">2056</span> <span class="to">Camp×CS2</span></span>
+    </div>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#concept">Тухай</a></li>
+    <li><a href="#daily">Хоногийн хуваарь</a></li>
+    <li><a href="#subjects">Хичээлүүд</a></li>
+    <li><a href="#timeline">14 хоног</a></li>
+    <li><a href="#register">Бүртгэл</a></li>
+  </ul>
+  <a class="nav-cta" href="#register">Бүртгүүлэх</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+
+
+
+  <div class="bracket br-tl"></div>
+  <div class="bracket br-tr"></div>
+  <div class="bracket br-bl"></div>
+  <div class="bracket br-br"></div>
+
+  <!-- Main hero: left text + right panel -->
+  <div class="hero-main">
+
+    <!-- LEFT -->
+    <div class="hero-left-col">
+      <div class="hero-hud">
+        <div class="hud-pill ct"><span class="hud-blink"></span>Зуны Зуслан</div>
+        <div class="hud-pill to"><span class="hud-blink"></span>CS2 Bootcamp</div>
+        <div class="hud-pill nn">2026</div>
+      </div>
+
+      <h1 class="hh">
+        ГОВИЙН<br>
+        <span class="to">ЗУСЛАН</span> <span class="ct">×</span><br>
+        <span class="ct">CS2</span> <span class="stroke">BOOT</span><span class="wht-txt">CAMP</span>
+      </h1>
+
+      <div class="hero-divider">
+        <span class="hero-divider-line"></span>
+        <span class="hero-divider-label">Shambala-2056 · Дорноговь · 2026</span>
+        <span class="hero-divider-line"></span>
+      </div>
+
+      <p class="hero-sub-txt">
+        12–16 насны хүүхдүүдэд зориулсан 14 хоногийн нэгдсэн хөтөлбөр.
+        Говийн байгаль, шинжлэх ухаан — болон CS2 тактик, AI, англи хэл.
+      </p>
+
+      <div class="hero-btns">
+        <a class="btn-to" href="#register">Ээлж Захиалах</a>
+        <a class="btn-ct" href="#subjects">Хичээлүүд</a>
+        <a class="btn-wire" href="#concept">Дэлгэрэнгүй</a>
+      </div>
+
+      <!-- Mini stat row -->
+      <div class="hero-mini-stats">
+        <div class="hms"><span class="hms-n to">4</span><span class="hms-l">Ээлж</span></div>
+        <div class="hms-sep"></div>
+        <div class="hms"><span class="hms-n wht-txt">20</span><span class="hms-l">Хүүхэд/ээлж</span></div>
+        <div class="hms-sep"></div>
+        <div class="hms"><span class="hms-n wht-txt">14</span><span class="hms-l">Хоног</span></div>
+        <div class="hms-sep"></div>
+        <div class="hms"><span class="hms-n ct">8</span><span class="hms-l">Хичээл</span></div>
+      </div>
+    </div>
+
+    <!-- RIGHT — visual info panel -->
+    <div class="hero-right-col">
+
+
+
+      <!-- Info cards stacked -->
+      <div class="hero-info-stack">
+
+        <div class="hi-card hi-camp">
+          <div class="hi-card-tag">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.2 3.5 22M17 8c0 0 3 3 2 7s-4 6-4 6M17 8L12 2"/></svg>
+            Зуны Зуслан
+          </div>
+          <div class="hi-card-title">Говийн байгаль · Шинжлэх ухаан</div>
+          <div class="hi-card-pills">
+            <span>Байгаль судлал</span>
+            <span>Эрчим хүч</span>
+            <span>Биеийн тамир</span>
+            <span>Одон орон</span>
+          </div>
+        </div>
+
+        <div class="hi-divider">
+          <span></span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round">
+            <line x1="12" y1="3" x2="12" y2="21"/>
+            <line x1="3" y1="12" x2="21" y2="12"/>
+            <circle cx="12" cy="12" r="2" fill="#4d9fd4"/>
+          </svg>
+          <span></span>
+        </div>
+
+        <div class="hi-card hi-cs2">
+          <div class="hi-card-tag">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg>
+            CS2 Bootcamp
+          </div>
+          <div class="hi-card-title">Тактик · AI · Сэтгэл зүй · Англи</div>
+          <div class="hi-card-pills">
+            <span>CS2 Тактик</span>
+            <span>AI Анализ</span>
+            <span>Сэтгэл зүй</span>
+            <span>Англи хэл</span>
+          </div>
+        </div>
+
+        <!-- Schedule mini -->
+        <div class="hi-schedule">
+          <div class="hi-sch-label">
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg>
+            2026 оны хуваарь
+          </div>
+          <div class="hi-sch-rows">
+            <div class="hi-sch-row"><span class="hi-sch-n ct">1</span><span class="hi-sch-d">06/25 — 07/08</span><span class="hi-sch-s">20 байр</span></div>
+            <div class="hi-sch-row"><span class="hi-sch-n ct">2</span><span class="hi-sch-d">07/09 — 07/22</span><span class="hi-sch-s">20 байр</span></div>
+            <div class="hi-sch-row"><span class="hi-sch-n ct">3</span><span class="hi-sch-d">07/23 — 08/05</span><span class="hi-sch-s">20 байр</span></div>
+            <div class="hi-sch-row"><span class="hi-sch-n ct">4</span><span class="hi-sch-d">08/06 — 08/19</span><span class="hi-sch-s">20 байр</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- CONCEPT -->
+<div class="concept-sec" id="concept">
+  <div class="concept-grid">
+    <div class="concept-half camp rv">
+      <div class="ch-tag"><span class="ch-tag-line"></span>
+        <!-- camp icon -->
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M7 1L1 13h12L7 1z" stroke="#e8920a" stroke-width="1.2" fill="none"/><line x1="7" y1="5" x2="7" y2="10" stroke="#e8920a" stroke-width="1"/></svg>
+        Зуны Зуслан
+      </div>
+      <h2 class="ch-h">Говийн байгальд<br>амьдрах дадал</h2>
+      <p class="ch-p">Shambala-2056 инженерийн суурин дээр 14 хоног — цөлжилтийн эсрэг ажил хийж буй бодит байгаль судлал, говийн уур амьсгал, инженерийн орчинд суралцана. Зуны зуслан биш — амьдрах туршлага.</p>
+      <div class="ch-chips">
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.2 3.5 22M17 8c0 0 3 3 2 7s-4 6-4 6M17 8L12 2"/><path d="M3.5 22c2-4 4-7 8.5-8"/></svg>
+          Байгаль судлал
+        </span>
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+          Эрчим хүч
+        </span>
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 12 7 12 9 5 11 19 13 9 15 14 17 12 21 12"/></svg>
+          Биеийн тамир
+        </span>
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1.5 0 2.5 1 2.5 2.5"/><path d="M12 4.5C8.5 4.5 6 7.5 6 11c0 5 3 9 6 9s6-4 6-9c0-3.5-2.5-6.5-6-6.5z"/><line x1="12" y1="9" x2="12" y2="15"/><line x1="9.5" y1="12" x2="14.5" y2="12"/></svg>
+          Эрүүл хоол
+        </span>
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3H5a2 2 0 00-2 2v4m6-6h10a2 2 0 012 2v4M9 3v18m0 0h10a2 2 0 002-2v-4M9 21H5a2 2 0 01-2-2v-4m0 0h18"/></svg>
+          Шинжлэх ухаан
+        </span>
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9"/><path d="M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9"/><line x1="3.5" y1="9" x2="20.5" y2="9"/><line x1="3.5" y1="15" x2="20.5" y2="15"/></svg>
+          Говийн аялал
+        </span>
+      </div>
+    </div>
+    <div class="concept-half cs2 rv">
+      <div class="ch-tag"><span class="ch-tag-line"></span>
+        <!-- crosshair icon -->
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+          <circle cx="7" cy="7" r="5.5" stroke="#4d9fd4" stroke-width="1.2"/>
+          <circle cx="7" cy="7" r="1.5" fill="#4d9fd4"/>
+          <line x1="7" y1="1" x2="7" y2="3.5" stroke="#4d9fd4" stroke-width="1.2"/>
+          <line x1="7" y1="10.5" x2="7" y2="13" stroke="#4d9fd4" stroke-width="1.2"/>
+          <line x1="1" y1="7" x2="3.5" y2="7" stroke="#4d9fd4" stroke-width="1.2"/>
+          <line x1="10.5" y1="7" x2="13" y2="7" stroke="#4d9fd4" stroke-width="1.2"/>
+        </svg>
+        CS2 Bootcamp
+      </div>
+      <h2 class="ch-h">eSports-ийн<br>мэргэжлийн сургалт</h2>
+      <p class="ch-p">Зөвхөн тоглоом биш — тоглогчийн бүх талын хөгжил. CS2 тактик, aim механик, сэтгэл зүй, англи хэл, AI хэрэгсэл. Говийн тайван орчинд тунгалаг оюунтай байж — шилдэг тоглогч болно.</p>
+      <div class="ch-chips">
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+            <circle cx="5" cy="5" r="4" stroke="#4d9fd4" stroke-width="1"/>
+            <circle cx="5" cy="5" r="1.2" fill="#4d9fd4"/>
+            <line x1="5" y1="1" x2="5" y2="2.5" stroke="#4d9fd4" stroke-width="1"/>
+            <line x1="5" y1="7.5" x2="5" y2="9" stroke="#4d9fd4" stroke-width="1"/>
+            <line x1="1" y1="5" x2="2.5" y2="5" stroke="#4d9fd4" stroke-width="1"/>
+            <line x1="7.5" y1="5" x2="9" y2="5" stroke="#4d9fd4" stroke-width="1"/>
+          </svg>
+          CS2 Тактик
+        </span>
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 007 4.5v.3A2.5 2.5 0 004.5 7.2a2.5 2.5 0 00-.5 4.8v.5A2.5 2.5 0 007 15h2.5M14.5 2A2.5 2.5 0 0117 4.5v.3a2.5 2.5 0 012.5 2.4 2.5 2.5 0 01.5 4.8v.5A2.5 2.5 0 0117 15H14.5M9 15v4a3 3 0 006 0v-4"/></svg>
+          Сэтгэл зүй
+        </span>
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="M7 10l2 2 4-4"/></svg>
+          AI хэрэгсэл
+        </span>
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9"/><line x1="3.5" y1="9" x2="20.5" y2="9"/><line x1="3.5" y1="15" x2="20.5" y2="15"/></svg>
+          Англи хэл
+        </span>
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+          Demo анализ
+        </span>
+        <span class="ch-chip">
+          <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4a2 2 0 000 4h2M18 9h2a2 2 0 010 4h-2M6 9V3h12v6a6 6 0 01-12 0z"/><path d="M12 15v4M8 19h8"/></svg>
+          Тэмцээн
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="concept-bridge rv">
+    <div class="cb-seg">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg>
+      <span class="cb-text">Өглөө — Говийн байгаль · Дасгал · Эрүүл хоол</span>
+    </div>
+    <span class="cb-sep">+</span>
+    <div class="cb-seg">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><circle cx="12" cy="12" r="0.8" fill="#4d9fd4"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg>
+      <span class="cb-text">Өдөр — CS2 · AI · Англи · Сэтгэл зүй</span>
+    </div>
+    <span class="cb-sep">+</span>
+    <div class="cb-seg">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2eb870" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span class="cb-text">Орой — Одон орон · Ярилцлага · Нөхөрлөл</span>
+    </div>
+  </div>
+</div>
+
+<!-- SCHEDULE -->
+<section class="sec sched-sec" id="schedule">
+  <div class="si">
+    <div class="rv">
+      <div class="stag ct-tag">Ээлжийн хуваарь · 2026</div>
+      <h2 class="sh">4 ЭЭЛЖ — <span class="ct">6/25 ЭЭС 8/19 ХҮРТЭЛ</span></h2>
+      <div class="hdiv"></div>
+      <p class="sp">Нийт 8 долоо хоногийн хугацаанд 4 ээлж явагдана. Нэг ээлжид хамгийн ихдээ <strong>20 хүүхэд.</strong></p>
+    </div>
+    <div class="sched-grid rv">
+      <div class="eel"><div class="eel-n">1-р ээлж</div><div class="eel-title">Анхны Ээлж</div><div class="eel-dates">06/25 — 07/08</div><div class="eel-badge"><span class="eel-dot"></span>20 байр</div></div>
+      <div class="eel"><div class="eel-n">2-р ээлж</div><div class="eel-title">Зуны Дунд</div><div class="eel-dates">07/09 — 07/22</div><div class="eel-badge"><span class="eel-dot"></span>20 байр</div></div>
+      <div class="eel"><div class="eel-n">3-р ээлж</div><div class="eel-title">Оргил Ээлж</div><div class="eel-dates">07/23 — 08/05</div><div class="eel-badge"><span class="eel-dot"></span>20 байр</div></div>
+      <div class="eel"><div class="eel-n">4-р ээлж</div><div class="eel-title">Сүүлийн Ээлж</div><div class="eel-dates">08/06 — 08/19</div><div class="eel-badge"><span class="eel-dot"></span>20 байр</div></div>
+    </div>
+    <div class="sched-facts rv">
+      <div class="sf">
+        <div class="sf-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15.5 14"/></svg>
+        </div>
+        <div><div class="sf-title">Байршил</div><div class="sf-text">Shambala-2056 талбай · Дорноговь аймаг · Сайншанд орчим</div></div>
+      </div>
+      <div class="sf">
+        <div class="sf-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/><circle cx="12" cy="16" r="1" fill="#4d9fd4"/></svg>
+        </div>
+        <div><div class="sf-title">Аюулгүй байдал</div><div class="sf-text">Эмч хамт · Хоол бүгд хангагдана · Эцэг эхтэй тогтмол холбоо</div></div>
+      </div>
+      <div class="sf">
+        <div class="sf-icon">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div><div class="sf-title">CS2 туршлага</div><div class="sf-text">Шаардлагагүй — анхлан тоглогч ч, тогтмол тоглогч ч элсэж болно</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DAILY PROGRAM -->
+<section class="sec daily-sec" id="daily">
+  <div class="si">
+    <div class="rv">
+      <div class="stag to-tag">Өдөр тутмын хөтөлбөр</div>
+      <h2 class="sh">НЭГДСЭН <span class="to">ХОНОГИЙН</span> ХУВААРЬ</h2>
+      <div class="hdiv to"></div>
+      <p class="sp">Ажлын өдөр, амралтын өдөр, тусгай үйл ажиллагааны 3 хуваарь. Таб дараад харна уу.</p>
+    </div>
+    <div class="daily-tabs rv">
+      <button class="dtab active" onclick="showTab('wd',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="14" x2="8" y2="14" stroke-width="2"/><line x1="12" y1="14" x2="12" y2="14" stroke-width="2"/><line x1="16" y1="14" x2="16" y2="14" stroke-width="2"/></svg>
+        Ажлын Өдөр (Да–Ба)
+      </button>
+      <button class="dtab" onclick="showTab('we',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg>
+        Амралтын Өдөр (Бям–Ням)
+      </button>
+      <button class="dtab" onclick="showTab('sp',this)">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.3 3.7L2.7 17A2 2 0 004.4 20h15.2a2 2 0 001.7-3L13.7 3.7a2 2 0 00-3.4 0z"/><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r=".5" fill="#4d9fd4"/></svg>
+        Тусгай Өдрүүд
+      </button>
+    </div>
+
+    <div class="daily-panel active" id="panel-wd">
+      <div class="dp-col">
+        <div class="dp-time">07:00 — 12:30</div>
+        <div class="dp-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/><line x1="4.2" y1="4.2" x2="5.6" y2="5.6"/><line x1="18.4" y1="4.2" x2="19.8" y2="5.6"/></svg>
+          Өглөөний Блок
+        </div>
+        <ul class="dp-items">
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>07:00</strong> — Өглөөний дасгал. Говийн агаарт 20 мин хөдөлгөөн. Хуруу, нүдний тусгай дасгал.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>07:30</strong> — Gamer nutrition хоол. Уураг, магни, витамин C. Чипс, энерги ундаа хориотой.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>08:30</strong> — Шинжлэх ухааны хичээл. Говийн биологи, экологи. Мод тарих, хөрс шинжлэх.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>10:30</strong> — Англи хэлний дасгал. CS2 callout-уудыг англиар. Pro тоглогчдын интервью орчуулах.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>11:30</strong> — Чөлөөт цаг, усны завсарлага. Нүдний 20-20-20 дасгал.</span></li>
+        </ul>
+      </div>
+      <div class="dp-col">
+        <div class="dp-time">13:00 — 18:30</div>
+        <div class="dp-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="1" fill="#4d9fd4"/><line x1="12" y1="3" x2="12" y2="8.5"/><line x1="12" y1="15.5" x2="12" y2="21"/><line x1="3" y1="12" x2="8.5" y2="12"/><line x1="15.5" y1="12" x2="21" y2="12"/></svg>
+          CS2 Bootcamp Блок
+        </div>
+        <ul class="dp-items">
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>13:00</strong> — Aim лаборатори. CS2 deathmatch. Crosshair placement, counter-strafe. Коуч ганцаарчлан засна.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>14:30</strong> — Тактикийн хичээл. Газрын зургийн мэдлэг, utility setup, rotate timing. Whiteboard стратеги.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>15:30</strong> — AI & Demo шинжилгээ. Leetify, CS2 analyzer ашиглан өөрийн тоглолтыг шинжлэх.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>16:30</strong> — Сэтгэл зүйн дасгал. Tilt management. Амьсгалын 4-7-8 техник. Pressure дор тогтвортой байх.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>17:30</strong> — Бүлгийн 5v5 scrimmage. Бодит нөхцөлд сурсан зүйлээ хэрэгжүүлнэ.</span></li>
+        </ul>
+      </div>
+      <div class="dp-col">
+        <div class="dp-time">19:00 — 22:00</div>
+        <div class="dp-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2eb870" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+          Оройн Блок
+        </div>
+        <ul class="dp-items">
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>19:00</strong> — Оройн хоол. Recovery хоол: уураг, магни. Хамтдаа. Дэлгэцгүй цаг.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>20:00</strong> — Одон орон ажиглалт. Говийн тэнгэр — гэрлийн бохирдолгүй. Монгол одны нэрс, домог.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>20:45</strong> — Өдрийн дүгнэлт. Ахмад зочин: инженер, eSports тамирчин. Ярилцлага, асуулт.</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span><strong>21:30</strong> — Унтлагын бэлтгэл. Дэлгэцгүй 30 мин. Найм цагийн нойр — тоглогчийн хамгийн чухал сэргэлт.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="daily-panel" id="panel-we">
+      <div class="dp-col">
+        <div class="dp-time">Бямба — Говийн Аялал</div>
+        <div class="dp-title"><svg width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M9 2C5.5 2 3 4.5 3 8c0 5.5 6 9 6 9s6-3.5 6-9c0-3.5-2.5-6-6-6zm0 8a2 2 0 110-4 2 2 0 010 4z" fill="#e8920a" opacity=".8"/></svg>Говийн Аялал</div>
+        <ul class="dp-items">
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Хамар хийд болон Шамбала эрчим хүчний төвд аялал</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Говийн морь унах — уламжлалт монгол дадал</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Shambala-2056 талбайн бодит ажил — мод тарих, услах</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Кампфайр, зочны ярилцлага, бүлгийн тоглоом</span></li>
+        </ul>
+      </div>
+      <div class="dp-col">
+        <div class="dp-time">Ням — CS2 Тэмцээн</div>
+        <div class="dp-title">
+          <svg width="18" height="18" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="#4d9fd4" stroke-width="1.5"/><circle cx="9" cy="9" r="2" fill="#4d9fd4"/><line x1="9" y1="2" x2="9" y2="5" stroke="#4d9fd4" stroke-width="1.5"/><line x1="9" y1="13" x2="9" y2="16" stroke="#4d9fd4" stroke-width="1.5"/><line x1="2" y1="9" x2="5" y2="9" stroke="#4d9fd4" stroke-width="1.5"/><line x1="13" y1="9" x2="16" y2="9" stroke="#4d9fd4" stroke-width="1.5"/></svg>
+          Долоо Хоногийн Тэмцээн
+        </div>
+        <ul class="dp-items">
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Долоо хоногийн дотоод 5v5 тэмцээн — бүлэг vs бүлэг</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Хувийн тоглолтын demo дахин харах — өөрийн алдааг олно</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Бүлгийн стратегийн хурал — дараа долоо хоногийн төлөвлөлт</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Шагналт ёслол — долоо хоногийн шилдэг тоглогч</span></li>
+        </ul>
+      </div>
+      <div class="dp-col">
+        <div class="dp-time">Хоёр өдрийн хамт</div>
+        <div class="dp-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2eb870" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 12 7 12 9 5 11 19 13 9 15 14 17 12 21 12"/></svg>
+          Биеийн Тамир
+        </div>
+        <ul class="dp-items">
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Хуруу, бугуйн дасгал — RSI урьдчилан сэргийлэх</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Нүдний 20-20-20 арга — харааны ядаргаа багасгах</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Нуруу, хүзүүний сунгалт — суугаа байдлын хор хөнөөл</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Тоглоом: тагт, хөлбөмбөг, спорт</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="daily-panel" id="panel-sp">
+      <div class="dp-col">
+        <div class="dp-time">1-р долоо хоног эхэн</div>
+        <div class="dp-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.1 8.3 22 9.3 17 14.1 18.2 21 12 17.8 5.8 21 7 14.1 2 9.3 8.9 8.3 12 2"/></svg>
+          Нээлтийн Ёслол
+        </div>
+        <ul class="dp-items">
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Shambala-2056 суурины танилцуулга тур</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Бүлэг, командын нэр тогтоох — хамтаар зохиона</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>CS2 анхны 5v5 — baseline тоглолт тэмдэглэнэ</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#e8920a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Эцэг эхтэй онлайн видео дуудлага</span></li>
+        </ul>
+      </div>
+      <div class="dp-col">
+        <div class="dp-time">7-р хоног</div>
+        <div class="dp-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/><circle cx="12" cy="15" r="1.5" fill="#4d9fd4"/></svg>
+          7 Хоногийн Дүн
+        </div>
+        <ul class="dp-items">
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Хагасын aim тест — 1-р өдрийн тоглолттой харьцуулна</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Тусгай зочин — инженер эсвэл про тоглогчтой уулзалт</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Хамтын гэрэл зургийн сесс — Shambala-2056 талбайд</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#4d9fd4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Дараа 7 хоногийн зорилтоо тус бүр тодорхойлно</span></li>
+        </ul>
+      </div>
+      <div class="dp-col">
+        <div class="dp-time">14-р хоног</div>
+        <div class="dp-title">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#2eb870" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9H4a2 2 0 000 4h2M18 9h2a2 2 0 010 4h-2M6 9V3h12v6a6 6 0 01-12 0z"/><path d="M12 15v4M8 19h8"/></svg>
+          Төгсгөлийн Ёслол
+        </div>
+        <ul class="dp-items">
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Эцсийн CS2 тэмцээн — 14 хоногийн хамгийн том тоглолт</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Гэрчилгээний ёслол — Shambala-2056 албан ёсны гэрчилгээ</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Хамгийн их хөгжсөн тоглогч шагналт</span></li>
+          <li><svg class="dp-arr" width="8" height="8" viewBox="0 0 16 16" fill="none" stroke="#2eb870" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="8" x2="14" y2="8"/><polyline points="9 3 14 8 9 13"/></svg><span>Эцэг эхийн угтах үдэшлэг — тоглолтын бичлэг, гэрэл зураг</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<section class="sec subj-sec" id="subjects">
+  <div class="si">
+    <div class="rv">
+      <div class="stag ct-tag">8 Хичээлийн Төрөл</div>
+      <h2 class="sh">ЮУГ <span class="ct">СУРАХ</span> ВЭ?</h2>
+      <div class="hdiv"></div>
+      <p class="sp">Зуслангийн хичээлүүд нь говийн зуслан болон CS2 bootcamp-ийн агуулгыг нэгтгэсэн. <strong>Сэтгэл зүй, англи хэл, эрүүл хоол</strong> — аль алинд нь нийтлэг.</p>
+    </div>
+    <div class="subj-grid rv">
+
+      <div class="subj-card ct-card">
+        <div class="subj-head">
+          <span class="subj-badge ct-badge">CS2 Bootcamp</span>
+          <div class="subj-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="1" fill="#4d9fd4"/><line x1="12" y1="3" x2="12" y2="8.5"/><line x1="12" y1="15.5" x2="12" y2="21"/><line x1="3" y1="12" x2="8.5" y2="12"/><line x1="15.5" y1="12" x2="21" y2="12"/></svg>
+          </div>
+          <div class="subj-name">CS2 Тактик & Механик</div>
+          <div class="subj-desc">Суурь болон дунд түвшний aim, газрын зураг, utility. Whiteboard болон in-game.</div>
+        </div>
+        <div class="subj-body">
+          <ul class="subj-topics">
+            <li><span class="stopic-dot ct-dot"></span>Crosshair placement болон counter-strafe</li>
+            <li><span class="stopic-dot ct-dot"></span>Spray pattern — AK47, M4A1-S, M4A4</li>
+            <li><span class="stopic-dot ct-dot"></span>Smoke, flash, molotov lineup</li>
+            <li><span class="stopic-dot ct-dot"></span>Rotate timing, map control, execute</li>
+            <li><span class="stopic-dot ct-dot"></span>Economy — buy, eco, force</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subj-card ct-card">
+        <div class="subj-head">
+          <span class="subj-badge ct-badge">CS2 Bootcamp</span>
+          <div class="subj-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M7 10l2 2 4-4" stroke="#e8920a" stroke-width="1.5"/></svg>
+          </div>
+          <div class="subj-name">AI & Demo Шинжилгээ</div>
+          <div class="subj-desc">Хиймэл оюун болон дата ашиглан өөрийн тоглолтыг шинжлэх.</div>
+        </div>
+        <div class="subj-body">
+          <ul class="subj-topics">
+            <li><span class="stopic-dot ct-dot"></span>CS2 demo файл хэрхэн унших</li>
+            <li><span class="stopic-dot ct-dot"></span>Leetify, CS2 analyzer ашиглах</li>
+            <li><span class="stopic-dot ct-dot"></span>Статистик — rating, KAST, ADR</li>
+            <li><span class="stopic-dot ct-dot"></span>AI-аар heat map, positioning анализ</li>
+            <li><span class="stopic-dot ct-dot"></span>ChatGPT-ийг CS2 тактик боловсруулахад</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subj-card ct-card">
+        <div class="subj-head">
+          <span class="subj-badge ct-badge">Хоёуланд нийтлэг</span>
+          <div class="subj-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 007 4.5v.3A2.5 2.5 0 004.5 7.2a2.5 2.5 0 00-.5 4.8v.5A2.5 2.5 0 007 15h2.5"/><path d="M14.5 2A2.5 2.5 0 0117 4.5v.3a2.5 2.5 0 012.5 2.4 2.5 2.5 0 01.5 4.8v.5A2.5 2.5 0 0117 15H14.5"/><path d="M9 15v4a3 3 0 006 0v-4"/><line x1="9" y1="9" x2="9" y2="11"/><line x1="15" y1="9" x2="15" y2="11"/><line x1="9" y1="10" x2="15" y2="10"/></svg>
+          </div>
+          <div class="subj-name">Сэтгэл Зүйн Дасгал</div>
+          <div class="subj-desc">Tilt management, pressure дор тогтвортой байх. Говийн тайван орчин — хамгийн тохиромжтой дасгалын газар.</div>
+        </div>
+        <div class="subj-body">
+          <ul class="subj-topics">
+            <li><span class="stopic-dot ct-dot"></span>Tilt гэж юу вэ? Яаж сэргийлэх, яаж гарах</li>
+            <li><span class="stopic-dot ct-dot"></span>Амьсгалын дасгал — 4-7-8 техник</li>
+            <li><span class="stopic-dot ct-dot"></span>Pre-game routine — тоглохоос өмнөх бэлтгэл</li>
+            <li><span class="stopic-dot ct-dot"></span>Алдаанаасаа суралцах — self-critique</li>
+            <li><span class="stopic-dot ct-dot"></span>Говийн чимээгүй байдалд meditative focus</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subj-card ct-card">
+        <div class="subj-head">
+          <span class="subj-badge ct-badge">Хоёуланд нийтлэг</span>
+          <div class="subj-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9"/><path d="M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9"/><line x1="3.5" y1="9" x2="20.5" y2="9"/><line x1="3.5" y1="15" x2="20.5" y2="15"/></svg>
+          </div>
+          <div class="subj-name">Англи Хэл — eSports</div>
+          <div class="subj-desc">CS2 callout, pro тоглогчдын хэл, олон улсын тэмцээний мэдлэг.</div>
+        </div>
+        <div class="subj-body">
+          <ul class="subj-topics">
+            <li><span class="stopic-dot ct-dot"></span>CS2 callout 200+ — англи, монгол хоёуланд</li>
+            <li><span class="stopic-dot ct-dot"></span>Pro видео, стрим орчуулах дасгал</li>
+            <li><span class="stopic-dot ct-dot"></span>ESL, BLAST тэмцээний commentary</li>
+            <li><span class="stopic-dot ct-dot"></span>Олон улсын тоглогчтой англиар харилцах</li>
+            <li><span class="stopic-dot ct-dot"></span>Post-game analysis — англиар</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subj-card to-card">
+        <div class="subj-head">
+          <span class="subj-badge to-badge">Хоёуланд нийтлэг</span>
+          <div class="subj-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2c1.5 0 2.5 1 2.5 2.5"/><path d="M12 4.5C8.5 4.5 6 7.5 6 11c0 5 3 9 6 9s6-4 6-9c0-3.5-2.5-6.5-6-6.5z"/><line x1="12" y1="9" x2="12" y2="15"/><line x1="9.5" y1="12" x2="14.5" y2="12"/></svg>
+          </div>
+          <div class="subj-name">Эрүүл Хоол — Gamer Nutrition</div>
+          <div class="subj-desc">Тоглогчийн гүйцэтгэлд хоол хэрхэн нөлөөлдөг. Зусланд бодитоор хэрэгжүүлнэ.</div>
+        </div>
+        <div class="subj-body">
+          <ul class="subj-topics">
+            <li><span class="stopic-dot to-dot"></span>Уураг, нүүрс ус, чийг — тоглогчийн шаардлага</li>
+            <li><span class="stopic-dot to-dot"></span>Reaction time-д нөлөөлдөг хоол, ундаа</li>
+            <li><span class="stopic-dot to-dot"></span>Кофеин — ашиг ба хор. Энерги ундаа яагаад муу</li>
+            <li><span class="stopic-dot to-dot"></span>Магни, В12, Омега-3 — тоглогчийн витамин</li>
+            <li><span class="stopic-dot to-dot"></span>Зусланд хамтдаа эрүүл хоол хийх дасгал</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subj-card to-card">
+        <div class="subj-head">
+          <span class="subj-badge to-badge">Хоёуланд нийтлэг</span>
+          <div class="subj-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 12 7 12 9 5 11 19 13 9 15 14 17 12 21 12"/></svg>
+          </div>
+          <div class="subj-name">Биеийн Тамир — Gamer Fitness</div>
+          <div class="subj-desc">RSI урьдчилан сэргийлэх, нүдний арчилгаа, тоглогчийн биеийг хамгаалах.</div>
+        </div>
+        <div class="subj-body">
+          <ul class="subj-topics">
+            <li><span class="stopic-dot to-dot"></span>Хуруу, бугуйн дасгал — RSI урьдчилан сэргийлэх</li>
+            <li><span class="stopic-dot to-dot"></span>Нүдний 20-20-20 арга</li>
+            <li><span class="stopic-dot to-dot"></span>Нуруу, хүзүүний сунгалт</li>
+            <li><span class="stopic-dot to-dot"></span>Кардио — тархины цусан хангамж</li>
+            <li><span class="stopic-dot to-dot"></span>Говийн агаарт өглөөний дасгал</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subj-card to-card">
+        <div class="subj-head">
+          <span class="subj-badge to-badge">Зуны Зуслан</span>
+          <div class="subj-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.2 3.5 22M17 8c0 0 3 3 2 7s-4 6-4 6M17 8L12 2"/><path d="M3.5 22c2-4 4-7 8.5-8"/></svg>
+          </div>
+          <div class="subj-name">Байгаль Судлал & Инженерчлэл</div>
+          <div class="subj-desc">Shambala-2056 талбайд бодитоор ажиллана. Цөлжилт, мод тарих, сэргээгдэх эрчим хүч.</div>
+        </div>
+        <div class="subj-body">
+          <ul class="subj-topics">
+            <li><span class="stopic-dot to-dot"></span>Говийн экосистем — ургамал, амьтан, хөрс</li>
+            <li><span class="stopic-dot to-dot"></span>Цөлжилт яагаад болдог — бодит жишээ</li>
+            <li><span class="stopic-dot to-dot"></span>Мод тарих, услах — бодит ажил</li>
+            <li><span class="stopic-dot to-dot"></span>Сэргээгдэх эрчим хүч</li>
+            <li><span class="stopic-dot to-dot"></span>Говийн ус — хомсдол, хамгаалалт</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="subj-card grn-card">
+        <div class="subj-head">
+          <span class="subj-badge grn-badge">Зуны Зуслан</span>
+          <div class="subj-icon-wrap">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#2eb870" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="2" y1="12" x2="22" y2="12"/><path d="M4 12l4-8 4 4 4-6 4 10"/><line x1="12" y1="12" x2="12" y2="20"/><line x1="8" y1="20" x2="16" y2="20"/></svg>
+          </div>
+          <div class="subj-name">Шинжлэх Ухаан & Одон Орон</div>
+          <div class="subj-desc">Говийн тэнгэр — дэлхийн тод одон орон ажиглалтын нэг. Биологи, физик амьдрал дээр.</div>
+        </div>
+        <div class="subj-body">
+          <ul class="subj-topics">
+            <li><span class="stopic-dot grn-dot"></span>Одон орон ажиглалт — дурангаар</li>
+            <li><span class="stopic-dot grn-dot"></span>Монгол одны нэрс болон домог</li>
+            <li><span class="stopic-dot grn-dot"></span>Говийн ургамлыг таних — нэр, онцлог, тархалт</li>
+            <li><span class="stopic-dot grn-dot"></span>Говийн ургамлын ач тус — эмийн, хүнсний, байгаль хамгааллын</li>
+            <li><span class="stopic-dot grn-dot"></span>Физикийн туршилт — нар, салхи, говьд</li>
+            <li><span class="stopic-dot grn-dot"></span>Инженерийн бодлого: говийн асуудлыг шийд</li>
+          </ul>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- 14 DAY TABLE -->
+<section class="sec tl-sec" id="timeline">
+  <div class="si">
+    <div class="rv">
+      <div class="stag to-tag">14 Хоногийн Нэгдсэн Хуваарь</div>
+      <h2 class="sh">14 ХОНОГИЙН <span class="to">НАРИЙН</span> ХУВААРЬ</h2>
+      <div class="hdiv to"></div>
+      <p class="sp">Нэг долоо хоногийн загвар. Хоёр дахь долоо хоног ижил бүтэц, агуулга гүнзгийрнэ.</p>
+    </div>
+    <div class="tl-wrap rv">
+      <table class="tlt">
+        <thead>
+          <tr>
+            <th style="text-align:left">Блок</th>
+            <th>Даваа</th><th>Мягмар</th><th>Лхагва</th><th>Пүрэв</th><th>Баасан</th><th>Бямба</th><th>Ням</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><div class="tl-row-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><polyline points="12 7 12 12 15 14"/></svg> Өглөө</div></td>
+            <td><div class="tl-a ta-to">Дасгал+Aim</div><div class="tl-a ta-to">Байгаль</div></td>
+            <td><div class="tl-a ta-to">Дасгал+Aim</div><div class="tl-a ta-ct">Англи</div></td>
+            <td><div class="tl-a ta-to">Дасгал+Aim</div><div class="tl-a ta-grn">Мод тарих</div></td>
+            <td><div class="tl-a ta-to">Дасгал+Aim</div><div class="tl-a ta-ct">Англи</div></td>
+            <td><div class="tl-a ta-to">Дасгал+Aim</div><div class="tl-a ta-grn">Шинжлэх ухаан</div></td>
+            <td><div class="tl-a ta-to">Гадна дасгал</div><div class="tl-a ta-grn">Говийн аялал</div></td>
+            <td><div class="tl-a ta-to">Чөлөөт Aim</div><div class="tl-a ta-dim">Амрах</div></td>
+          </tr>
+          <tr>
+            <td><div class="tl-row-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg> CS2</div></td>
+            <td><div class="tl-a ta-ct">Aim Lab</div><div class="tl-a ta-ct">Тактик</div></td>
+            <td><div class="tl-a ta-ct">Aim Lab</div><div class="tl-a ta-ct">AI анализ</div></td>
+            <td><div class="tl-a ta-ct">Aim Lab</div><div class="tl-a ta-ct">Тактик</div></td>
+            <td><div class="tl-a ta-ct">Aim Lab</div><div class="tl-a ta-ct">Demo</div></td>
+            <td><div class="tl-a ta-ct">Aim Lab</div><div class="tl-a ta-ct">Тактик</div></td>
+            <td><div class="tl-a ta-dim">CS2 амарна</div></td>
+            <td><div class="tl-a ta-sp">Тэмцээн!</div></td>
+          </tr>
+          <tr>
+            <td><div class="tl-row-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg> Сэтгэл зүй</div></td>
+            <td><div class="tl-a ta-ct">Амьсгал</div></td>
+            <td><div class="tl-a ta-ct">Tilt хичээл</div></td>
+            <td><div class="tl-a ta-ct">Focus</div></td>
+            <td><div class="tl-a ta-ct">Амьсгал</div></td>
+            <td><div class="tl-a ta-ct">Pressure</div></td>
+            <td><div class="tl-a ta-dim">—</div></td>
+            <td><div class="tl-a ta-ct">Pre-game</div></td>
+          </tr>
+          <tr>
+            <td><div class="tl-row-label"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2eb870" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 13 6 13s6-7.7 6-13c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2.5"/></svg> Орой</div></td>
+            <td><div class="tl-a ta-grn">Одон орон</div><div class="tl-a ta-grn">Ярилцлага</div></td>
+            <td><div class="tl-a ta-grn">Зочин</div><div class="tl-a ta-grn">Ярилцлага</div></td>
+            <td><div class="tl-a ta-grn">Одон орон</div><div class="tl-a ta-grn">Ярилцлага</div></td>
+            <td><div class="tl-a ta-grn">Scrimmage</div><div class="tl-a ta-grn">Дүн яриа</div></td>
+            <td><div class="tl-a ta-grn">Scrimmage</div><div class="tl-a ta-grn">7 хоногийн дүн</div></td>
+            <td><div class="tl-a ta-grn">Кампфайр</div><div class="tl-a ta-grn">Нөхөрлөл</div></td>
+            <td><div class="tl-a ta-sp">Шагнал ёслол</div></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec why-sec">
+  <div class="si">
+    <div class="rv">
+      <div class="stag grn-tag">Яагаад энэ зуслан?</div>
+      <h2 class="sh">14 ХОНОГТ <span class="grn">ЮУ</span><br>СУРАЛЦАХ ВЭ?</h2>
+      <div class="hdiv" style="background:var(--grn)"></div>
+    </div>
+    <div class="why-grid rv">
+      <div class="why-card">
+        <div class="wc-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.5"/><circle cx="12" cy="12" r="1" fill="#4d9fd4"/><line x1="12" y1="3" x2="12" y2="8.5"/><line x1="12" y1="15.5" x2="12" y2="21"/><line x1="3" y1="12" x2="8.5" y2="12"/><line x1="15.5" y1="12" x2="21" y2="12"/></svg>
+        </div>
+        <div class="wc-title">CS2 Бодит Суурь</div>
+        <div class="wc-text">Зөвхөн тоглоход биш — <strong>яагаад, яаж тоглох</strong>. Aim, тактик, AI шинжилгээ — бүгд систематик аргаар.</div>
+      </div>
+      <div class="why-card">
+        <div class="wc-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 2A2.5 2.5 0 007 4.5v.3A2.5 2.5 0 004.5 7.2a2.5 2.5 0 00-.5 4.8v.5A2.5 2.5 0 007 15h2.5M14.5 2A2.5 2.5 0 0117 4.5v.3a2.5 2.5 0 012.5 2.4 2.5 2.5 0 01.5 4.8v.5A2.5 2.5 0 0117 15H14.5M9 15v4a3 3 0 006 0v-4"/></svg>
+        </div>
+        <div class="wc-title">Сэтгэл Зүйн Тогтвортой Байдал</div>
+        <div class="wc-text">Говийн тайван орчинд tilt, pressure, алдааг боловсруулах. Тоглоомд болон <strong>амьдралд хоёуланд</strong> хэрэгтэй.</div>
+      </div>
+      <div class="why-card to-hover">
+        <div class="wc-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8C8 10 5.9 16.2 3.5 22M17 8c0 0 3 3 2 7s-4 6-4 6M17 8L12 2"/><path d="M3.5 22c2-4 4-7 8.5-8"/></svg>
+        </div>
+        <div class="wc-title">Байгальтай Холбогдох</div>
+        <div class="wc-text">Хот дахь хүүхдүүдэд говийн байгаль, <strong>Shambala-2056-ийн бодит ажил</strong>, мод тарих давтагдашгүй боломж.</div>
+      </div>
+      <div class="why-card to-hover">
+        <div class="wc-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 3c-2.5 3-4 5.5-4 9s1.5 6 4 9M12 3c2.5 3 4 5.5 4 9s-1.5 6-4 9"/><line x1="3.5" y1="9" x2="20.5" y2="9"/><line x1="3.5" y1="15" x2="20.5" y2="15"/></svg>
+        </div>
+        <div class="wc-title">Практик Англи Хэл</div>
+        <div class="wc-text">CS2-ийн дагуу суралцсан англи хэл <strong>бодит сонирхолтой</strong> учир хурдан шингэнэ. Callout, pro видео, олон улс.</div>
+      </div>
+      <div class="why-card">
+        <div class="wc-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><polyline points="8 21 12 17 16 21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M7 10l2 2 4-4" stroke="#e8920a" stroke-width="1.5"/></svg>
+        </div>
+        <div class="wc-title">AI & Дата Боловсрол</div>
+        <div class="wc-text">AI хэрэгсэл ашиглан өөрийн тоглолтыг шинжлэх — <strong>ирээдүйн технологийн суурь</strong>. 12-16 насанд хамгийн тохиромжтой.</div>
+      </div>
+      <div class="why-card to-hover">
+        <div class="wc-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#e8920a" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 12 7 12 9 5 11 19 13 9 15 14 17 12 21 12"/></svg>
+        </div>
+        <div class="wc-title">Эрүүл Gamer Зуршил</div>
+        <div class="wc-text">Эрүүл хоол, биеийн дасгал, нойр — <strong>pro тоглогчдын мэргэжлийн зуршил</strong> 14 хоногт нэвтрүүлнэ.</div>
+      </div>
+      <div class="why-card">
+        <div class="wc-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div class="wc-title">Нөхдийн Нийгэмлэг</div>
+        <div class="wc-text">20 хүүхэд 14 хоног хамт — <strong>найрамдал, багийн ажиллагаа</strong>. Говьд хамт шатсан кампфайр мартагдахгүй.</div>
+      </div>
+      <div class="why-card">
+        <div class="wc-icon-wrap">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 11 12 14 22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg>
+        </div>
+        <div class="wc-title">Shambala-2056 Гэрчилгээ</div>
+        <div class="wc-text">Ээлж дүүргэсэн хүүхэд бүр <strong>Shambala-2056 гэрчилгээ</strong> авна. Говийн инженерийн суурины хамтрагч болсоны тэмдэг.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REGISTER -->
+<section class="sec reg-sec" id="register">
+  <div class="reg-inner">
+    <div class="rv">
+      <div class="stag ct-tag">Бүртгэл · 2026</div>
+      <h2 class="reg-h">ЭЭЛЖ <span class="ct">ЗАХИАЛАХ</span></h2>
+      <div class="hdiv"></div>
+      <p class="reg-p">Нэг ээлжид <strong style="color:var(--txt)">20 хүүхэд</strong> л авах тул эрт бүртгүүлнэ үү. Маягт илгээсний дараа 24 цагийн дотор холбоо барина. CS2 туршлага шаардлагагүй.</p>
+    </div>
+    <div class="reg-grid">
+      <div class="rv">
+        <div class="ri-box">
+          <div class="ri-title">Чухал мэдээлэл</div>
+          <div class="ri-row"><div class="ri-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/></svg></div><div class="ri-text"><strong>12–16 нас</strong> — 7-р аас 11-р ангийн сурагч</div></div>
+          <div class="ri-row"><div class="ri-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="16" y1="2" x2="16" y2="6"/></svg></div><div class="ri-text"><strong>14 хоног</strong> нэг ээлж · 4 ээлж нийт зун</div></div>
+          <div class="ri-row"><div class="ri-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 13 6 13s6-7.7 6-13c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2.5"/></svg></div><div class="ri-text">Байршил: <strong>Shambala-2056 талбай · Дорноговь</strong></div></div>
+          <div class="ri-row"><div class="ri-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3"/><line x1="12" y1="3" x2="12" y2="9"/><line x1="12" y1="15" x2="12" y2="21"/><line x1="3" y1="12" x2="9" y2="12"/><line x1="15" y1="12" x2="21" y2="12"/></svg></div><div class="ri-text">CS2 туршлага <strong>шаардлагагүй</strong> — анхлан тоглогч ч болно</div></div>
+          <div class="ri-row"><div class="ri-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 018 0v4"/><circle cx="12" cy="16" r="1" fill="#4d9fd4"/></svg></div><div class="ri-text">Хоол, байр, аюулгүй байдал <strong>бүгд хангагдана</strong></div></div>
+          <div class="ri-row"><div class="ri-icon-wrap"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12L7 2l5 10H2z" stroke="#4d9fd4" stroke-width="1.2" fill="none"/><line x1="7" y1="6" x2="7" y2="9" stroke="#4d9fd4" stroke-width="1"/><circle cx="7" cy="10.5" r=".5" fill="#4d9fd4"/></svg></div><div class="ri-text">Галт тэрэгний буудлаас <strong>угтаж, хүргэнэ</strong></div></div>
+          <div class="ri-row"><div class="ri-icon-wrap"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#4d9fd4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.7 2 6 4.7 6 8c0 5.3 6 13 6 13s6-7.7 6-13c0-3.3-2.7-6-6-6z"/><circle cx="12" cy="8" r="2.5"/></svg></div><div class="ri-text">Эцэг эхийн <strong>бичгэн зөвшөөрөл</strong> шаардлагатай</div></div>
+        </div>
+      </div>
+      <div class="rv">
+        <div id="regWrap">
+          <div id="regBody" class="rform">
+            <div class="frow">
+              <div class="fgrp"><div class="flbl">Хүүхдийн овог</div><input class="finp" type="text" id="cln" placeholder="Бат"></div>
+              <div class="fgrp"><div class="flbl">Хүүхдийн нэр</div><input class="finp" type="text" id="cfn" placeholder="Болд"></div>
+            </div>
+            <div class="frow">
+              <div class="fgrp"><div class="flbl">Нас / Анги</div>
+                <select class="fsel" id="age">
+                  <option value="">— сонгох —</option>
+                  <option>12 нас · 7-р анги</option>
+                  <option>13 нас · 8-р анги</option>
+                  <option>14 нас · 9-р анги</option>
+                  <option>15 нас · 10-р анги</option>
+                  <option>16 нас · 11-р анги</option>
+                </select>
+              </div>
+              <div class="fgrp"><div class="flbl">CS2 туршлага</div>
+                <select class="fsel" id="exp">
+                  <option value="">— сонгох —</option>
+                  <option>Огт тоглоогүй — анхлан</option>
+                  <option>Заримдаа тоглодог</option>
+                  <option>Тогтмол тоглодог · Silver</option>
+                  <option>Gold Nova болон дээш</option>
+                </select>
+              </div>
+            </div>
+            <div class="fgrp">
+              <div class="flbl">Ээлж сонгох</div>
+              <div class="eel-pick">
+                <input type="radio" name="eel" id="e1" class="ep-r" value="1-р ээлж · 06/25–07/08">
+                <label class="ep-l" for="e1">1-р ээлж<br>06/25–07/08</label>
+                <input type="radio" name="eel" id="e2" class="ep-r" value="2-р ээлж · 07/09–07/22">
+                <label class="ep-l" for="e2">2-р ээлж<br>07/09–07/22</label>
+                <input type="radio" name="eel" id="e3" class="ep-r" value="3-р ээлж · 07/23–08/05">
+                <label class="ep-l" for="e3">3-р ээлж<br>07/23–08/05</label>
+                <input type="radio" name="eel" id="e4" class="ep-r" value="4-р ээлж · 08/06–08/19">
+                <label class="ep-l" for="e4">4-р ээлж<br>08/06–08/19</label>
+              </div>
+            </div>
+            <div class="frow">
+              <div class="fgrp"><div class="flbl">Эцэг эхийн нэр</div><input class="finp" type="text" id="pn" placeholder="Нэр Овог"></div>
+              <div class="fgrp"><div class="flbl">Утасны дугаар</div><input class="finp" type="tel" id="ph" placeholder="+976 9900 0000"></div>
+            </div>
+            <div class="fgrp"><div class="flbl">Имэйл хаяг</div><input class="finp" type="email" id="em" placeholder="name@email.com"></div>
+            <div class="fgrp"><div class="flbl">Хүүхдийн сонирхол · Анхааруулах зүйл</div><textarea class="fta" id="msg" placeholder="Байгаль, шинжлэх ухаан, CS2-д сонирхолтой юу? Эрүүл мэндийн онцгой нөхцөл байдал байна уу?"></textarea></div>
+            <div class="ferr" id="ferr"></div>
+            <button class="fsub" onclick="doReg()">ЭЭЛЖ ЗАХИАЛАХ →</button>
+          </div>
+          <div class="fsuccess" id="fsuccess">
+            <span class="fsi">✓</span>
+            <div class="fst">ЗАХИАЛГА АМЖИЛТТАЙ</div>
+            <div class="fsd" id="fsd"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div>
+    <div class="foot-logo-row">
+      </div>
+      <div class="foot-brand">ШАМБАЛА<span class="ct">2056</span> <span class="to">CAMP×CS2</span></div>
+    </div>
+    <div class="foot-sub">Зуны Зуслан & CS2 Bootcamp · Дорноговь аймаг</div>
+    <div class="foot-desc">Говийн цөлжилтийн эсрэг ажиллах 36 жилийн инженерийн суурины хүний нөөц бэлтгэлийн хэсэг.</div>
+    <div class="foot-copy">© 2026 Shambala-2056 · Зуны Зуслан & CS2 Bootcamp · Дорноговь</div>
+  </div>
+  <div>
+    <div class="foot-col-h">Холбоос</div>
+    <ul class="foot-links">
+      <li><a href="#concept">Зуслан & Bootcamp тухай</a></li>
+      <li><a href="#schedule">Ээлжийн хуваарь</a></li>
+      <li><a href="#daily">Хоногийн хуваарь</a></li>
+      <li><a href="#subjects">8 хичээлийн төрөл</a></li>
+      <li><a href="#timeline">14 хоногийн хуваарь</a></li>
+      <li><a href="#register">Ээлж захиалах</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="foot-col-h">Холбоо барих</div>
+    <ul class="foot-links">
+      <li><a href="#">Instagram: @shambala2056</a></li>
+      <li><a href="#">Байршил: Дорноговь аймаг</a></li>
+      <li><a href="#">Хариу: 24 цагийн дотор</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('on')),{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+function showTab(id,btn){
+  document.querySelectorAll('.daily-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.dtab').forEach(b=>b.classList.remove('active'));
+  document.getElementById('panel-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function doReg(){
+  const cln=document.getElementById('cln').value.trim();
+  const cfn=document.getElementById('cfn').value.trim();
+  const age=document.getElementById('age').value;
+  const exp=document.getElementById('exp').value;
+  const eel=document.querySelector('input[name="eel"]:checked')?.value||'';
+  const pn=document.getElementById('pn').value.trim();
+  const ph=document.getElementById('ph').value.trim();
+  const em=document.getElementById('em').value.trim();
+  const err=document.getElementById('ferr');
+  err.style.display='none';
+  const checks=[
+    [!cln||!cfn,'Хүүхдийн нэрийг бүтнээр оруулна уу.'],
+    [!age,'Хүүхдийн насыг сонгоно уу.'],
+    [!exp,'CS2 туршлагыг сонгоно уу.'],
+    [!eel,'Ээлж сонгоно уу.'],
+    [!pn,'Эцэг эхийн нэрийг оруулна уу.'],
+    [!ph,'Утасны дугаараа оруулна уу.'],
+    [!em||!em.includes('@'),'Зөв имэйл хаяг оруулна уу.'],
+  ];
+  for(const[bad,msg]of checks){if(bad){err.textContent=msg;err.style.display='block';return;}}
+  document.getElementById('regBody').style.display='none';
+  document.getElementById('fsuccess').style.display='block';
+  document.getElementById('fsd').innerHTML=
+    `<strong style="color:var(--wht)">${cln} ${cfn}</strong> (${age})-н захиалга хүлээн авлаа.<br>
+    Ээлж: <strong style="color:var(--ct)">${eel}</strong><br>
+    Эцэг эх: <strong style="color:var(--wht)">${pn}</strong> · <strong>${ph}</strong><br><br>
+    <strong>${em}</strong>-д <strong style="color:var(--ct)">24 цагийн дотор</strong> дэлгэрэнгүй мэдээлэл илгээнэ.<br><br>
+    <span style="font-family:var(--fm);font-size:.65rem;color:var(--dim)">// ШАМБАЛА2056 · ГОВИЙН ЗУСЛАН & CS2 BOOTCAMP · 2026 //</span>`;
+}
+</script>
+</body>
+</html>
