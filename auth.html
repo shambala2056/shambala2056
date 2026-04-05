@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Нэвтрэх / Бүртгүүлэх — Shambala2056 CS2 Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@200;300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0b09;--bg2:#121109;--bg3:#181610;
+  --sand:#c8a96e;--sand2:#e8c888;
+  --teal:#00c8a0;--teal2:#00e8b8;
+  --ember:#e05820;
+  --ln:#242018;--ln2:#302c20;
+  --dim:#504830;--mid:#908060;
+  --txt:#d0c8a8;--wht:#f0ead8;
+  --grn:#22c55e;--red:#ef4444;
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Sora',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden;min-height:100svh;display:flex;flex-direction:column}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:180px}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;inset-x:0;z-index:500;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid var(--ln);background:rgba(12,11,9,.96);backdrop-filter:blur(16px)}
+.nav-left{display:flex;flex-direction:column;gap:1px}
+.nav-parent{font-family:var(--fm);font-size:.57rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim)}
+.nav-brand{font-family:var(--fd);font-size:1.1rem;letter-spacing:3px;color:var(--sand);text-decoration:none;display:flex;align-items:center;gap:7px}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-family:var(--fm);font-size:.63rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--sand)}
+.nav-cta{font-family:var(--fm);font-size:.63rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--teal);color:#000;padding:9px 22px;text-decoration:none;transition:background .15s;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}
+.nav-cta:hover{background:var(--teal2)}
+
+/* ── PAGE ── */
+.page{flex:1;display:flex;align-items:center;justify-content:center;padding:80px 20px 60px;position:relative;overflow:hidden}
+.page-bg{position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to top,rgba(200,169,110,.04) 0%,transparent 40%),
+  radial-gradient(ellipse 60% 50% at 50% 90%,rgba(224,88,32,.04) 0%,transparent 60%)}
+.page-grid{position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:72px 72px;opacity:.35;mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 10%,transparent 75%)}
+
+/* ── AUTH CARD ── */
+.auth-wrap{position:relative;z-index:2;width:100%;max-width:460px}
+
+.auth-head{margin-bottom:28px}
+.auth-bc{font-family:var(--fm);font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.auth-bc .sep{color:var(--ln2)}
+.auth-bc .act{color:var(--teal)}
+.auth-title{font-family:var(--fd);font-size:clamp(2.6rem,6vw,3.8rem);letter-spacing:2px;line-height:.92;color:var(--wht);margin-bottom:4px}
+.auth-title .sand{color:var(--sand)}
+.auth-title .teal{color:var(--teal)}
+
+/* Tab */
+.auth-tabs{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ln);border:1px solid var(--ln);margin-bottom:1px}
+.tab-btn{font-family:var(--fm);font-size:.63rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:13px;background:var(--bg2);color:var(--dim);border:none;cursor:pointer;transition:all .15s;text-align:center}
+.tab-btn:hover{color:var(--txt)}
+.tab-btn.active{background:var(--bg3);color:var(--sand);border-bottom:2px solid var(--sand)}
+
+/* Card */
+.auth-card{background:var(--bg2);border:1px solid var(--ln2);position:relative;overflow:hidden;
+  clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px))}
+.auth-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--sand),transparent)}
+
+/* Form */
+.auth-form{padding:28px 28px 24px;display:flex;flex-direction:column;gap:1px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+.fgrp{display:flex;flex-direction:column;margin-bottom:1px}
+.flbl{font-family:var(--fm);font-size:.57rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:8px 13px 0;background:var(--bg3);border:1px solid var(--ln);border-bottom:none}
+.finp{background:var(--bg3);border:1px solid var(--ln);border-top:none;color:var(--txt);padding:10px 13px 11px;font-family:var(--fb);font-size:.88rem;font-weight:300;outline:none;width:100%;transition:border-color .15s}
+.finp:focus{border-color:var(--teal);position:relative;z-index:1}
+.finp::placeholder{color:var(--dim);opacity:.6}
+
+/* нууц үгийн хүч */
+.pw-bar{height:2px;background:var(--ln);transition:all .3s;margin-top:2px}
+.pw-bar.s1{background:var(--red);width:33%}
+.pw-bar.s2{background:var(--sand);width:66%}
+.pw-bar.s3{background:var(--teal);width:100%}
+
+.ferr{font-family:var(--fm);font-size:.62rem;color:var(--red);letter-spacing:1px;padding:8px 0;display:none}
+.fsub{font-family:var(--fm);font-size:.65rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#000;background:var(--teal);border:none;padding:14px;cursor:pointer;width:100%;transition:background .15s;margin-top:4px;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%)}
+.fsub:hover{background:var(--teal2)}
+.fsub:disabled{opacity:.5;cursor:not-allowed}
+
+/* Spinner */
+.spin{display:inline-block;width:13px;height:13px;border:2px solid rgba(0,0,0,.25);border-top-color:#000;border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+/* Footer */
+.auth-foot{padding:14px 28px 20px;border-top:1px solid var(--ln);font-family:var(--fm);font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-align:center}
+.auth-foot a{color:var(--teal);text-decoration:none}
+.auth-foot a:hover{color:var(--teal2)}
+
+/* Panel visibility */
+.panel{display:none}
+.panel.active{display:contents}
+
+footer{border-top:1px solid var(--ln);padding:24px 48px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);flex-wrap:wrap;gap:14px}
+.foot-l{display:flex;flex-direction:column;gap:2px}
+.foot-parent{font-family:var(--fm);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.foot-brand{font-family:var(--fd);font-size:1rem;letter-spacing:3px;color:var(--sand)}
+.foot-r{font-family:var(--fm);font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)}
+
+@media(max-width:600px){
+  nav{padding:0 20px}
+  nav .nav-links{display:none}
+  footer{padding:20px}
+  .page{padding:72px 14px 48px}
+  .auth-form{padding:20px 16px 18px}
+  .auth-foot{padding:12px 16px 18px}
+  .frow{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <span class="nav-parent">Shambala2056 · Дэд Төсөл</span>
+    <a class="nav-brand" href="cs2-enrollment.html"><span class="nav-dot"></span>CS2 ACADEMY</a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="cs2-enrollment.html#about">Бидний тухай</a></li>
+    <li><a href="cs2-enrollment.html#programs">Хөтөлбөр</a></li>
+    <li><a href="cs2-enrollment.html#register">Бүртгэл</a></li>
+  </ul>
+  <a class="nav-cta" href="cs2-enrollment.html">Буцах</a>
+</nav>
+
+<main class="page">
+  <div class="page-bg"></div>
+  <div class="page-grid"></div>
+
+  <div class="auth-wrap">
+
+    <div class="auth-head">
+      <div class="auth-bc">
+        <span>CS2 Academy</span><span class="sep">/</span><span class="act" id="bcLabel">Нэвтрэх</span>
+      </div>
+      <h1 class="auth-title" id="authTitle">НЭВТРЭХ</h1>
+    </div>
+
+    <!-- Tabs -->
+    <div class="auth-tabs">
+      <button class="tab-btn active" id="tabLogin" onclick="switchTab('login')">НЭВТРЭХ</button>
+      <button class="tab-btn"        id="tabReg"   onclick="switchTab('reg')">БҮРТГҮҮЛЭХ</button>
+    </div>
+
+    <div class="auth-card">
+
+      <!-- ── НЭВТРЭХ ── -->
+      <div class="auth-form" id="loginPanel">
+        <div class="fgrp">
+          <div class="flbl">Имэйл хаяг</div>
+          <input class="finp" type="email" id="lEm" placeholder="name@email.com" autocomplete="email">
+        </div>
+        <div class="fgrp" style="margin-top:1px">
+          <div class="flbl">Нууц үг</div>
+          <input class="finp" type="password" id="lPw" placeholder="••••••••" autocomplete="current-password">
+        </div>
+        <div class="ferr" id="lErr"></div>
+        <button class="fsub" id="lBtn" onclick="doLogin()">
+          <span id="lBtnTxt">НЭВТРЭХ →</span>
+        </button>
+      </div>
+
+      <!-- ── БҮРТГҮҮЛЭХ ── -->
+      <div class="auth-form" id="regPanel" style="display:none">
+        <div class="frow">
+          <div class="fgrp">
+            <div class="flbl">Овог</div>
+            <input class="finp" type="text" id="rLn" placeholder="Бат" autocomplete="family-name">
+          </div>
+          <div class="fgrp">
+            <div class="flbl">Нэр</div>
+            <input class="finp" type="text" id="rFn" placeholder="Болд" autocomplete="given-name">
+          </div>
+        </div>
+        <div class="fgrp" style="margin-top:1px">
+          <div class="flbl">Утасны дугаар</div>
+          <input class="finp" type="tel" id="rPh" placeholder="+976 9900 0000" autocomplete="tel">
+        </div>
+        <div class="fgrp" style="margin-top:1px">
+          <div class="flbl">Имэйл хаяг</div>
+          <input class="finp" type="email" id="rEm" placeholder="name@email.com" autocomplete="email">
+        </div>
+        <div class="fgrp" style="margin-top:1px">
+          <div class="flbl">Нууц үг (8+ тэмдэгт)</div>
+          <input class="finp" type="password" id="rPw" placeholder="••••••••" autocomplete="new-password" oninput="checkPw(this.value)">
+          <div class="pw-bar" id="pwBar"></div>
+        </div>
+        <div class="fgrp" style="margin-top:1px">
+          <div class="flbl">Нууц үг давтах</div>
+          <input class="finp" type="password" id="rPw2" placeholder="••••••••" autocomplete="new-password">
+        </div>
+        <div class="ferr" id="rErr"></div>
+        <button class="fsub" id="rBtn" onclick="doRegister()">
+          <span id="rBtnTxt">БҮРТГҮҮЛЭХ →</span>
+        </button>
+      </div>
+
+      <div class="auth-foot" id="authFoot">
+        Бүртгэл байхгүй юу? <a href="#" onclick="switchTab('reg');return false;">Бүртгүүлэх →</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <div class="foot-l">
+    <span class="foot-parent">Shambala2056 · Инженерийн Суурин · Дорноговь</span>
+    <span class="foot-brand">CS2 ACADEMY</span>
+  </div>
+  <div class="foot-r">© 2026 — Дэд Төсөл · Дижитал / eSports</div>
+</footer>
+
+<script type="module">
+import { auth, db } from './js/firebase-config.js';
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword,
+  updateProfile,
+  onAuthStateChanged
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+import {
+  doc, setDoc, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
+
+// Аль хэдийн нэвтэрсэн бол enrollment руу шилжүүлэх
+onAuthStateChanged(auth, user => {
+  if (user) window.location.href = 'cs2-enrollment.html#register';
+});
+
+// ── Tab солих ──
+window.switchTab = function(tab) {
+  const isLogin = tab === 'login';
+  document.getElementById('loginPanel').style.display = isLogin ? 'flex' : 'none';
+  document.getElementById('regPanel').style.display   = isLogin ? 'none' : 'flex';
+  document.getElementById('tabLogin').classList.toggle('active', isLogin);
+  document.getElementById('tabReg').classList.toggle('active', !isLogin);
+  document.getElementById('authTitle').textContent   = isLogin ? 'НЭВТРЭХ' : 'БҮРТГҮҮЛЭХ';
+  document.getElementById('bcLabel').textContent     = isLogin ? 'Нэвтрэх' : 'Бүртгүүлэх';
+  document.getElementById('authFoot').innerHTML = isLogin
+    ? 'Бүртгэл байхгүй юу? <a href="#" onclick="switchTab(\'reg\');return false;">Бүртгүүлэх →</a>'
+    : 'Бүртгэл байгаа юу? <a href="#" onclick="switchTab(\'login\');return false;">Нэвтрэх →</a>';
+  // URL hash шинэчлэх
+  history.replaceState(null, '', isLogin ? '#login' : '#register');
+};
+
+// Hash-аас tab-ийг тодорхойлох
+if (location.hash === '#register') switchTab('reg');
+
+// ── Нууц үгийн хүч ──
+window.checkPw = function(v) {
+  const bar = document.getElementById('pwBar');
+  if (!v) { bar.className = 'pw-bar'; return; }
+  bar.className = v.length >= 10 && /[A-Z]/.test(v) && /[0-9]/.test(v)
+    ? 'pw-bar s3' : v.length >= 8 ? 'pw-bar s2' : 'pw-bar s1';
+};
+
+// ── НЭВТРЭХ ──
+window.doLogin = async function() {
+  const em  = document.getElementById('lEm').value.trim();
+  const pw  = document.getElementById('lPw').value;
+  const err = document.getElementById('lErr');
+  const btn = document.getElementById('lBtn');
+  const txt = document.getElementById('lBtnTxt');
+  err.style.display = 'none';
+
+  if (!em || !em.includes('@')) { showErr(err, 'Зөв имэйл хаяг оруулна уу.'); return; }
+  if (pw.length < 6)            { showErr(err, 'Нууц үг 6-аас дээш тэмдэгт байна.'); return; }
+
+  setLoading(btn, txt, true, 'НЭВТЭРЧ БАЙНА...');
+  try {
+    await signInWithEmailAndPassword(auth, em, pw);
+    // onAuthStateChanged шилжүүлэх болно
+  } catch(e) {
+    setLoading(btn, txt, false, 'НЭВТРЭХ →');
+    showErr(err, firebaseMsg(e.code));
+  }
+};
+
+// ── БҮРТГҮҮЛЭХ ──
+window.doRegister = async function() {
+  const ln  = document.getElementById('rLn').value.trim();
+  const fn  = document.getElementById('rFn').value.trim();
+  const ph  = document.getElementById('rPh').value.trim();
+  const em  = document.getElementById('rEm').value.trim();
+  const pw  = document.getElementById('rPw').value;
+  const pw2 = document.getElementById('rPw2').value;
+  const err = document.getElementById('rErr');
+  const btn = document.getElementById('rBtn');
+  const txt = document.getElementById('rBtnTxt');
+  err.style.display = 'none';
+
+  const checks = [
+    [!ln || !fn,               'Овог нэрээ бүтнээр оруулна уу.'],
+    [!ph,                      'Утасны дугаараа оруулна уу.'],
+    [!em || !em.includes('@'), 'Зөв имэйл хаяг оруулна уу.'],
+    [pw.length < 8,            'Нууц үг хамгийн багадаа 8 тэмдэгт байна.'],
+    [pw !== pw2,               'Нууц үг таарахгүй байна.'],
+  ];
+  for (const [bad, msg] of checks) {
+    if (bad) { showErr(err, msg); return; }
+  }
+
+  setLoading(btn, txt, true, 'БҮРТГҮҮЛЖ БАЙНА...');
+  try {
+    const cred = await createUserWithEmailAndPassword(auth, em, pw);
+    await updateProfile(cred.user, { displayName: `${ln} ${fn}` });
+    await setDoc(doc(db, 'users', cred.user.uid), {
+      lastName:    ln,
+      firstName:   fn,
+      displayName: `${ln} ${fn}`,
+      phone:       ph,
+      email:       em,
+      createdAt:   serverTimestamp(),
+    });
+    // onAuthStateChanged шилжүүлэх болно
+  } catch(e) {
+    setLoading(btn, txt, false, 'БҮРТГҮҮЛЭХ →');
+    showErr(err, firebaseMsg(e.code));
+  }
+};
+
+// Enter товч
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return;
+  const isLogin = document.getElementById('loginPanel').style.display !== 'none';
+  isLogin ? window.doLogin() : window.doRegister();
+});
+
+function showErr(el, msg) { el.textContent = msg; el.style.display = 'block'; }
+function setLoading(btn, txt, on, label) {
+  btn.disabled = on;
+  txt.innerHTML = on ? `<span class="spin"></span>${label}` : label;
+}
+function firebaseMsg(code) {
+  return ({
+    'auth/user-not-found':       'Энэ имэйлтэй хэрэглэгч олдсонгүй.',
+    'auth/wrong-password':       'Нууц үг буруу байна.',
+    'auth/invalid-credential':   'Имэйл эсвэл нууц үг буруу байна.',
+    'auth/email-already-in-use': 'Энэ имэйл хаяг аль хэдийн бүртгэлтэй. Нэвтрэнэ үү.',
+    'auth/weak-password':        'Нууц үг хэт энгийн байна.',
+    'auth/too-many-requests':    'Олон удаа оролдсон. Түр хүлээгээд дахин оролдоно уу.',
+    'auth/network-request-failed':'Интернэт холболтоо шалгана уу.',
+  })[code] || 'Алдаа гарлаа. Дахин оролдоно уу.';
+}
+</script>
+</body>
+</html>

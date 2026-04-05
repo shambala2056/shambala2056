@@ -239,7 +239,7 @@ footer{border-top:1px solid var(--ln);padding:32px 48px;display:flex;align-items
     <li><a href="#register">Бүртгэл</a></li>
   </ul>
   <div style="display:flex;gap:10px;align-items:center">
-    <a class="nav-cta" id="navAuthBtn" href="login.html">Нэвтрэх</a>
+    <a class="nav-cta" id="navAuthBtn" href="auth.html">Нэвтрэх</a>
   </div>
 </nav>
 
@@ -444,7 +444,7 @@ footer{border-top:1px solid var(--ln);padding:32px 48px;display:flex;align-items
         <!-- Нэвтрэлтийн мэдэгдэл -->
         <div id="authBanner" style="display:none;margin-bottom:1px;padding:14px 16px;background:rgba(200,169,110,.07);border:1px solid rgba(200,169,110,.25);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap">
           <span style="font-family:var(--fm);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--sand)" id="authBannerTxt">Бүртгэл илгээхийн тулд нэвтэрнэ үү</span>
-          <a href="login.html" style="font-family:var(--fm);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;background:var(--teal);color:#000;padding:8px 18px;text-decoration:none;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)">Нэвтрэх →</a>
+          <a href="auth.html" style="font-family:var(--fm);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;background:var(--teal);color:#000;padding:8px 18px;text-decoration:none;clip-path:polygon(5px 0,100% 0,calc(100% - 5px) 100%,0 100%)">Нэвтрэх →</a>
         </div>
         <div id="regWrap">
           <div id="regBody" class="rform">
@@ -601,7 +601,7 @@ onAuthStateChanged(auth, user => {
     if (emInp && !emInp.value) emInp.value = user.email || '';
   } else {
     btn.textContent = 'Нэвтрэх';
-    btn.href = 'login.html';
+    btn.href = 'auth.html';
     banner.style.display = 'flex';
     bTxt.textContent = '⚠ Бүртгэл илгээхийн тулд эхлээд нэвтэрнэ үү';
   }
@@ -634,7 +634,7 @@ window.doReg = async function(){
 
   // Нэвтрээгүй бол тодорхой мессеж харуулах
   if (!currentUser) {
-    err.innerHTML = '⚠ Та нэвтрээгүй байна. <a href="login.html" style="color:var(--teal)">Энд дарж нэвтэрнэ үү →</a>';
+    err.innerHTML = '⚠ Та нэвтрээгүй байна. <a href="auth.html" style="color:var(--teal)">Энд дарж нэвтэрнэ үү →</a>';
     err.style.display = 'block';
     document.getElementById('authBanner').style.display = 'flex';
     window.scrollTo({ top: document.getElementById('register').offsetTop - 80, behavior: 'smooth' });
