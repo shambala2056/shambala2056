@@ -1,0 +1,9 @@
+{
+  "name": "shambala2056",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node build.js",
+    "dev": "node build.js && npx serve . -p 3000"
+  }
+}
