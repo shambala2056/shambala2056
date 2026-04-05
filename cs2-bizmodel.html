@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Бизнес Загвар — Shambala2056 CS2 Academy</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@200;300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#09090c; --bg2:#0f0f13; --bg3:#141418;
+  --ln:#1c1c24; --ln2:#262630;
+  --dim:#484858; --mid:#787898; --txt:#c0c0d8; --wht:#eeeef8;
+  --teal:#00c8a0; --teal2:#00e8b8; --tealD:rgba(0,200,160,.08);
+  --sand:#c8a060; --sand2:#e8bc70;
+  --red:#e04040; --red2:#f87070;
+  --grn:#16a34a; --grn2:#4ade80;
+  --blu:#2563eb; --blu2:#60a5fa;
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Sora',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.018;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px}
+
+/* NAV */
+nav{position:fixed;top:0;inset-x:0;z-index:500;height:52px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid var(--ln);background:rgba(9,9,12,.97);backdrop-filter:blur(16px)}
+.logo{font-family:var(--fd);font-size:1.1rem;letter-spacing:3px;color:var(--wht);text-decoration:none;display:flex;align-items:center;gap:8px}
+.ldot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.ntag{font-family:var(--fm);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+
+/* HERO */
+.hero{min-height:100svh;display:flex;flex-direction:column;justify-content:flex-end;padding:52px 48px 64px;position:relative;overflow:hidden;border-bottom:1px solid var(--ln)}
+.hbg{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 70% 50% at 50% 90%,rgba(0,200,160,.06) 0%,transparent 65%),
+  linear-gradient(160deg,rgba(200,160,96,.03) 0%,transparent 50%)}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:72px 72px;opacity:.4;mask-image:linear-gradient(to top,black 0%,transparent 65%)}
+.hero-in{position:relative;z-index:2;max-width:1200px}
+.hlbl{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.hlbl::before{content:'';width:28px;height:1px;background:var(--teal)}
+h1.hh{font-family:var(--fd);font-size:clamp(3.5rem,8vw,7.5rem);line-height:.92;letter-spacing:1px;color:var(--wht);margin-bottom:8px}
+h1.hh .teal{color:var(--teal)}
+h1.hh .stk{color:transparent;-webkit-text-stroke:1px var(--ln2)}
+.hsub{font-size:.95rem;color:var(--mid);max-width:580px;line-height:1.85;margin-bottom:48px}
+.kstrip{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);max-width:900px}
+.kp{background:var(--bg2);padding:20px 22px}
+.kpn{font-family:var(--fd);font-size:2.1rem;letter-spacing:1px;color:var(--wht);line-height:1;margin-bottom:3px}
+.kpn .teal{color:var(--teal)}.kpn .sand{color:var(--sand)}.kpn .red{color:var(--red2)}.kpn .grn{color:var(--grn2)}
+.kpl{font-family:var(--fm);font-size:.57rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+
+/* SECTIONS */
+.sec{padding:80px 48px;border-bottom:1px solid var(--ln)}
+.si{max-width:1200px;margin:0 auto}
+.slbl{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.slbl::before{content:attr(data-n);color:var(--teal)}
+.sh{font-family:var(--fd);font-size:clamp(1.9rem,4vw,3.5rem);line-height:.95;letter-spacing:1px;color:var(--wht);margin-bottom:12px}
+.sh .teal{color:var(--teal)}.sh .stk{color:transparent;-webkit-text-stroke:1px var(--ln2)}.sh .sand{color:var(--sand)}
+.sp{font-size:.92rem;color:var(--mid);max-width:520px;line-height:1.85}
+
+/* ── CONTEXT ── */
+.ctx-sec{background:var(--bg2)}
+.ctx-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.ctx-card{background:var(--bg2);padding:28px 24px;position:relative;overflow:hidden;transition:background .2s}
+.ctx-card:hover{background:var(--bg3)}
+.ctx-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--teal);transition:width .3s}
+.ctx-card:hover::after{width:100%}
+.ctx-icon{font-size:2rem;margin-bottom:14px;display:block}
+.ctx-title{font-family:var(--fm);font-size:.68rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--wht);margin-bottom:8px}
+.ctx-text{font-size:.88rem;color:var(--dim);line-height:1.75}
+.ctx-highlight{color:var(--teal);font-weight:400}
+
+/* ── REVENUE MODEL ── */
+.rev-sec{background:var(--bg)}
+.rev-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.rev-stream{background:var(--bg);padding:36px 32px}
+.rev-stream.s1{border-top:3px solid var(--teal)}
+.rev-stream.s2{border-top:3px solid var(--sand)}
+.rs-tag{font-family:var(--fm);font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px}
+.s1 .rs-tag{color:var(--teal)}.s2 .rs-tag{color:var(--sand)}
+.rs-name{font-family:var(--fd);font-size:2rem;letter-spacing:1px;color:var(--wht);margin-bottom:6px}
+.rs-desc{font-size:.88rem;color:var(--dim);line-height:1.75;margin-bottom:22px}
+.rs-rows{}
+.rs-row{display:flex;justify-content:space-between;align-items:baseline;padding:9px 0;border-bottom:1px solid var(--ln);font-size:.85rem}
+.rs-row:last-child{border-bottom:none}
+.rs-l{color:var(--mid)}
+.rs-v{font-family:var(--fm);font-size:.8rem;color:var(--wht);font-weight:500}
+.s1 .rs-v{color:var(--teal)}.s2 .rs-v{color:var(--sand)}
+
+/* ── COST STRUCTURE ── */
+.cost-sec{background:var(--bg2)}
+.cost-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:start;margin-top:48px}
+table.ct{width:100%;border-collapse:collapse}
+table.ct th{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);text-align:left;padding:8px 0;border-bottom:1px solid var(--ln)}
+table.ct th:last-child{text-align:right}
+table.ct td{font-size:.86rem;padding:10px 0;border-bottom:1px solid var(--ln);color:var(--txt)}
+table.ct td:last-child{text-align:right;font-family:var(--fm);font-size:.8rem;color:var(--red2)}
+table.ct tr:last-child td{border-bottom:none;font-weight:500;color:var(--wht)}
+table.ct tr:last-child td:last-child{color:var(--red2)}
+.ct-note{font-family:var(--fm);font-size:.65rem;letter-spacing:1.5px;color:var(--dim);padding:12px 0;border-top:1px solid var(--ln);margin-top:4px}
+
+/* ── SCENARIO TABLE ── */
+.proj-sec{background:var(--bg)}
+.sc-bar{display:flex;gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.sc-btn{flex:1;padding:12px;background:var(--bg2);font-family:var(--fm);font-size:.64rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--dim);border:none;cursor:pointer;transition:all .15s;text-align:center;border-bottom:2px solid transparent}
+.sc-btn:hover{color:var(--wht)}
+.sc-btn.ap{background:rgba(224,64,64,.08);color:var(--red2);border-bottom-color:var(--red)}
+.sc-btn.ab{background:rgba(37,99,235,.08);color:var(--blu2);border-bottom-color:var(--blu)}
+.sc-btn.ao{background:rgba(22,163,74,.08);color:var(--grn2);border-bottom-color:var(--grn)}
+.tbl-w{overflow-x:auto;margin-top:1px}
+table.pt{width:100%;border-collapse:collapse;background:var(--bg2);border:1px solid var(--ln);min-width:780px}
+table.pt th{font-family:var(--fm);font-size:.57rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:12px 16px;text-align:right;border-bottom:1px solid var(--ln);background:var(--bg3);white-space:nowrap}
+table.pt th:first-child{text-align:left}
+table.pt td{font-size:.84rem;padding:10px 16px;border-bottom:1px solid var(--ln);text-align:right;color:var(--txt)}
+table.pt td:first-child{text-align:left;color:var(--mid);font-size:.8rem}
+tr.sr td{background:var(--bg);font-family:var(--fm);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:8px 16px;border-bottom:1px solid var(--ln)}
+tr.sub td:first-child{padding-left:26px;color:var(--dim);font-size:.78rem}
+tr.tot td{font-weight:500;color:var(--wht);background:rgba(0,200,160,.05);border-top:1px solid var(--ln2)}
+tr.tot td:first-child{font-family:var(--fm);font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase}
+tr.net td{background:var(--bg3);border-top:1px solid var(--ln2)}
+tr.net td:first-child{font-family:var(--fm);font-size:.65rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--wht)}
+.vg{color:var(--grn2)!important;font-weight:500}
+.vr{color:var(--red2)!important;font-weight:500}
+.vt{color:var(--teal)!important;font-weight:500}
+.vs{color:var(--sand)!important}
+.be-note{margin-top:1px;padding:12px 16px;background:var(--bg2);border:1px solid var(--ln);font-family:var(--fm);font-size:.64rem;letter-spacing:1.5px;color:var(--dim)}
+.be-note span{color:var(--teal)}
+
+/* ── CHARTS ── */
+.ch-sec{background:var(--bg2)}
+.ch-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.ch-card{background:var(--bg2);padding:26px}
+.ch-title{font-family:var(--fm);font-size:.64rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--wht);margin-bottom:4px}
+.ch-sub{font-size:.75rem;color:var(--dim);margin-bottom:18px}
+canvas{max-height:220px}
+
+/* ── UNIT ECONOMICS ── */
+.unit-sec{background:var(--bg)}
+.unit-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.unit-card{background:var(--bg);padding:24px 20px;border-top:3px solid var(--ln2)}
+.unit-card.u1{border-top-color:var(--teal)}
+.unit-card.u2{border-top-color:var(--sand)}
+.unit-card.u3{border-top-color:var(--grn)}
+.unit-card.u4{border-top-color:var(--red)}
+.unit-n{font-family:var(--fd);font-size:2.2rem;letter-spacing:1px;color:var(--wht);line-height:1;margin-bottom:6px}
+.unit-card.u1 .unit-n{color:var(--teal)}
+.unit-card.u2 .unit-n{color:var(--sand)}
+.unit-card.u3 .unit-n{color:var(--grn2)}
+.unit-card.u4 .unit-n{color:var(--red2)}
+.unit-lbl{font-family:var(--fm);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:8px}
+.unit-desc{font-size:.8rem;color:var(--dim);line-height:1.6}
+
+/* ── RISKS ── */
+.risk-sec{background:var(--bg2)}
+.risk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.risk-card{background:var(--bg2);padding:26px 22px}
+.risk-level{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px}
+.rl-h{color:var(--red2)}.rl-m{color:var(--sand)}.rl-l{color:var(--grn2)}
+.risk-title{font-family:var(--fm);font-size:.72rem;font-weight:500;letter-spacing:1px;color:var(--wht);margin-bottom:8px}
+.risk-text{font-size:.84rem;color:var(--dim);line-height:1.7;margin-bottom:10px}
+.risk-mit{font-size:.8rem;color:var(--mid);padding-top:10px;border-top:1px solid var(--ln);line-height:1.6}
+.risk-mit::before{content:'Шийдэл: ';font-family:var(--fm);font-size:.6rem;letter-spacing:1px;color:var(--teal);text-transform:uppercase}
+
+footer{border-top:1px solid var(--ln);padding:28px 48px;display:flex;justify-content:space-between;align-items:center;background:var(--bg)}
+.fl{font-family:var(--fd);font-size:.95rem;letter-spacing:3px;color:var(--wht)}
+.fr{font-family:var(--fm);font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)}
+
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.on{opacity:1;transform:none}
+
+@media(max-width:900px){
+  nav,footer{padding:0 20px}
+  footer{padding:18px 20px}
+  .hero,.sec{padding:52px 20px 48px}
+  .kstrip{grid-template-columns:repeat(3,1fr)}
+  .ctx-grid,.rev-grid,.cost-grid,.ch-grid{grid-template-columns:1fr}
+  .unit-grid{grid-template-columns:repeat(2,1fr)}
+  .risk-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="#top"><span class="ldot"></span>SHAMBALA2056 · CS2 ACADEMY</a>
+  <span class="ntag">Бизнес Загвар · 2026</span>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hbg"></div><div class="hgrid"></div>
+  <div class="hero-in">
+    <div class="hlbl">Бизнес Загвар · Офлайн · Сайншанд</div>
+    <h1 class="hh">
+      <span class="stk">BUSINESS</span><br>
+      <span class="teal">MODEL</span><br>
+      CANVAS
+    </h1>
+    <p class="hsub">Шамбала2056 CS2 Academy-н бодит бизнес загвар — Сайншанд суурьтай офлайн сургалт, 2 орлогын урсгал, Дорноговийн зах зээлд тулгуурласан тооцоо.</p>
+    <div class="kstrip">
+      <div class="kp"><div class="kpn"><span class="teal">2</span></div><div class="kpl">Орлогын урсгал</div></div>
+      <div class="kp"><div class="kpn" id="kp-students">—</div><div class="kpl">Base сурагч/жил</div></div>
+      <div class="kp"><div class="kpn"><span class="sand">3</span></div><div class="kpl">Batch/жил</div></div>
+      <div class="kp"><div class="kpn"><span class="grn" id="kp-be">—</span></div><div class="kpl">Breakeven жил</div></div>
+      <div class="kp"><div class="kpn">📍</div><div class="kpl">Сайншанд</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTEXT -->
+<section class="sec ctx-sec">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="01">Загварын суурь</div>
+      <h2 class="sh">БИЗНЕСИЙН <span class="teal">НӨХЦӨЛ</span></h2>
+      <p class="sp">Шийдвэр гаргахад нөлөөлсөн гол хүчин зүйлс.</p>
+    </div>
+    <div class="ctx-grid rv">
+      <div class="ctx-card">
+        <span class="ctx-icon">📍</span>
+        <div class="ctx-title">Офлайн · Сайншанд</div>
+        <div class="ctx-text">Дорноговийн залуучуудтай биечлэн ажиллах нь онлайнаас <span class="ctx-highlight">үр дүнтэй</span>. Сайншандад PC room суурьтай. Хичээлийн долоо хоногийн хуваарь тогтмол.</div>
+      </div>
+      <div class="ctx-card">
+        <span class="ctx-icon">👥</span>
+        <div class="ctx-title">Зах зээлийн хэмжээ</div>
+        <div class="ctx-text">Дорноговь аймгийн 14–28 насны залуучуудын тоо <span class="ctx-highlight">~8,000–12,000</span>. CS2 тоглодог, сонирхолтой хувь: консерватив тооцоогоор <span class="ctx-highlight">3–5%</span> буюу 300–600 хүн.</div>
+      </div>
+      <div class="ctx-card">
+        <span class="ctx-icon">🏆</span>
+        <div class="ctx-title">Өрсөлдөгч</div>
+        <div class="ctx-text">Сайншандад CS2 сургалт <span class="ctx-highlight">байхгүй</span>. Улаанбаатарт хэд хэдэн gaming клуб байгаа ч Дорноговийн залуучуудад <span class="ctx-highlight">хүртээмжгүй</span>. Анхны зах зээлийн давуу тал.</div>
+      </div>
+      <div class="ctx-card">
+        <span class="ctx-icon">💰</span>
+        <div class="ctx-title">Төлбөрийн чадвар</div>
+        <div class="ctx-text">Дорноговь — уул уурхай, газрын тосоос хамааралтай аймаг. Дундаж цалин <span class="ctx-highlight">харьцангуй өндөр</span>. ₮180–420K/сар сургалтын төлбөр боломжийн хэмжээнд.</div>
+      </div>
+      <div class="ctx-card">
+        <span class="ctx-icon">🌿</span>
+        <div class="ctx-title">Shambala2056 холбоо</div>
+        <div class="ctx-text">Том төслийн дэд төсөл учир <span class="ctx-highlight">эхний зардлын зарим хэсгийг</span> том төсөл дэмжих боломжтой. Байрны зардал, нийтийн дэд бүтэц хуваалцах боломж.</div>
+      </div>
+      <div class="ctx-card">
+        <span class="ctx-icon">📡</span>
+        <div class="ctx-title">The MongolZ эффект</div>
+        <div class="ctx-text">Монголын CS2 сонирхол <span class="ctx-highlight">2025 оноос огцом өсөв</span>. MongolZ World Champions болсон. Дорноговийн залуучуудын мэдлэг, сонирхол нэмэгдсэн — demand байгаа.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- REVENUE STREAMS -->
+<section class="sec rev-sec">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="02">Орлогын загвар</div>
+      <h2 class="sh">2 ОРЛОГЫН <span class="teal">УРСГАЛ</span></h2>
+      <p class="sp">Сурагчдын сургалтын төлбөр болон ивээн тэтгэгч — хоёулаа Сайншандын офлайн загварт тулгуурласан.</p>
+    </div>
+    <div class="rev-grid rv">
+      <div class="rev-stream s1">
+        <div class="rs-tag">Урсгал 1 · Тогтмол</div>
+        <div class="rs-name">СУРГАЛТЫН ТӨЛБӨР</div>
+        <div class="rs-desc">Сурагч бүрээс batch бүрт авдаг тогтмол орлого. Офлайн, Сайншанд. 3 хөтөлбөр, 3 batch/жил.</div>
+        <div class="rs-rows">
+          <div class="rs-row"><span class="rs-l">Bronze — 8 долоо хоног</span><span class="rs-v">₮180,000/сар × 2 = ₮360K/сурагч</span></div>
+          <div class="rs-row"><span class="rs-l">Silver — 12 долоо хоног</span><span class="rs-v">₮280,000/сар × 3 = ₮840K/сурагч</span></div>
+          <div class="rs-row"><span class="rs-l">Gold — 16 долоо хоног</span><span class="rs-v">₮420,000/сар × 4 = ₮1.68M/сурагч</span></div>
+          <div class="rs-row"><span class="rs-l">Дундаж орлого/сурагч</span><span class="rs-v">~₮780,000 (50/35/15% mix)</span></div>
+          <div class="rs-row"><span class="rs-l">Batch/жил</span><span class="rs-v">3 batch (3, 7, 11-р сар)</span></div>
+          <div class="rs-row"><span class="rs-l">Бүлгийн хэмжээ</span><span class="rs-v">10–15 сурагч/batch</span></div>
+          <div class="rs-row"><span class="rs-l">Y1 Base (30 сурагч/жил)</span><span class="rs-v">~₮23,400,000</span></div>
+        </div>
+      </div>
+      <div class="rev-stream s2">
+        <div class="rs-tag">Урсгал 2 · Хэрлэг</div>
+        <div class="rs-name">ИВЭЭН ТЭТГЭГЧ</div>
+        <div class="rs-desc">Орон нутгийн компани, үйлдвэр, Shambala2056-тэй холбоотой бизнесүүд. Брэндийн нэр дагуул, тэмцээний нэрийн эрх.</div>
+        <div class="rs-rows">
+          <div class="rs-row"><span class="rs-l">Bronze — ₮5M/жил</span><span class="rs-v">Лого, Discord, 1 пост/сар</span></div>
+          <div class="rs-row"><span class="rs-l">Silver — ₮10M/жил</span><span class="rs-v">Нэмэлт: тэмцээн баннер, YouTube</span></div>
+          <div class="rs-row"><span class="rs-l">Gold — ₮20M/жил</span><span class="rs-v">Тэмцээн нэрийн эрх, бүх суваг</span></div>
+          <div class="rs-row"><span class="rs-l">Y1 Base хослол</span><span class="rs-v">2 Bronze = ₮10,000,000</span></div>
+          <div class="rs-row"><span class="rs-l">Зорилт ивээн тэтгэгч</span><span class="rs-v">Уул уурхай, газрын тосны компани</span></div>
+          <div class="rs-row"><span class="rs-l">Давуу тал</span><span class="rs-v">Shambala2056 нэр + орон нутгийн PR</span></div>
+          <div class="rs-row"><span class="rs-l">Y1 Base нийт</span><span class="rs-v">₮10,000,000</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- COST STRUCTURE -->
+<section class="sec cost-sec">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="03">Зардлын бүтэц</div>
+      <h2 class="sh">ОФЛАЙН <span class="stk">ЗАРДАЛ</span></h2>
+      <p class="sp">Сайншандад PC room ажиллуулах бодит зардал. Эхний жилд хамгийн өндөр.</p>
+    </div>
+    <div class="cost-grid rv">
+      <div>
+        <div class="slbl" style="margin-bottom:12px" data-n="↓">Тогтмол зардал (жилийн)</div>
+        <table class="ct">
+          <thead><tr><th>Зардлын төрөл</th><th>₮/жил</th></tr></thead>
+          <tbody>
+            <tr><td>Коучийн цалин (2 үндсэн)</td><td>₮12,000,000</td></tr>
+            <tr><td>PC room түрээс (Сайншанд)</td><td>₮4,800,000</td></tr>
+            <tr><td>Тоног төхөөрөмж (PC, периферал)</td><td>₮8,000,000 *</td></tr>
+            <tr><td>Интернэт, цахилгаан</td><td>₮1,200,000</td></tr>
+            <tr><td>Маркетинг, сурталчилгаа</td><td>₮2,400,000</td></tr>
+            <tr><td>Тоглоомын лиценз, платформ</td><td>₮600,000</td></tr>
+            <tr><td>Бусад захиргааны зардал</td><td>₮1,200,000</td></tr>
+            <tr><td><strong>Нийт тогтмол зардал</strong></td><td><strong>₮30,200,000</strong></td></tr>
+          </tbody>
+        </table>
+        <div class="ct-note">* PC тоног — нэг удаагийн капитал зардал. Дараа жилүүдэд байхгүй.</div>
+      </div>
+      <div>
+        <div class="slbl" style="margin-bottom:12px" data-n="↓">Хувьсах зардал</div>
+        <table class="ct">
+          <thead><tr><th>Зардлын төрөл</th><th>Хувь</th></tr></thead>
+          <tbody>
+            <tr><td>Сургалтын материал (сурагч тус бүр)</td><td>~5%</td></tr>
+            <tr><td>Тэмцээн зохион байгуулах зардал</td><td>~3%</td></tr>
+            <tr><td>Нэмэлт коуч (Gold batch)</td><td>~2%</td></tr>
+            <tr><td><strong>Нийт хувьсах зардал</strong></td><td><strong>~10%</strong></td></tr>
+          </tbody>
+        </table>
+        <div style="margin-top:24px">
+          <div class="slbl" style="margin-bottom:12px" data-n="↓">Y2+ зардал (PC хасагдсан)</div>
+          <table class="ct">
+            <thead><tr><th>Зардлын төрөл</th><th>₮/жил</th></tr></thead>
+            <tbody>
+              <tr><td>Нийт тогтмол зардал</td><td>₮22,200,000</td></tr>
+              <tr><td>Жилийн өсөлт</td><td>+12%/жил</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTION TABLE -->
+<section class="sec proj-sec" id="proj">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="04">5 жилийн проекц</div>
+      <h2 class="sh">SCENARIO <span class="teal">ШИНЖИЛГЭЭ</span></h2>
+      <p class="sp">Дорноговийн зах зээлд тулгуурласан бодит тоо. Сурагчийн тоо хязгаарлагдмал — реалист байсан нь дээр.</p>
+    </div>
+    <div class="sc-bar rv">
+      <button class="sc-btn" id="btn-p" onclick="setSc('p')">🔴 PESSIMISTIC</button>
+      <button class="sc-btn" id="btn-b" onclick="setSc('b')">🔵 BASE — Суурь</button>
+      <button class="sc-btn" id="btn-o" onclick="setSc('o')">🟢 OPTIMISTIC</button>
+    </div>
+    <div class="tbl-w rv">
+      <table class="pt"><thead><tr><th style="text-align:left">Үзүүлэлт</th><th>2026</th><th>2027</th><th>2028</th><th>2029</th><th>2030</th></tr></thead>
+      <tbody id="ptb"></tbody></table>
+    </div>
+    <div class="be-note rv" id="benote"></div>
+  </div>
+</section>
+
+<!-- CHARTS -->
+<section class="sec ch-sec">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="05">Визуал шинжилгээ</div>
+      <h2 class="sh">ОРЛОГО <span class="stk">ГРАФИК</span></h2>
+    </div>
+    <div class="ch-grid rv">
+      <div class="ch-card">
+        <div class="ch-title">Нийт Орлого — 3 Scenario</div>
+        <div class="ch-sub">2026–2030 · ₮сая</div>
+        <canvas id="c1"></canvas>
+      </div>
+      <div class="ch-card">
+        <div class="ch-title">Цэв Ашиг — 3 Scenario</div>
+        <div class="ch-sub">Breakeven шугамтай</div>
+        <canvas id="c2"></canvas>
+      </div>
+      <div class="ch-card">
+        <div class="ch-title">Орлогын Хуваарь (Base)</div>
+        <div class="ch-sub">Сургалт vs Ивээн тэтгэгч</div>
+        <canvas id="c3"></canvas>
+      </div>
+      <div class="ch-card">
+        <div class="ch-title">Сурагчийн Тоо</div>
+        <div class="ch-sub">Scenario харьцуулалт</div>
+        <canvas id="c4"></canvas>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- UNIT ECONOMICS -->
+<section class="sec unit-sec">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="06">Нэгжийн эдийн засаг</div>
+      <h2 class="sh">UNIT <span class="teal">ECONOMICS</span></h2>
+      <p class="sp">Нэг сурагч, нэг batch-ийн тооцоо.</p>
+    </div>
+    <div class="unit-grid rv">
+      <div class="unit-card u1">
+        <div class="unit-n">₮780K</div>
+        <div class="unit-lbl">Дундаж орлого / сурагч</div>
+        <div class="unit-desc">Bronze 50%, Silver 35%, Gold 15% хувийн жинтэй дундаж. Нэг batch дотор.</div>
+      </div>
+      <div class="unit-card u2">
+        <div class="unit-n">₮370K</div>
+        <div class="unit-lbl">Зардал / сурагч</div>
+        <div class="unit-desc">30 сурагч/жил тооцвол нийт тогтмол зардлыг хувааснаас. 10% хувьсах нэмэгдэнэ.</div>
+      </div>
+      <div class="unit-card u3">
+        <div class="unit-n">₮410K</div>
+        <div class="unit-lbl">Contribution margin</div>
+        <div class="unit-desc">Нэг сурагч нэмэгдэх тусам ₮410K нэмэлт ашиг. Ивээн тэтгэгч орвол бүр дээр.</div>
+      </div>
+      <div class="unit-card u4">
+        <div class="unit-n">~56</div>
+        <div class="unit-lbl">Breakeven сурагч/жил</div>
+        <div class="unit-desc">Y2+ зардал (₮22.2M), ивээн тэтгэгч ₮10M байхад 56 сурагч хангалттай.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RISKS -->
+<section class="sec risk-sec">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="07">Эрсдлийн шинжилгээ</div>
+      <h2 class="sh">ЭРСДЭЛ <span class="stk">& ШИЙДЭЛ</span></h2>
+    </div>
+    <div class="risk-grid rv">
+      <div class="risk-card">
+        <div class="risk-level rl-h">🔴 Өндөр эрсдэл</div>
+        <div class="risk-title">Сурагчийн тоо хүрэлцэхгүй байх</div>
+        <div class="risk-text">Дорноговийн зах зээл жижиг. Breakeven-д хүрэх 40–56 сурагч олдохгүй байж болно. Y1 хамгийн эмзэг үе.</div>
+        <div class="risk-mit">Эхний batch-д Shambala2056 баг болон танил нэр хүндтэй хүмүүсийн ойролцооноос элсэгч татах. Үнэгүй trial эсвэл хөнгөлөлттэй эхний batch явуулах.</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-level rl-h">🔴 Өндөр эрсдэл</div>
+        <div class="risk-title">Ивээн тэтгэгч олдохгүй байх</div>
+        <div class="risk-text">Y1-д ивээн тэтгэгч ороогүй тохиолдолд орлого зөвхөн сургалтын төлбөрт тулна. Y1 алдагдал нэмэгдэнэ.</div>
+        <div class="risk-mit">Shambala2056-ийн нэрийг ашиглан орон нутгийн компаниудтай урьдчилан ярилцах. Bronze багцаас эхлэх. Бартерын нөхцөл санал болгох.</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-level rl-m">🟡 Дунд эрсдэл</div>
+        <div class="risk-title">Коуч олдоход хүндрэлтэй</div>
+        <div class="risk-text">Сайншандад FACEIT Level 8+ коуч байхгүй байж болно. Улаанбаатараас авчрах тохиолдолд орон сууц, тээвэр нэмэлт зардал.</div>
+        <div class="risk-mit">Эхний жил Улаанбаатараас 1 үндсэн коуч, Дорноговийн дотоодоос 1 туслах коуч хослуулах. Дараа жилүүдэд өөрийн орон нутгийн коуч бэлтгэх.</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-level rl-m">🟡 Дунд эрсдэл</div>
+        <div class="risk-title">Интернэт хурд хангалтгүй</div>
+        <div class="risk-text">CS2 онлайн тоглохд стабиль интернэт шаардлагатай. Сайншандад fiber байхгүй тохиолдолд latency өндөр байна.</div>
+        <div class="risk-mit">Тусгай бизнес интернэт гэрээ байгуулах. Эхний зардалд bandwidth upgrade орсон байх. Улаанбаатарын сервертэй холболт шалгах.</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-level rl-l">🟢 Бага эрсдэл</div>
+        <div class="risk-title">Өрсөлдөгч орж ирэх</div>
+        <div class="risk-text">Ирээдүйд Сайншандад өөр gaming клуб нэвтэрч болно. Одоогоор байхгүй ч 2–3 жилд нэмэгдэж болно.</div>
+        <div class="risk-mit">Анхны ордог байх давуу тал. Shambala2056 брэнд, орон нутгийн сүлжээ, тэмцээний нэр нийлэхэд өрсөлдөгчид хэцүү.</div>
+      </div>
+      <div class="risk-card">
+        <div class="risk-level rl-l">🟢 Бага эрсдэл</div>
+        <div class="risk-title">CS2 тоглоомын ирээдүй</div>
+        <div class="risk-text">Valve CS2-ийн хөгжлийг зогсоовол зах зээл жижгэрэх. Харин eSports ерөнхий өсөлттэй тул бага эрсдэл.</div>
+        <div class="risk-mit">Академийн ур чадвар болон методологийг бусад eSports тоглоомд шилжүүлэх боломжтой загварт хийх.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fl">SHAMBALA2056 · CS2 ACADEMY</div>
+  <div class="fr">Бизнес Загвар · Confidential · 2026</div>
+</footer>
+
+<script>
+/* ── DATA ── */
+const M=1_000_000;
+const YRS=[2026,2027,2028,2029,2030];
+
+// Sainshand offline — realistic student counts per year
+const ST={p:[16,22,30,38,48],b:[30,42,58,78,100],o:[48,70,100,140,190]};
+// avg revenue per student (Bronze 50%, Silver 35%, Gold 15%)
+// Bronze: 2mo×180k=360k | Silver: 3mo×280k=840k | Gold: 4mo×420k=1680k
+const AVG=.50*360_000+.35*840_000+.15*1_680_000; // 180k+294k+252k=726k
+// sponsors [B,S,G] per year
+const SP={
+  p:[[0,0,0],[1,0,0],[1,0,0],[2,0,0],[2,1,0]],
+  b:[[2,0,0],[2,1,0],[2,1,0],[3,1,1],[3,2,1]],
+  o:[[2,1,0],[3,1,0],[3,1,1],[4,2,1],[4,2,2]]
+};
+const SFEE=[5*M,10*M,20*M];
+// fixed costs: Y1 has 8M for equipment, Y2+ without
+const FC_Y1=30.2*M, FC_BASE=22.2*M, FC_GROW=0.12;
+const VAR=0.10;
+
+function calc(sc){
+  return YRS.map((_,i)=>{
+    const s=ST[sc][i];
+    const tRev=s*AVG;
+    const spArr=SP[sc][i];
+    const sRev=spArr.reduce((a,n,j)=>a+n*SFEE[j],0);
+    const total=tRev+sRev;
+    const fixed=(i===0?FC_Y1:FC_BASE)*Math.pow(1+FC_GROW,i===0?0:i-1);
+    const varC=total*VAR;
+    const net=total-fixed-varC;
+    return{s,tRev,sRev,spArr,total,fixed,varC,net,margin:total>0?net/total:0};
+  });
+}
+
+const NOTES={
+  p:'🔴 PESSIMISTIC — Цөөн сурагч, ивээн тэтгэгч байхгүй жилүүд. Breakeven ~2029–2030. Нарийн зардлын хяналт, Shambala2056-ийн дэмжлэг шаардлагатай.',
+  b:'🔵 BASE — Жилд 30–100 сурагч, 2 Bronze ивээн тэтгэгчтэй эхэлнэ. Breakeven ~2027–2028. Хамгийн магадлалтай хувилбар.',
+  o:'🟢 OPTIMISTIC — Хурдан өсөлт, Gold ивээн тэтгэгч орно. 2026 оны сүүлд эсвэл 2027 эхэнд breakeven. Дорноговийн зах зээлийн хурдан өсөлт шаардлагатай.'
+};
+
+function fm(n){const a=Math.abs(n);if(a>=M)return(n<0?'-':'')+'₮'+(a/M).toFixed(1)+'M';if(a>=1000)return(n<0?'-':'')+'₮'+(a/1000).toFixed(0)+'K';return(n<0?'-':'')+'₮'+a.toLocaleString()}
+function cls(n){return n>=0?'vg':'vr'}
+
+function renderTable(sc){
+  const data=calc(sc);
+  const rows=[];
+  rows.push(`<tr class="sr"><td colspan="6">ОРЛОГО</td></tr>`);
+  rows.push(`<tr><td>Сургалтын орлого</td>${data.map(d=>`<td class="vt">${fm(d.tRev)}</td>`).join('')}</tr>`);
+  rows.push(`<tr class="sub"><td>— Сурагчийн тоо</td>${data.map(d=>`<td>${d.s} хүн</td>`).join('')}</tr>`);
+  rows.push(`<tr><td>Ивээн тэтгэгчийн орлого</td>${data.map(d=>`<td class="vs">${fm(d.sRev)}</td>`).join('')}</tr>`);
+  rows.push(`<tr class="sub"><td>— Bronze (×₮5M)</td>${data.map(d=>`<td>${d.spArr[0]}ш = ${fm(d.spArr[0]*5*M)}</td>`).join('')}</tr>`);
+  rows.push(`<tr class="sub"><td>— Silver (×₮10M)</td>${data.map(d=>`<td>${d.spArr[1]}ш = ${fm(d.spArr[1]*10*M)}</td>`).join('')}</tr>`);
+  rows.push(`<tr class="sub"><td>— Gold (×₮20M)</td>${data.map(d=>`<td>${d.spArr[2]}ш = ${fm(d.spArr[2]*20*M)}</td>`).join('')}</tr>`);
+  rows.push(`<tr class="tot"><td>Нийт Орлого</td>${data.map(d=>`<td class="vt">${fm(d.total)}</td>`).join('')}</tr>`);
+  rows.push(`<tr class="sr"><td colspan="6">ЗАРДАЛ</td></tr>`);
+  rows.push(`<tr><td>Тогтмол зардал</td>${data.map(d=>`<td class="vr">${fm(-d.fixed)}</td>`).join('')}</tr>`);
+  rows.push(`<tr class="sub"><td>— Y1 тоног (₮8M нэг удаагийн)</td><td class="vr">орсон</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>`);
+  rows.push(`<tr><td>Хувьсах зардал (10%)</td>${data.map(d=>`<td class="vr">${fm(-d.varC)}</td>`).join('')}</tr>`);
+  rows.push(`<tr class="sr"><td colspan="6">ЦЭВ АШИГ / АЛДАГДАЛ</td></tr>`);
+  rows.push(`<tr class="net"><td>Цэв Ашиг</td>${data.map(d=>`<td class="${cls(d.net)}">${fm(d.net)}</td>`).join('')}</tr>`);
+  rows.push(`<tr><td>Маржин</td>${data.map(d=>`<td class="${cls(d.net)}">${(d.margin*100).toFixed(1)}%</td>`).join('')}</tr>`);
+  let cum=0;
+  rows.push(`<tr class="net"><td>Хуримтлагдсан</td>${data.map(d=>{cum+=d.net;return`<td class="${cls(cum)}">${fm(cum)}</td>`}).join('')}</tr>`);
+  document.getElementById('ptb').innerHTML=rows.join('');
+  document.getElementById('benote').innerHTML=`<span>${NOTES[sc]}</span>`;
+}
+
+/* ── CHARTS ── */
+Chart.defaults.color='#484858';Chart.defaults.font.family='DM Mono';
+const GC={grid:{color:'rgba(28,28,40,.8)',drawBorder:false},tick:{color:'#484858',font:{family:'DM Mono',size:9}}};
+function mk(id,cfg){return new Chart(document.getElementById(id).getContext('2d'),cfg)}
+const yrs=YRS.map(String);
+
+let c1=mk('c1',{type:'bar',data:{labels:yrs,datasets:[
+  {label:'Pessimistic',data:[],backgroundColor:'rgba(224,64,64,.2)',borderColor:'#e04040',borderWidth:1.5},
+  {label:'Base',data:[],backgroundColor:'rgba(37,99,235,.2)',borderColor:'#2563eb',borderWidth:1.5},
+  {label:'Optimistic',data:[],backgroundColor:'rgba(22,163,74,.2)',borderColor:'#16a34a',borderWidth:1.5}
+]},options:{responsive:true,plugins:{legend:{labels:{color:'#787898',font:{family:'DM Mono',size:9}}}},
+  scales:{x:{grid:GC.grid,ticks:GC.tick},y:{grid:GC.grid,ticks:{...GC.tick,callback:v=>'₮'+(v/M).toFixed(0)+'M'}}}}});
+
+let c2=mk('c2',{type:'line',data:{labels:yrs,datasets:[
+  {label:'Pessimistic',data:[],borderColor:'#e04040',backgroundColor:'rgba(224,64,64,.05)',tension:.4,fill:true,pointRadius:4,pointBackgroundColor:'#e04040'},
+  {label:'Base',data:[],borderColor:'#2563eb',backgroundColor:'rgba(37,99,235,.05)',tension:.4,fill:true,pointRadius:4,pointBackgroundColor:'#2563eb'},
+  {label:'Optimistic',data:[],borderColor:'#16a34a',backgroundColor:'rgba(22,163,74,.05)',tension:.4,fill:true,pointRadius:4,pointBackgroundColor:'#16a34a'},
+  {label:'Breakeven',data:[0,0,0,0,0],borderColor:'rgba(0,200,160,.3)',borderDash:[6,4],pointRadius:0,fill:false}
+]},options:{responsive:true,plugins:{legend:{labels:{color:'#787898',font:{family:'DM Mono',size:9}}}},
+  scales:{x:{grid:GC.grid,ticks:GC.tick},y:{grid:GC.grid,ticks:{...GC.tick,callback:v=>'₮'+(v/M).toFixed(0)+'M'}}}}});
+
+let c3=mk('c3',{type:'bar',data:{labels:yrs,datasets:[
+  {label:'Сургалт',data:[],backgroundColor:'rgba(0,200,160,.65)',borderSkipped:false},
+  {label:'Ивээн тэтгэгч',data:[],backgroundColor:'rgba(200,160,96,.65)',borderSkipped:false}
+]},options:{responsive:true,plugins:{legend:{labels:{color:'#787898',font:{family:'DM Mono',size:9}}}},
+  scales:{x:{stacked:true,grid:GC.grid,ticks:GC.tick},y:{stacked:true,grid:GC.grid,ticks:{...GC.tick,callback:v=>'₮'+(v/M).toFixed(0)+'M'}}}}});
+
+let c4=mk('c4',{type:'line',data:{labels:yrs,datasets:[
+  {label:'Pessimistic',data:[],borderColor:'#e04040',tension:.4,pointRadius:4,pointBackgroundColor:'#e04040',fill:false},
+  {label:'Base',data:[],borderColor:'#2563eb',tension:.4,pointRadius:4,pointBackgroundColor:'#2563eb',fill:false},
+  {label:'Optimistic',data:[],borderColor:'#16a34a',tension:.4,pointRadius:4,pointBackgroundColor:'#16a34a',fill:false}
+]},options:{responsive:true,plugins:{legend:{labels:{color:'#787898',font:{family:'DM Mono',size:9}}}},
+  scales:{x:{grid:GC.grid,ticks:GC.tick},y:{grid:GC.grid,ticks:GC.tick}}}});
+
+function updateCharts(){
+  const dp=calc('p'),db=calc('b'),do_=calc('o');
+  c1.data.datasets[0].data=dp.map(d=>+(d.total/M).toFixed(2));
+  c1.data.datasets[1].data=db.map(d=>+(d.total/M).toFixed(2));
+  c1.data.datasets[2].data=do_.map(d=>+(d.total/M).toFixed(2));c1.update();
+  c2.data.datasets[0].data=dp.map(d=>+(d.net/M).toFixed(2));
+  c2.data.datasets[1].data=db.map(d=>+(d.net/M).toFixed(2));
+  c2.data.datasets[2].data=do_.map(d=>+(d.net/M).toFixed(2));c2.update();
+  c3.data.datasets[0].data=db.map(d=>+(d.tRev/M).toFixed(2));
+  c3.data.datasets[1].data=db.map(d=>+(d.sRev/M).toFixed(2));c3.update();
+  c4.data.datasets[0].data=ST.p;c4.data.datasets[1].data=ST.b;c4.data.datasets[2].data=ST.o;c4.update();
+  // breakeven
+  let cum=0,beY='—';
+  calc('b').forEach((d,i)=>{cum+=d.net;if(cum>=0&&beY==='—')beY=YRS[i];});
+  document.getElementById('kp-be').textContent=beY;
+  document.getElementById('kp-students').textContent=ST.b[0];
+}
+
+function setSc(sc){
+  document.querySelectorAll('.sc-btn').forEach(b=>b.className='sc-btn');
+  const map={p:'ap',b:'ab',o:'ao'};
+  document.getElementById('btn-'+sc).classList.add(map[sc]);
+  renderTable(sc);
+}
+
+setSc('b');updateCharts();
+
+/* reveal */
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('on')),{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

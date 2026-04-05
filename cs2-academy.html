@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shambala2056 CS2 Academy — Дорноговийн Ирээдүй</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@200;300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#08090b; --bg2:#0e0f12; --bg3:#13141a;
+  --ln:#1a1c24; --ln2:#242630;
+  --dim:#484a60; --mid:#787a98; --txt:#c0c2d8; --wht:#eceef8;
+  --teal:#00c8a0; --teal2:#00e8b8; --tealA:rgba(0,200,160,.08);
+  --sand:#c8a060; --sand2:#e8c070; --sandA:rgba(200,160,96,.08);
+  --ember:#e05820; --ember2:#f07840;
+  --grn:#16a34a; --grn2:#4ade80;
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Sora',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.018;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:160px}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;inset-x:0;z-index:500;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid var(--ln);background:rgba(8,9,11,.97);backdrop-filter:blur(18px)}
+.nav-stack{display:flex;flex-direction:column;gap:0}
+.nav-super{font-family:var(--fm);font-size:.55rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);line-height:1.2}
+.nav-brand{font-family:var(--fd);font-size:1.1rem;letter-spacing:3px;color:var(--sand);text-decoration:none;display:flex;align-items:center;gap:7px;line-height:1.2}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);flex-shrink:0;animation:blink 2s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.nav-links{display:flex;gap:28px;list-style:none}
+.nav-links a{font-family:var(--fm);font-size:.62rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--wht)}
+.nav-cta{font-family:var(--fm);font-size:.62rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--teal);color:#000;padding:9px 22px;border:none;cursor:pointer;text-decoration:none;transition:background .15s;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}
+.nav-cta:hover{background:var(--teal2)}
+
+/* ── HERO: SHAMBALA2056 CONTEXT ── */
+.hero{min-height:100svh;display:grid;grid-template-rows:1fr auto;padding:56px 0 0;position:relative;overflow:hidden;border-bottom:1px solid var(--ln)}
+.hero-bg{position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 60% at 50% 80%,rgba(200,160,96,.05) 0%,transparent 60%),
+  radial-gradient(ellipse 50% 40% at 20% 30%,rgba(0,200,160,.04) 0%,transparent 55%),
+  linear-gradient(180deg,#08090b 0%,#0a0c0f 100%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:64px 64px;opacity:.4;mask-image:radial-gradient(ellipse 100% 70% at 50% 100%,black 30%,transparent 80%)}
+
+.hero-content{position:relative;z-index:2;padding:0 48px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center;flex:1;padding-bottom:60px}
+
+.hero-left{}
+.hero-eyebrow{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--sand);margin-bottom:20px;display:flex;align-items:center;gap:10px;opacity:.9}
+.hero-eyebrow::before{content:'';width:28px;height:1px;background:var(--sand)}
+h1.hero-h1{font-family:var(--fd);font-size:clamp(3.5rem,7vw,6.5rem);line-height:.92;letter-spacing:1px;color:var(--wht);margin-bottom:14px}
+h1.hero-h1 .teal{color:var(--teal);text-shadow:0 0 40px rgba(0,200,160,.25)}
+h1.hero-h1 .sand{color:var(--sand)}
+h1.hero-h1 .stroke{color:transparent;-webkit-text-stroke:1px var(--ln2)}
+.hero-tagline{font-family:var(--fm);font-size:.72rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:22px;opacity:.8}
+.hero-desc{font-size:.97rem;color:var(--mid);max-width:460px;line-height:1.9;margin-bottom:36px}
+.hero-desc strong{color:var(--txt);font-weight:400}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-teal{font-family:var(--fm);font-size:.66rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--teal);color:#000;padding:13px 28px;border:none;cursor:pointer;text-decoration:none;display:inline-block;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:all .15s}
+.btn-teal:hover{background:var(--teal2);transform:translateY(-1px)}
+.btn-ghost{font-family:var(--fm);font-size:.66rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:transparent;color:var(--mid);padding:12px 28px;border:1px solid var(--ln2);cursor:pointer;text-decoration:none;display:inline-block;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:all .15s}
+.btn-ghost:hover{border-color:var(--sand);color:var(--sand)}
+
+/* right: ecosystem map */
+.hero-right{position:relative}
+.eco-card{background:var(--bg2);border:1px solid var(--ln2);padding:24px;position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px))}
+.eco-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:100%;background:linear-gradient(to bottom,var(--sand),transparent)}
+.eco-label{font-family:var(--fm);font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--sand);margin-bottom:14px}
+.eco-title{font-family:var(--fd);font-size:1.6rem;letter-spacing:2px;color:var(--wht);margin-bottom:4px}
+.eco-sub{font-family:var(--fm);font-size:.62rem;color:var(--dim);letter-spacing:1.5px;margin-bottom:20px}
+.eco-pillars{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:20px}
+.eco-pillar{background:var(--bg3);border:1px solid var(--ln);padding:10px 12px;display:flex;align-items:center;gap:8px;font-size:.82rem;color:var(--mid)}
+.eco-pillar .pi{font-size:.95rem}
+.eco-pillar.active{border-color:rgba(0,200,160,.3);background:var(--tealA);color:var(--txt)}
+.eco-pillar.active .pi-label{color:var(--teal)}
+.eco-divider{height:1px;background:var(--ln);margin-bottom:16px}
+.eco-sub2{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);margin-bottom:10px}
+.eco-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.eco-stat{text-align:center;padding:10px 8px;background:var(--tealA);border:1px solid rgba(0,200,160,.15)}
+.eco-stat-n{font-family:var(--fd);font-size:1.4rem;color:var(--teal);line-height:1}
+.eco-stat-l{font-family:var(--fm);font-size:.52rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);margin-top:3px}
+
+/* bottom strip */
+.hero-strip{position:relative;z-index:2;border-top:1px solid var(--ln);display:grid;grid-template-columns:repeat(5,1fr);gap:0;background:var(--ln)}
+.hs-item{background:var(--bg2);padding:18px 24px;border-right:1px solid var(--ln)}
+.hs-item:last-child{border-right:none}
+.hs-n{font-family:var(--fd);font-size:1.8rem;letter-spacing:1px;color:var(--wht);line-height:1;margin-bottom:3px}
+.hs-n .teal{color:var(--teal)}.hs-n .sand{color:var(--sand)}
+.hs-l{font-family:var(--fm);font-size:.55rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+
+/* ── MISSION SECTION ── */
+.mission-sec{background:var(--bg2);border-bottom:1px solid var(--ln);padding:88px 48px;position:relative;overflow:hidden}
+.mission-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 100% 50%,rgba(0,200,160,.04) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 0% 50%,rgba(200,160,96,.04) 0%,transparent 55%)}
+.ms-inner{max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.ms-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.ms-left{}
+.ms-label{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--sand);margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.ms-label::before{content:'';width:24px;height:1px;background:var(--sand)}
+.ms-h{font-family:var(--fd);font-size:clamp(2.2rem,4vw,4rem);line-height:.95;letter-spacing:1px;color:var(--wht);margin-bottom:16px}
+.ms-h .teal{color:var(--teal)}.ms-h .sand{color:var(--sand)}
+.ms-p{font-size:.95rem;color:var(--mid);line-height:1.9;margin-bottom:16px}
+.ms-p strong{color:var(--txt);font-weight:400}
+.ms-quote{border-left:3px solid var(--sand);padding:14px 18px;margin-top:20px;background:var(--sandA)}
+.ms-quote-text{font-size:.9rem;color:var(--txt);line-height:1.7;font-style:italic}
+.ms-quote-src{font-family:var(--fm);font-size:.6rem;letter-spacing:1.5px;color:var(--sand);margin-top:8px;text-transform:uppercase}
+
+.ms-right{}
+.timeline{display:flex;flex-direction:column;gap:0}
+.tl-item{display:flex;gap:20px;padding:18px 0;border-bottom:1px solid var(--ln);position:relative}
+.tl-item:last-child{border-bottom:none}
+.tl-year{font-family:var(--fd);font-size:1.4rem;letter-spacing:1px;color:var(--ln2);flex-shrink:0;width:56px;transition:color .2s}
+.tl-item:hover .tl-year{color:var(--sand)}
+.tl-content{}
+.tl-title{font-family:var(--fm);font-size:.7rem;font-weight:500;letter-spacing:1px;text-transform:uppercase;color:var(--wht);margin-bottom:5px}
+.tl-text{font-size:.83rem;color:var(--dim);line-height:1.65}
+.tl-badge{display:inline-block;font-family:var(--fm);font-size:.55rem;letter-spacing:1.5px;text-transform:uppercase;padding:2px 8px;margin-top:6px;clip-path:polygon(3px 0,100% 0,calc(100% - 3px) 100%,0 100%)}
+.tl-badge.now{background:var(--teal);color:#000}
+.tl-badge.plan{background:var(--ln2);color:var(--dim)}
+
+/* ── LINK SECTION: Why CS2 ── */
+.link-sec{background:var(--bg);border-bottom:1px solid var(--ln);padding:88px 48px}
+.ls-inner{max-width:1200px;margin:0 auto}
+.ls-label{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.ls-label::before{content:'';width:24px;height:1px;background:var(--teal)}
+.ls-h{font-family:var(--fd);font-size:clamp(2rem,4vw,3.8rem);line-height:.95;letter-spacing:1px;color:var(--wht);margin-bottom:14px}
+.ls-h .teal{color:var(--teal)}.ls-h .stk{color:transparent;-webkit-text-stroke:1px var(--ln2)}
+.ls-sub{font-size:.95rem;color:var(--mid);max-width:580px;line-height:1.85;margin-bottom:52px}
+.ls-sub strong{color:var(--txt);font-weight:400}
+.ls-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln)}
+.ls-card{background:var(--bg);padding:28px 24px;position:relative;overflow:hidden;transition:background .2s}
+.ls-card:hover{background:var(--bg2)}
+.ls-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--teal);transition:width .3s}
+.ls-card:hover::after{width:100%}
+.ls-num{font-family:var(--fd);font-size:3.2rem;color:var(--ln2);line-height:1;margin-bottom:14px;transition:color .2s}
+.ls-card:hover .ls-num{color:var(--teal)}
+.ls-title{font-family:var(--fm);font-size:.68rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--wht);margin-bottom:10px}
+.ls-text{font-size:.87rem;color:var(--dim);line-height:1.75}
+.ls-text strong{color:var(--teal);font-weight:400}
+
+/* ── PROGRAMS ── */
+.prog-sec{background:var(--bg2);border-bottom:1px solid var(--ln);padding:88px 48px}
+.prog-inner{max-width:1200px;margin:0 auto}
+.sec-lbl{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.sec-lbl::before{content:attr(data-n);color:var(--teal)}
+.sec-h{font-family:var(--fd);font-size:clamp(2rem,4vw,3.5rem);line-height:.95;letter-spacing:1px;color:var(--wht);margin-bottom:12px}
+.sec-h .teal{color:var(--teal)}.sec-h .stk{color:transparent;-webkit-text-stroke:1px var(--ln2)}.sec-h .sand{color:var(--sand)}
+.sec-p{font-size:.92rem;color:var(--mid);max-width:520px;line-height:1.85}
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.prog{background:var(--bg2);display:flex;flex-direction:column;transition:background .2s;position:relative}
+.prog:hover{background:var(--bg3)}
+.prog-bar{height:3px;background:var(--ln2)}
+.prog.p1 .prog-bar{background:var(--teal)}.prog.p2 .prog-bar{background:var(--sand)}.prog.p3 .prog-bar{background:linear-gradient(90deg,var(--teal),var(--sand))}
+.prog-head{padding:28px 24px 20px;border-bottom:1px solid var(--ln)}
+.prog-tag{font-family:var(--fm);font-size:.57rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px}
+.prog.p1 .prog-tag{color:var(--teal)}.prog.p2 .prog-tag{color:var(--sand)}.prog.p3 .prog-tag{color:var(--sand2)}
+.prog-name{font-family:var(--fd);font-size:2.1rem;letter-spacing:1px;color:var(--wht);line-height:1;margin-bottom:4px}
+.prog-mn{font-size:.82rem;color:var(--dim);margin-bottom:16px}
+.prog-price{font-family:var(--fd);font-size:1.7rem;letter-spacing:1px;color:var(--wht)}
+.prog-price small{font-family:var(--fm);font-size:.62rem;color:var(--dim);vertical-align:middle;margin-left:4px}
+.prog-body{padding:20px 24px 24px;flex:1;display:flex;flex-direction:column}
+.prog-list{list-style:none;flex:1;margin-bottom:20px}
+.prog-list li{font-size:.84rem;color:var(--mid);padding:8px 0;border-bottom:1px solid var(--ln);display:flex;align-items:flex-start;gap:9px;line-height:1.5}
+.prog-list li:last-child{border-bottom:none}
+.pck{color:var(--teal);font-size:.72rem;flex-shrink:0;margin-top:2px}
+.prog-btn{display:block;width:100%;font-family:var(--fm);font-size:.62rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:12px;border:1px solid var(--ln2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;text-align:center}
+.prog.p1 .prog-btn:hover{border-color:var(--teal);color:var(--teal);background:var(--tealA)}
+.prog.p2 .prog-btn:hover{border-color:var(--sand);color:var(--sand);background:var(--sandA)}
+.prog.p3 .prog-btn{background:var(--teal);color:#000;border-color:var(--teal)}
+.prog.p3 .prog-btn:hover{background:var(--teal2)}
+.prog-rec{position:absolute;top:12px;right:12px;font-family:var(--fm);font-size:.53rem;letter-spacing:2px;text-transform:uppercase;color:#000;background:var(--teal);padding:3px 9px}
+
+/* ── SPONSOR ── */
+.sponsor-sec{background:var(--bg);border-bottom:1px solid var(--ln);padding:88px 48px}
+.sp-inner{max-width:1200px;margin:0 auto}
+.sp-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:48px}
+.sp-tier{background:var(--bg);display:flex;flex-direction:column;transition:background .2s;position:relative}
+.sp-tier:hover{background:var(--bg2)}
+.sp-bar{height:3px}
+.sp-tier.t1 .sp-bar{background:#a07050}.sp-tier.t2 .sp-bar{background:#909cb0}.sp-tier.t3 .sp-bar{background:linear-gradient(90deg,var(--sand),var(--sand2))}
+.sp-head{padding:26px 22px 20px;border-bottom:1px solid var(--ln)}
+.sp-badge{font-family:var(--fm);font-size:.57rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:12px}
+.sp-tier.t1 .sp-badge{color:#a07050}.sp-tier.t2 .sp-badge{color:#909cb0}.sp-tier.t3 .sp-badge{color:var(--sand)}
+.sp-name{font-family:var(--fd);font-size:2rem;letter-spacing:1px;color:var(--wht);line-height:1;margin-bottom:4px}
+.sp-mn{font-size:.82rem;color:var(--dim);margin-bottom:16px}
+.sp-price{font-family:var(--fd);font-size:1.6rem;letter-spacing:1px;color:var(--wht)}
+.sp-price small{font-family:var(--fm);font-size:.6rem;color:var(--dim);vertical-align:middle;margin-left:4px}
+.sp-body{padding:18px 22px 22px;flex:1;display:flex;flex-direction:column}
+.sp-feats{list-style:none;flex:1;margin-bottom:18px}
+.sp-feats li{font-size:.83rem;color:var(--mid);padding:8px 0;border-bottom:1px solid var(--ln);display:flex;align-items:flex-start;gap:8px;line-height:1.5}
+.sp-feats li:last-child{border-bottom:none}
+.spck{color:var(--teal);font-size:.7rem;flex-shrink:0;margin-top:2px}
+.spno{color:var(--ln2);font-size:.7rem;flex-shrink:0;margin-top:2px}
+.spno~span{color:var(--ln2)}
+.sp-btn{display:block;width:100%;font-family:var(--fm);font-size:.6rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:12px;border:1px solid var(--ln2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;text-align:center}
+.sp-tier.t1 .sp-btn:hover{border-color:#a07050;color:#a07050}
+.sp-tier.t2 .sp-btn:hover{border-color:#909cb0;color:#909cb0}
+.sp-tier.t3 .sp-btn{background:var(--sand);color:#000;border-color:var(--sand)}
+.sp-tier.t3 .sp-btn:hover{background:var(--sand2)}
+.sp-rec{position:absolute;top:12px;right:12px;font-family:var(--fm);font-size:.52rem;letter-spacing:2px;text-transform:uppercase;color:#000;background:var(--sand);padding:3px 8px}
+.sp-why{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);border-top:none}
+.sp-why-item{background:var(--bg2);padding:20px 22px}
+.sp-why-title{font-family:var(--fm);font-size:.62rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--wht);margin-bottom:8px}
+.sp-why-text{font-size:.83rem;color:var(--dim);line-height:1.7}
+
+/* ── REGISTER ── */
+.reg-sec{background:var(--bg2);border-bottom:1px solid var(--ln);padding:88px 48px;position:relative;overflow:hidden}
+.reg-sec::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 70% at 50% 50%,rgba(0,200,160,.04) 0%,transparent 65%)}
+.reg-inner{max-width:1100px;margin:0 auto;position:relative;z-index:2}
+.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:48px}
+.ri-h{font-family:var(--fd);font-size:1.8rem;letter-spacing:1px;color:var(--wht);margin-bottom:12px;line-height:1.1}
+.ri-p{font-size:.9rem;color:var(--dim);line-height:1.85;margin-bottom:24px}
+.ri-detail{border-top:1px solid var(--ln);padding-top:18px}
+.rd{display:flex;gap:12px;padding:9px 0;border-bottom:1px solid var(--ln);font-size:.82rem}
+.rd:last-child{border-bottom:none}
+.rd-l{font-family:var(--fm);font-size:.57rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);width:76px;flex-shrink:0;padding-top:2px}
+.rd-v{color:var(--txt)}
+
+/* form */
+.rform{display:flex;flex-direction:column;gap:1px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+.fgrp{display:flex;flex-direction:column;margin-bottom:1px}
+.flbl{font-family:var(--fm);font-size:.57rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:8px 13px 0;background:var(--bg3);border:1px solid var(--ln);border-bottom:none}
+.finp,.fsel,.fta{background:var(--bg3);border:1px solid var(--ln);border-top:none;color:var(--txt);padding:9px 13px 11px;font-family:var(--fb);font-size:.88rem;font-weight:300;outline:none;appearance:none;-webkit-appearance:none;width:100%;transition:border-color .15s}
+.finp:focus,.fsel:focus,.fta:focus{border-color:var(--teal);z-index:1;position:relative}
+.finp::placeholder,.fta::placeholder{color:var(--dim);opacity:.6}
+.fsel option{background:var(--bg3)}
+.fta{resize:none;min-height:80px}
+.prog-radios{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-bottom:1px}
+.pr-radio{display:none}
+.pr-lbl{display:block;padding:11px;background:var(--bg3);font-family:var(--fm);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);cursor:pointer;text-align:center;transition:all .15s}
+.pr-radio:checked+.pr-lbl{background:var(--teal);color:#000}
+.pr-lbl:hover{color:var(--wht)}
+.fsub{font-family:var(--fm);font-size:.65rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#000;background:var(--teal);border:none;padding:14px;cursor:pointer;width:100%;transition:background .15s}
+.fsub:hover{background:var(--teal2)}
+.ferr{font-family:var(--fm);font-size:.62rem;color:#f87171;letter-spacing:1px;padding:7px 0;display:none}
+.fsuccess{display:none;padding:48px 0;text-align:center}
+.fsi{font-size:3rem;display:block;margin-bottom:12px;animation:pop .4s ease-out}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.fst{font-family:var(--fd);font-size:1.6rem;letter-spacing:2px;color:var(--grn2);margin-bottom:10px}
+.fsd{font-size:.88rem;color:var(--dim);line-height:1.8}
+
+/* ── FOOTER ── */
+footer{background:var(--bg);border-top:1px solid var(--ln);padding:40px 48px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:32px;align-items:start}
+.foot-brand{font-family:var(--fd);font-size:1.1rem;letter-spacing:3px;color:var(--sand);margin-bottom:4px}
+.foot-sub{font-family:var(--fm);font-size:.57rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:10px}
+.foot-desc{font-size:.82rem;color:var(--dim);line-height:1.7}
+.foot-col-title{font-family:var(--fm);font-size:.6rem;letter-spacing:2px;text-transform:uppercase;color:var(--mid);margin-bottom:12px}
+.foot-links{list-style:none;display:flex;flex-direction:column;gap:8px}
+.foot-links a{font-size:.83rem;color:var(--dim);text-decoration:none;transition:color .2s}
+.foot-links a:hover{color:var(--teal)}
+.foot-copy{font-family:var(--fm);font-size:.57rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);padding-top:24px;border-top:1px solid var(--ln);margin-top:16px}
+
+/* reveal */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.on{opacity:1;transform:none}
+
+@media(max-width:960px){
+  nav,footer{padding:0 20px}
+  footer{padding:28px 20px;grid-template-columns:1fr}
+  .hero-content,.ms-grid,.ls-grid,.reg-grid{grid-template-columns:1fr}
+  .hero-content{padding:0 20px 52px}
+  .hero-strip{grid-template-columns:repeat(3,1fr)}
+  .prog-grid,.sp-grid,.sp-why{grid-template-columns:1fr}
+  .frow,.prog-radios{grid-template-columns:1fr}
+  .mission-sec,.link-sec,.prog-sec,.sponsor-sec,.reg-sec{padding:60px 20px}
+  nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-stack">
+    <span class="nav-super">Shambala2056 · Инженерийн Суурин · Дорноговь</span>
+    <a class="nav-brand" href="#top"><span class="nav-dot"></span>CS2 ACADEMY</a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#mission">Зорилго</a></li>
+    <li><a href="#why">Яагаад CS2</a></li>
+    <li><a href="#programs">Хөтөлбөр</a></li>
+    <li><a href="#sponsor">Ивээн тэтгэгч</a></li>
+    <li><a href="#register">Бүртгэл</a></li>
+  </ul>
+  <a class="nav-cta" href="#register">Элсэх</a>
+</nav>
+
+<!-- ══════════════════ HERO ══════════════════ -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-content">
+    <div class="hero-left">
+      <div class="hero-eyebrow">Shambala2056 · Дэд Төсөл · 2026</div>
+      <h1 class="hero-h1">
+        <span class="stroke">ГОВИЙН</span><br>
+        ЗАЛУУСЫН<br>
+        <span class="teal">CS2</span> <span class="sand">ACADEMY</span>
+      </h1>
+      <div class="hero-tagline">// Дорноговийн ирээдүйг дижитал замаар бүтээнэ //</div>
+      <p class="hero-desc">
+        <strong>Shambala2056</strong> нь Дорноговийн говийг 2056 он хүртэл хөгжүүлэх 36 жилийн инженерийн суурин. CS2 Academy нь тэр том зорилгын <strong>дижитал дэд төсөл</strong> — залуучуудад газар, нөөцөд тулаагүй тогтвортой орлогын зам нээнэ.
+      </p>
+      <div class="hero-btns">
+        <a class="btn-teal" href="#register">Одоо Элсэх</a>
+        <a class="btn-ghost" href="#mission">Зорилго Унших</a>
+      </div>
+    </div>
+    <div class="hero-right rv">
+      <div class="eco-card">
+        <div class="eco-label">Shambala2056 · Экосистем</div>
+        <div class="eco-title">ИНЖЕНЕРИЙН СУУРИН</div>
+        <div class="eco-sub">// 50 га · Дорноговь · 2024–2056 //</div>
+        <div class="eco-pillars">
+          <div class="eco-pillar"><span class="pi">🌿</span><span class="pi-label">Биоинженерчлэл</span></div>
+          <div class="eco-pillar"><span class="pi">⚡</span><span class="pi-label">Сэргээгдэх эрчим хүч</span></div>
+          <div class="eco-pillar"><span class="pi">🔬</span><span class="pi-label">Эрдэм шинжилгээ</span></div>
+          <div class="eco-pillar active"><span class="pi">🎮</span><span class="pi-label pi-label">IT / CS2 Academy ✓</span></div>
+        </div>
+        <div class="eco-divider"></div>
+        <div class="eco-sub2">CS2 Academy · Дэд Төслийн Үзүүлэлт</div>
+        <div class="eco-stats">
+          <div class="eco-stat"><div class="eco-stat-n">30<span style="font-size:.9rem">+</span></div><div class="eco-stat-l">Сурагч/жил</div></div>
+          <div class="eco-stat"><div class="eco-stat-n">3</div><div class="eco-stat-l">Batch/жил</div></div>
+          <div class="eco-stat"><div class="eco-stat-n">2</div><div class="eco-stat-l">Орлогын урсгал</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-strip">
+    <div class="hs-item"><div class="hs-n"><span class="sand">50</span> га</div><div class="hs-l">Суурины нутаг</div></div>
+    <div class="hs-item"><div class="hs-n">36 <span style="font-size:1rem;color:var(--dim)">жил</span></div><div class="hs-l">Урт хугацааны төлөвлөгөө</div></div>
+    <div class="hs-item"><div class="hs-n">4</div><div class="hs-l">Хөгжлийн чиглэл</div></div>
+    <div class="hs-item"><div class="hs-n"><span class="teal">#4</span></div><div class="hs-l">CS2 Academy дэд төсөл</div></div>
+    <div class="hs-item"><div class="hs-n">2056</div><div class="hs-l">Ирээдүйн он</div></div>
+  </div>
+</section>
+
+<!-- ══════════════════ MISSION ══════════════════ -->
+<section class="mission-sec" id="mission">
+  <div class="ms-inner">
+    <div class="ms-grid">
+      <div class="rv">
+        <div class="ms-label">Shambala2056 · Үндсэн зорилго</div>
+        <h2 class="ms-h">ГОВИЙН <span class="sand">ИРЭЭДҮЙГ</span><br>БҮТЭЭНЭ</h2>
+        <p class="ms-p">
+          <strong>Shambala2056</strong> нь Дорноговь аймгийн Сайншандад байрлах 50 га талбайд 36 жилийн хугацаанд хэрэгжих инженерийн суурины төсөл. Үүсгэн байгуулагчдын гол зорилго нь энгийн — Монголын говийн <strong>цөлжилтийг сааруулж</strong>, байгалийн нөөц дуусаны дараа ч Дорноговийн залуучуудад <strong>тогтвортой амьдрах боломж</strong> бүтээх.
+        </p>
+        <p class="ms-p">
+          Уул уурхай, газрын тос — эдгээр нөөц нэг өдөр дуусна. Тэр үед ч говийн залуучууд амьдрах боломжтой байх ёстой. Иймд суурин дөрвөн чиглэлд хөгжлөө явуулна: биоинженерчлэл, сэргээгдэх эрчим хүч, эрдэм шинжилгээ, <strong>болон IT/дижитал</strong>.
+        </p>
+        <div class="ms-quote">
+          <div class="ms-quote-text">"Байгалийн хязгаарлагдмал нөөц дууссаны дараа ч улс орны эдийн засагт бодит үр ашгаа өгөх дөрвөн салбарыг хөгжүүлэх нь бидний ирээдүй."</div>
+          <div class="ms-quote-src">— Shambala2056 Үүсгэн Байгуулагчид</div>
+        </div>
+      </div>
+      <div class="rv">
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-year">2024</div>
+            <div class="tl-content">
+              <div class="tl-title">Суурин байгуулах эхлэл</div>
+              <div class="tl-text">50 га газарт инженерийн суурины анхны бүтээн байгуулалт. 23,000+ мод тарих. Байгаль орчны яамтай хамтын ажиллагаа.</div>
+              <span class="tl-badge now">Хэрэгжиж байна</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2026</div>
+            <div class="tl-content">
+              <div class="tl-title">CS2 Academy нээлт</div>
+              <div class="tl-text">Дижитал дэд төсөл эхэлнэ. Сайншандад офлайн PC room, анхны batch сурагчид. Дорноговийн залуучуудын IT хөгжлийн эхлэл.</div>
+              <span class="tl-badge now">Бэлтгэж байна</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2028</div>
+            <div class="tl-content">
+              <div class="tl-title">eSports экосистем</div>
+              <div class="tl-text">Academy-аас мэргэжилтэн гарч, Монголын CS2 тавцанд орно. Орон нутгийн тэмцээн тогтмол болно. Ивээн тэтгэгчийн тоо нэмэгдэнэ.</div>
+              <span class="tl-badge plan">Төлөвлөгдсөн</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2030</div>
+            <div class="tl-content">
+              <div class="tl-title">IT/Digital Hub</div>
+              <div class="tl-text">CS2 Academy нь Shambala2056 суурины дижитал хүний нөөцийн бааз болно. Суурины бусад дэд төслүүдтэй нэгдэнэ.</div>
+              <span class="tl-badge plan">Төлөвлөгдсөн</span>
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-year">2056</div>
+            <div class="tl-content">
+              <div class="tl-title">Олон улсын суурин</div>
+              <div class="tl-text">Тогтвортой хөгжлийн зорилтуудын хүрээнд олон улсын эрдэм шинжилгээний хүрээлэн. Говийн ирээдүй — бодит болно.</div>
+              <span class="tl-badge plan">Алсын зорилго</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ WHY CS2 ══════════════════ -->
+<section class="link-sec" id="why">
+  <div class="ls-inner">
+    <div class="rv">
+      <div class="ls-label">CS2 Academy · Яагаад дэд төсөл болов</div>
+      <h2 class="ls-h">ГОВИЙН ЗАЛУУС <span class="teal">ДИЖИТАЛ</span><br><span class="stk">ЗАМААР ХӨГЖИНӨ</span></h2>
+      <p class="ls-sub">CS2 Academy нь Shambala2056-ийн том зорилготой <strong>органик холбоотой</strong>. Санамсаргүй биш — дижитал орлогын загвар нь говийн нөхцөлд хамгийн тохирсон шийдэл.</p>
+    </div>
+    <div class="ls-grid rv">
+      <div class="ls-card">
+        <div class="ls-num">01</div>
+        <div class="ls-title">Нөөцөд Тулаагүй Орлого</div>
+        <div class="ls-text">Уул уурхай, газрын тос — хязгаарлагдмал. eSports бол <strong>оюун ухаан, ур чадвараас</strong> хамаарах дижитал эдийн засаг. Говийн нөөц дуусаад ч ажиллана.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-num">02</div>
+        <div class="ls-title">Дорноговийн Залуучуудад</div>
+        <div class="ls-text">Сайншандын 14–28 насны залуучуудад <strong>Улаанбаатар явалгүй</strong> мэргэжлийн сургалт авах боломж. Говийн хүний нөөц говьд үлдэнэ.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-num">03</div>
+        <div class="ls-title">IT Хүний Нөөц Бий Болгоно</div>
+        <div class="ls-text">CS2 Academy-н сурагчид логик сэтгэлгээ, стратеги, багийн ажиллагааг эзэмшинэ. Эдгээр чадвар <strong>Shambala2056-ийн IT чиглэлд</strong> шууд хэрэглэгдэнэ.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-num">04</div>
+        <div class="ls-title">The MongolZ Эффект</div>
+        <div class="ls-text">2025 онд Монголын CS2 баг дэлхийн аварга болов. <strong>Дорноговийн залуучуудын сонирхол</strong> огцом нэмэгдсэн — demand байгаа, supply байхгүй байна.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-num">05</div>
+        <div class="ls-title">Ивээн Тэтгэгчийн Сүлжээ</div>
+        <div class="ls-text">Дорноговийн уул уурхай, газрын тосны компаниуд <strong>нийгмийн хариуцлагын</strong> хүрээнд eSports-ийг дэмжих сонирхолтой. Shambala2056 нэр давуу тал.</div>
+      </div>
+      <div class="ls-card">
+        <div class="ls-num">06</div>
+        <div class="ls-title">Загвар Нь Томрох Боломжтой</div>
+        <div class="ls-text">CS2 Academy амжилтаа батлах тусам Shambala2056-ийн <strong>бусад дэд төслүүдэд</strong> загвар болно. Дижитал хөгжлийн эхлэл цэг.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ PROGRAMS ══════════════════ -->
+<section class="prog-sec" id="programs">
+  <div class="prog-inner">
+    <div class="rv">
+      <div class="sec-lbl" data-n="01">Сургалтын хөтөлбөр</div>
+      <h2 class="sec-h">ГУРВАН <span class="teal">ТҮВШНИЙ</span> ХӨТӨЛБӨР</h2>
+      <p class="sec-p">Сайншандад офлайн. 14–28 насны Дорноговийн залуучуудад. Batch бүрт 10–15 сурагч.</p>
+    </div>
+    <div class="prog-grid rv">
+      <div class="prog p1">
+        <div class="prog-bar"></div>
+        <div class="prog-head">
+          <div class="prog-tag">Түвшин I · 8 долоо хоног</div>
+          <div class="prog-name">BRONZE</div>
+          <div class="prog-mn">Шинэ тоглогчдод · Суурь механик</div>
+          <div class="prog-price">₮180,000 <small>/ сар</small></div>
+        </div>
+        <div class="prog-body">
+          <ul class="prog-list">
+            <li><span class="pck">✓</span><span>Aim болон crosshair placement</span></li>
+            <li><span class="pck">✓</span><span>Counter-strafing, spray control</span></li>
+            <li><span class="pck">✓</span><span>Үндсэн газрын зургийн мэдлэг</span></li>
+            <li><span class="pck">✓</span><span>Анхдагч utility хэрэглэх</span></li>
+            <li><span class="pck">✓</span><span>Batch дүүргэсэн гэрчилгээ</span></li>
+          </ul>
+          <button class="prog-btn" onclick="pick('BRONZE')">Сонгох →</button>
+        </div>
+      </div>
+      <div class="prog p2">
+        <div class="prog-bar"></div>
+        <div class="prog-head">
+          <div class="prog-tag">Түвшин II · 12 долоо хоног</div>
+          <div class="prog-name">SILVER</div>
+          <div class="prog-mn">Суурь мэдлэгтэй · Тактик нэмэх</div>
+          <div class="prog-price">₮280,000 <small>/ сар</small></div>
+        </div>
+        <div class="prog-body">
+          <ul class="prog-list">
+            <li><span class="pck">✓</span><span>Advanced aim — flick, tracking</span></li>
+            <li><span class="pck">✓</span><span>Map control болон rotation</span></li>
+            <li><span class="pck">✓</span><span>Тактик, execute стратеги</span></li>
+            <li><span class="pck">✓</span><span>Demo review болон анализ</span></li>
+            <li><span class="pck">✓</span><span>Дотоод тэмцээнд оролцох</span></li>
+          </ul>
+          <button class="prog-btn" onclick="pick('SILVER')">Сонгох →</button>
+        </div>
+      </div>
+      <div class="prog p3">
+        <div class="prog-bar"></div>
+        <div class="prog-rec">Санал болгох</div>
+        <div class="prog-head">
+          <div class="prog-tag">Түвшин III · 16 долоо хоног</div>
+          <div class="prog-name">GOLD</div>
+          <div class="prog-mn">Pro болохыг зорьсон · Бүрэн бэлтгэл</div>
+          <div class="prog-price">₮420,000 <small>/ сар</small></div>
+        </div>
+        <div class="prog-body">
+          <ul class="prog-list">
+            <li><span class="pck">✓</span><span>Pro-level utility болон IGL</span></li>
+            <li><span class="pck">✓</span><span>Anti-strat, read болон clutch</span></li>
+            <li><span class="pck">✓</span><span>Scrimmage болон тэмцээний бэлтгэл</span></li>
+            <li><span class="pck">✓</span><span>1-on-1 хувийн коучинг</span></li>
+            <li><span class="pck">✓</span><span>eSports recruitment дэмжлэг</span></li>
+          </ul>
+          <button class="prog-btn" onclick="pick('GOLD')">Сонгох →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ SPONSOR ══════════════════ -->
+<section class="sponsor-sec" id="sponsor">
+  <div class="sp-inner">
+    <div class="rv">
+      <div class="sec-lbl" data-n="02">Ивээн тэтгэгч</div>
+      <h2 class="sec-h">ГОВИЙН <span class="sand">ИРЭЭДҮЙД</span> ХӨРӨНГӨ ОРУЛ</h2>
+      <p class="sec-p">Shambala2056 CS2 Academy-г дэмжих нь зөвхөн академид биш — Дорноговийн залуучуудын дижитал ирээдүйд хөрөнгө оруулалт.</p>
+    </div>
+    <div class="sp-grid rv">
+      <div class="sp-tier t1">
+        <div class="sp-bar"></div>
+        <div class="sp-head">
+          <div class="sp-badge">Bronze Partner</div>
+          <div class="sp-name">BRONZE</div>
+          <div class="sp-mn">Хүрэл Ивээн Тэтгэгч</div>
+          <div class="sp-price">₮5,000,000 <small>/ жил</small></div>
+        </div>
+        <div class="sp-body">
+          <ul class="sp-feats">
+            <li><span class="spck">✓</span><span>Академийн нэрэнд брэнд нэр</span></li>
+            <li><span class="spck">✓</span><span>Вебсайт болон Discord-д лого</span></li>
+            <li><span class="spck">✓</span><span>Сарын 1 пост (Facebook/IG)</span></li>
+            <li><span class="spck">✓</span><span>Тэмцээнд баннер байршуулалт</span></li>
+            <li><span class="spck">✓</span><span>Сар тутмын хүрэлтийн тайлан</span></li>
+            <li><span class="spno">—</span><span>YouTube дурдалт</span></li>
+            <li><span class="spno">—</span><span>Exclusive тэмцээний нэр</span></li>
+          </ul>
+          <button class="sp-btn" onclick="pickSp('BRONZE — ₮5,000,000')">Сонгох →</button>
+        </div>
+      </div>
+      <div class="sp-tier t2">
+        <div class="sp-bar"></div>
+        <div class="sp-head">
+          <div class="sp-badge">Silver Partner</div>
+          <div class="sp-name">SILVER</div>
+          <div class="sp-mn">Мөнгөн Ивээн Тэтгэгч</div>
+          <div class="sp-price">₮10,000,000 <small>/ жил</small></div>
+        </div>
+        <div class="sp-body">
+          <ul class="sp-feats">
+            <li><span class="spck">✓</span><span>Академийн нэрэнд брэнд нэр (мөнгөн)</span></li>
+            <li><span class="spck">✓</span><span>Вебсайт hero хэсэгт том лого</span></li>
+            <li><span class="spck">✓</span><span>Сарын 3 пост (FB/IG/TikTok)</span></li>
+            <li><span class="spck">✓</span><span>Тэмцээнд LED баннер + MC дурдалт</span></li>
+            <li><span class="spck">✓</span><span>YouTube сар тутмын дурдалт</span></li>
+            <li><span class="spck">✓</span><span>Хагас жилийн дүн тайлан</span></li>
+            <li><span class="spno">—</span><span>Exclusive тэмцээний нэр</span></li>
+          </ul>
+          <button class="sp-btn" onclick="pickSp('SILVER — ₮10,000,000')">Сонгох →</button>
+        </div>
+      </div>
+      <div class="sp-tier t3">
+        <div class="sp-bar"></div>
+        <div class="sp-rec">Санал болгох</div>
+        <div class="sp-head">
+          <div class="sp-badge">Gold Partner</div>
+          <div class="sp-name">GOLD</div>
+          <div class="sp-mn">Алтан Ивээн Тэтгэгч</div>
+          <div class="sp-price">₮20,000,000 <small>/ жил</small></div>
+        </div>
+        <div class="sp-body">
+          <ul class="sp-feats">
+            <li><span class="spck">✓</span><span>Академийн нэрэнд брэнд нэр (алтан)</span></li>
+            <li><span class="spck">✓</span><span>Бүх материалд тэргүүлэх лого</span></li>
+            <li><span class="spck">✓</span><span>7 хоног бүрийн пост + Story</span></li>
+            <li><span class="spck">✓</span><span>YouTube бүр видео дурдалт</span></li>
+            <li><span class="spck">✓</span><span><strong>1 тэмцээн таны брэндийн нэрээр</strong></span></li>
+            <li><span class="spck">✓</span><span>Exclusive stand + мерч тэмцээнд</span></li>
+            <li><span class="spck">✓</span><span>PR мэдэгдэл + хэвлэл мэдээлэл</span></li>
+          </ul>
+          <button class="sp-btn" onclick="pickSp('GOLD — ₮20,000,000')">Сонгох →</button>
+        </div>
+      </div>
+    </div>
+    <div class="sp-why rv">
+      <div class="sp-why-item">
+        <div class="sp-why-title">Зорилтот Үзэгч</div>
+        <div class="sp-why-text">14–28 насны Дорноговийн залуучууд — технологид дуртай, худалдан авах шийдвэрт нөлөөтэй, eSports-ийг идэвхтэй дагадаг.</div>
+      </div>
+      <div class="sp-why-item">
+        <div class="sp-why-title">Shambala2056 Нэрийн Давуу Тал</div>
+        <div class="sp-why-text">Таны брэнд зөвхөн академид биш — Дорноговийн хөгжлийн том зорилготой холбоотой болно. Нийгмийн хариуцлагын хэмжээнд.</div>
+      </div>
+      <div class="sp-why-item">
+        <div class="sp-why-title">Ил Тод Тайлан</div>
+        <div class="sp-why-text">Impression, reach, engagement — бүх метрикийг PDF тайланд хийж сар бүр илгээнэ. Хөрөнгө оруулалтын үр дүн тодорхой.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ REGISTER ══════════════════ -->
+<section class="reg-sec" id="register">
+  <div class="reg-inner">
+    <div class="rv">
+      <div class="sec-lbl" data-n="03">Элсэлт</div>
+      <h2 class="sec-h">БҮРТГЭЛИЙН <span class="teal">МАЯГТ</span></h2>
+      <p class="sec-p">Shambala2056 CS2 Academy-д элсэж, Дорноговийн дижитал ирээдүйн нэг хэсэг бол.</p>
+    </div>
+    <div class="reg-grid">
+      <div class="rv">
+        <div class="ri-h">Говийн залуусын академид тавтай морил.</div>
+        <div class="ri-p">Маягтыг бөглөж илгээгээрэй. Бид 24 цагийн дотор холбоо барина. Дорноговийн залуучуудад тусгай нөхцөл байдаг.</div>
+        <div class="ri-detail">
+          <div class="rd"><div class="rd-l">Академи</div><div class="rd-v">Shambala2056 CS2 Academy</div></div>
+          <div class="rd"><div class="rd-l">Байршил</div><div class="rd-v">Сайншанд · Дорноговь аймаг</div></div>
+          <div class="rd"><div class="rd-l">Хэлбэр</div><div class="rd-v">Офлайн — PC room, тогтмол хуваарь</div></div>
+          <div class="rd"><div class="rd-l">Нас</div><div class="rd-v">14 болон түүнээс дээш</div></div>
+          <div class="rd"><div class="rd-l">Batch</div><div class="rd-v">3, 7, 11-р сарын эхэнд</div></div>
+          <div class="rd"><div class="rd-l">Холбоо</div><div class="rd-v">@shambala2056</div></div>
+        </div>
+      </div>
+      <div class="rv">
+        <div id="regWrap">
+          <div id="regBody" class="rform">
+            <div class="frow" style="margin-bottom:1px">
+              <div class="fgrp"><div class="flbl">Овог</div><input class="finp" type="text" id="ln" placeholder="Бат"></div>
+              <div class="fgrp"><div class="flbl">Нэр</div><input class="finp" type="text" id="fn" placeholder="Болд"></div>
+            </div>
+            <div class="frow" style="margin-bottom:1px">
+              <div class="fgrp"><div class="flbl">Имэйл</div><input class="finp" type="email" id="em" placeholder="name@email.com"></div>
+              <div class="fgrp"><div class="flbl">Утас</div><input class="finp" type="tel" id="ph" placeholder="+976 9900 0000"></div>
+            </div>
+            <div class="fgrp" style="margin-bottom:1px">
+              <div class="flbl">Сум / Байршил</div>
+              <select class="fsel" id="loc">
+                <option value="">— сонгох —</option>
+                <option>Сайншанд сум</option>
+                <option>Дорноговь — Бусад сум</option>
+                <option>Улаанбаатар (офлайн ирэх боломжтой)</option>
+                <option>Бусад</option>
+              </select>
+            </div>
+            <div class="fgrp" style="margin-bottom:1px">
+              <div class="flbl">Одоогийн ранк</div>
+              <select class="fsel" id="rnk">
+                <option value="">— сонгох —</option>
+                <option>Бүртгэлгүй / Шинэ</option>
+                <option>Silver I–IV</option>
+                <option>Gold Nova I–III</option>
+                <option>Master Guardian</option>
+                <option>Legendary Eagle+</option>
+                <option>Supreme / Global Elite</option>
+                <option>Premier 5k+</option>
+              </select>
+            </div>
+            <div style="margin-bottom:1px">
+              <div class="flbl" style="border:1px solid var(--ln);border-bottom:none;background:var(--bg3)">Хөтөлбөр сонгох</div>
+              <div class="prog-radios">
+                <input type="radio" name="prog" id="pb" class="pr-radio" value="BRONZE — ₮180,000/сар">
+                <label class="pr-lbl" for="pb">BRONZE</label>
+                <input type="radio" name="prog" id="ps" class="pr-radio" value="SILVER — ₮280,000/сар">
+                <label class="pr-lbl" for="ps">SILVER</label>
+                <input type="radio" name="prog" id="pg" class="pr-radio" value="GOLD — ₮420,000/сар">
+                <label class="pr-lbl" for="pg">GOLD</label>
+              </div>
+            </div>
+            <div class="fgrp" style="margin-bottom:1px">
+              <div class="flbl">Зорилго / Нэмэлт</div>
+              <textarea class="fta" id="msg" placeholder="Жишээ: Мэргэжлийн тамирчин болох, FACEIT level ахиулах, eSports-оор орлого олох..."></textarea>
+            </div>
+            <div class="ferr" id="ferr"></div>
+            <button class="fsub" onclick="doReg()">ЭЛСЭЛТ ИЛГЭЭХ →</button>
+          </div>
+          <div class="fsuccess" id="fsuccess">
+            <span class="fsi">✓</span>
+            <div class="fst">БҮРТГЭЛ АМЖИЛТТАЙ</div>
+            <div class="fsd" id="fsd"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════ FOOTER ══════════════════ -->
+<footer>
+  <div>
+    <div class="foot-brand">SHAMBALA2056</div>
+    <div class="foot-sub">CS2 Academy · Дэд Төсөл · Дорноговь</div>
+    <div class="foot-desc">Говийн ирээдүйг бүтээх 36 жилийн инженерийн суурин. CS2 Academy нь дижитал хөгжлийн эхлэл цэг.</div>
+    <div class="foot-copy" style="margin-top:16px">© 2026 Shambala2056 CS2 Academy · Сайншанд, Дорноговь аймаг</div>
+  </div>
+  <div>
+    <div class="foot-col-title">Хуудасны холбоос</div>
+    <ul class="foot-links">
+      <li><a href="#mission">Shambala2056 зорилго</a></li>
+      <li><a href="#why">Яагаад CS2 Academy</a></li>
+      <li><a href="#programs">Сургалтын хөтөлбөр</a></li>
+      <li><a href="#sponsor">Ивээн тэтгэгч болох</a></li>
+      <li><a href="#register">Бүртгэл</a></li>
+    </ul>
+  </div>
+  <div>
+    <div class="foot-col-title">Холбоо барих</div>
+    <ul class="foot-links">
+      <li><a href="#">Instagram: @shambala2056</a></li>
+      <li><a href="#">Байршил: Сайншанд, Дорноговь</a></li>
+      <li><a href="#">Хариу: 24 цагийн дотор</a></li>
+    </ul>
+  </div>
+</footer>
+
+<script>
+/* REVEAL */
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('on')),{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+/* PICK PROGRAM */
+function pick(name){
+  const map={BRONZE:'pb',SILVER:'ps',GOLD:'pg'};
+  const el=document.getElementById(map[name]);
+  if(el)el.checked=true;
+  document.getElementById('register').scrollIntoView({behavior:'smooth'});
+}
+
+/* PICK SPONSOR */
+function pickSp(tier){
+  document.getElementById('register').scrollIntoView({behavior:'smooth'});
+}
+
+/* REGISTER */
+function doReg(){
+  const ln=document.getElementById('ln').value.trim();
+  const fn=document.getElementById('fn').value.trim();
+  const em=document.getElementById('em').value.trim();
+  const ph=document.getElementById('ph').value.trim();
+  const loc=document.getElementById('loc').value;
+  const rnk=document.getElementById('rnk').value;
+  const prog=document.querySelector('input[name="prog"]:checked')?.value||'';
+  const err=document.getElementById('ferr');
+  err.style.display='none';
+  const checks=[
+    [!ln||!fn,'Нэрээ бүтнээр оруулна уу.'],
+    [!em||!em.includes('@'),'Зөв имэйл хаяг оруулна уу.'],
+    [!ph,'Утасны дугаараа оруулна уу.'],
+    [!loc,'Байршлаа сонгоно уу.'],
+    [!rnk,'Одоогийн ранкаа сонгоно уу.'],
+    [!prog,'Хөтөлбөр сонгоно уу.']
+  ];
+  for(const[bad,msg]of checks){if(bad){err.textContent=msg;err.style.display='block';return;}}
+  document.getElementById('regBody').style.display='none';
+  document.getElementById('fsuccess').style.display='block';
+  document.getElementById('fsd').innerHTML=
+    `<strong style="color:var(--wht)">${ln} ${fn}</strong>-н бүртгэл хүлээн авлаа.<br>
+    Байршил: <strong style="color:var(--sand)">${loc}</strong><br>
+    Хөтөлбөр: <strong style="color:var(--teal)">${prog}</strong><br><br>
+    <strong>${em}</strong>-д <strong style="color:var(--teal)">24 цагийн дотор</strong> хариу илгээнэ.<br><br>
+    <span style="font-family:var(--fm);font-size:.68rem;color:var(--dim)">// SHAMBALA2056 · ГОВИЙН ЗАЛУУС · ДИЖИТАЛ ИРЭЭДҮЙ //</span>`;
+}
+</script>
+</body>
+</html>

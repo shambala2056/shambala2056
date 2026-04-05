@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CS2 Academy — Shambala2056 Дэд Төсөл</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Sora:wght@200;300;400;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0c0b09;--bg2:#121109;--bg3:#181610;
+  --sand:#c8a96e;--sand2:#e8c888;
+  --teal:#00c8a0;--teal2:#00e8b8;
+  --ember:#e05820;
+  --ln:#242018;--ln2:#302c20;
+  --dim:#504830;--mid:#908060;
+  --txt:#d0c8a8;--wht:#f0ead8;
+  --grn:#22c55e;--red:#ef4444;
+  --fd:'Bebas Neue',sans-serif;
+  --fb:'Sora',sans-serif;
+  --fm:'DM Mono',monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden}
+body::before{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.02;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+  background-size:180px}
+
+nav{position:fixed;top:0;inset-x:0;z-index:500;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid var(--ln);background:rgba(12,11,9,.96);backdrop-filter:blur(16px)}
+.nav-left{display:flex;flex-direction:column;gap:1px}
+.nav-parent{font-family:var(--fm);font-size:.57rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim)}
+.nav-brand{font-family:var(--fd);font-size:1.1rem;letter-spacing:3px;color:var(--sand);text-decoration:none;display:flex;align-items:center;gap:7px}
+.nav-dot{width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 2s infinite;flex-shrink:0}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.nav-links{display:flex;gap:32px;list-style:none}
+.nav-links a{font-family:var(--fm);font-size:.63rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--sand)}
+.nav-cta{font-family:var(--fm);font-size:.63rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--teal);color:#000;padding:9px 22px;border:none;cursor:pointer;text-decoration:none;transition:background .15s;clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}
+.nav-cta:hover{background:var(--teal2)}
+
+.hero{min-height:100svh;display:grid;grid-template-columns:1fr 1fr;align-items:end;padding:56px 48px 72px;position:relative;overflow:hidden;border-bottom:1px solid var(--ln)}
+.hero-bg{position:absolute;inset:0;pointer-events:none;background:linear-gradient(to top,rgba(200,169,110,.04) 0%,transparent 35%),radial-gradient(ellipse 60% 40% at 50% 90%,rgba(224,88,32,.05) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;background-image:linear-gradient(var(--ln) 1px,transparent 1px),linear-gradient(90deg,var(--ln) 1px,transparent 1px);background-size:72px 72px;opacity:.45;mask-image:linear-gradient(to top,black 0%,transparent 70%)}
+.hero-left{position:relative;z-index:2;padding-right:60px}
+.hero-bc{font-family:var(--fm);font-size:.6rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--dim);margin-bottom:20px;display:flex;align-items:center;gap:8px}
+.hero-bc .sep{color:var(--ln2)}
+.hero-bc .act{color:var(--teal)}
+h1.hh{font-family:var(--fd);font-size:clamp(3.8rem,8vw,7.5rem);line-height:.92;letter-spacing:1px;color:var(--wht);margin-bottom:10px}
+h1.hh .teal{color:var(--teal);text-shadow:0 0 40px rgba(0,200,160,.3)}
+h1.hh .stk{color:transparent;-webkit-text-stroke:1px var(--ln2)}
+.hero-tag{font-family:var(--fm);font-size:.75rem;letter-spacing:2px;text-transform:uppercase;color:var(--sand);margin-bottom:22px;opacity:.8}
+.hero-p{font-size:.95rem;color:var(--mid);max-width:480px;line-height:1.85;margin-bottom:38px}
+.hero-p strong{color:var(--txt);font-weight:400}
+.hero-btns{display:flex;gap:14px;flex-wrap:wrap}
+.btn-teal{font-family:var(--fm);font-size:.66rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--teal);color:#000;padding:13px 30px;border:none;cursor:pointer;text-decoration:none;display:inline-block;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:all .15s}
+.btn-teal:hover{background:var(--teal2);transform:translateY(-1px)}
+.btn-line{font-family:var(--fm);font-size:.66rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:transparent;color:var(--mid);padding:12px 30px;border:1px solid var(--ln2);cursor:pointer;text-decoration:none;display:inline-block;clip-path:polygon(8px 0,100% 0,calc(100% - 8px) 100%,0 100%);transition:all .15s}
+.btn-line:hover{border-color:var(--sand);color:var(--sand)}
+.hero-right{position:relative;z-index:2;border-left:1px solid var(--ln);padding-left:48px;display:flex;flex-direction:column}
+.hstat{padding:26px 0;border-bottom:1px solid var(--ln)}
+.hstat:last-child{border-bottom:none}
+.hstat-n{font-family:var(--fd);font-size:2.8rem;letter-spacing:1px;color:var(--wht);line-height:1;margin-bottom:5px}
+.hstat-n .teal{color:var(--teal)}
+.hstat-n .sand{color:var(--sand)}
+.hstat-l{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+
+.ctx-band{background:var(--bg2);border-bottom:1px solid var(--ln);padding:32px 48px;display:flex;align-items:center;gap:40px;flex-wrap:wrap}
+.ctx-item{display:flex;align-items:center;gap:12px;flex:1;min-width:180px}
+.ctx-icon{font-size:1.6rem;flex-shrink:0}
+.ctx-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:2px}
+.ctx-val{font-size:.9rem;color:var(--txt);font-weight:300}
+.ctx-sep{width:1px;height:44px;background:var(--ln);flex-shrink:0}
+
+.sec{padding:84px 48px;border-bottom:1px solid var(--ln)}
+.si{max-width:1200px;margin:0 auto}
+.slbl{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.slbl::before{content:attr(data-n);color:var(--teal)}
+.sh{font-family:var(--fd);font-size:clamp(2rem,4vw,3.8rem);line-height:.95;letter-spacing:1px;color:var(--wht);margin-bottom:13px}
+.sh .teal{color:var(--teal)}
+.sh .stk{color:transparent;-webkit-text-stroke:1px var(--ln2)}
+.sh .sand{color:var(--sand)}
+.sp{font-size:.93rem;color:var(--mid);max-width:520px;line-height:1.85}
+
+.about-sec{background:var(--bg2)}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;margin-top:52px}
+.ab-txt{font-size:.93rem;color:var(--mid);line-height:1.9;margin-bottom:18px}
+.ab-txt strong{color:var(--txt);font-weight:400}
+.parent-card{background:var(--bg3);border:1px solid var(--ln2);padding:26px;position:relative;overflow:hidden;clip-path:polygon(0 0,calc(100% - 16px) 0,100% 16px,100% 100%,16px 100%,0 calc(100% - 16px))}
+.parent-card::before{content:'';position:absolute;top:0;left:0;width:3px;height:56px;background:linear-gradient(to bottom,var(--sand),transparent)}
+.pc-lbl{font-family:var(--fm);font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;color:var(--sand);margin-bottom:12px;display:flex;align-items:center;gap:6px}
+.pc-name{font-family:var(--fd);font-size:1.7rem;letter-spacing:2px;color:var(--wht);margin-bottom:4px}
+.pc-sub{font-size:.78rem;color:var(--dim);font-family:var(--fm);letter-spacing:1px;margin-bottom:16px}
+.pc-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--ln);font-size:.83rem}
+.pc-row:last-child{border-bottom:none}
+.pc-l{color:var(--dim)}.pc-v{color:var(--txt);font-family:var(--fm);font-size:.78rem}
+.sub-badge{display:inline-flex;align-items:center;gap:7px;background:rgba(0,200,160,.07);border:1px solid rgba(0,200,160,.18);padding:7px 14px;margin-top:18px;font-family:var(--fm);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--teal);clip-path:polygon(6px 0,100% 0,calc(100% - 6px) 100%,0 100%)}
+.sub-badge::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--teal);animation:blink 1.5s infinite}
+
+.prog-sec{background:var(--bg)}
+.prog-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:52px}
+.prog{background:var(--bg);display:flex;flex-direction:column;transition:background .2s;position:relative}
+.prog:hover{background:var(--bg2)}
+.prog-bar{height:3px;background:var(--ln2)}
+.prog.p1 .prog-bar{background:var(--teal)}
+.prog.p2 .prog-bar{background:var(--sand)}
+.prog.p3 .prog-bar{background:linear-gradient(90deg,var(--teal),var(--sand))}
+.prog-head{padding:30px 26px 22px;border-bottom:1px solid var(--ln)}
+.prog-tag{font-family:var(--fm);font-size:.58rem;letter-spacing:2.5px;text-transform:uppercase;margin-bottom:14px}
+.prog.p1 .prog-tag{color:var(--teal)}.prog.p2 .prog-tag{color:var(--sand)}.prog.p3 .prog-tag{color:var(--sand2)}
+.prog-name{font-family:var(--fd);font-size:2.3rem;letter-spacing:1px;color:var(--wht);line-height:1;margin-bottom:5px}
+.prog-mn{font-size:.83rem;color:var(--dim);margin-bottom:18px}
+.prog-price{font-family:var(--fd);font-size:1.8rem;letter-spacing:1px;color:var(--wht)}
+.prog-price small{font-family:var(--fm);font-size:.63rem;color:var(--dim);vertical-align:middle;margin-left:4px}
+.prog-body{padding:22px 26px 26px;flex:1;display:flex;flex-direction:column}
+.prog-list{list-style:none;flex:1;margin-bottom:22px}
+.prog-list li{font-size:.85rem;color:var(--mid);padding:8px 0;border-bottom:1px solid var(--ln);display:flex;align-items:flex-start;gap:9px;line-height:1.5}
+.prog-list li:last-child{border-bottom:none}
+.pck{color:var(--teal);font-size:.73rem;flex-shrink:0;margin-top:2px}
+.prog-btn{display:block;width:100%;font-family:var(--fm);font-size:.63rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:12px;border:1px solid var(--ln2);background:transparent;color:var(--dim);cursor:pointer;transition:all .2s;text-align:center}
+.prog.p1 .prog-btn:hover{border-color:var(--teal);color:var(--teal);background:rgba(0,200,160,.05)}
+.prog.p2 .prog-btn:hover{border-color:var(--sand);color:var(--sand);background:rgba(200,169,110,.05)}
+.prog.p3 .prog-btn{background:var(--teal);color:#000;border-color:var(--teal)}
+.prog.p3 .prog-btn:hover{background:var(--teal2)}
+.prog-rec{position:absolute;top:12px;right:12px;font-family:var(--fm);font-size:.54rem;letter-spacing:2px;text-transform:uppercase;color:#000;background:var(--teal);padding:3px 9px}
+
+.curr-sec{background:var(--bg2)}
+.curr-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:52px}
+.cmod{background:var(--bg2);padding:26px;transition:background .2s;position:relative;overflow:hidden}
+.cmod::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--teal);transition:width .3s}
+.cmod:hover{background:var(--bg3)}.cmod:hover::after{width:100%}
+.cmod-n{font-family:var(--fd);font-size:3.2rem;color:var(--ln2);line-height:1;margin-bottom:14px;transition:color .2s}
+.cmod:hover .cmod-n{color:var(--teal)}
+.cmod-title{font-family:var(--fm);font-size:.67rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--wht);margin-bottom:10px}
+.cmod-list{list-style:none}
+.cmod-list li{font-size:.83rem;color:var(--dim);padding:5px 0;border-bottom:1px solid var(--ln);line-height:1.5}
+.cmod-list li:last-child{border-bottom:none}
+
+.coach-sec{background:var(--bg)}
+.coach-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-top:52px}
+.coach{background:var(--bg);padding:26px 20px;text-align:center;transition:background .2s}
+.coach:hover{background:var(--bg2)}
+.coach-av{width:62px;height:62px;border-radius:50%;margin:0 auto 13px;border:2px solid var(--ln2);display:flex;align-items:center;justify-content:center;font-family:var(--fd);font-size:1.4rem;color:var(--wht);background:var(--bg3);transition:border-color .2s}
+.coach:hover .coach-av{border-color:var(--teal)}
+.coach-name{font-family:var(--fd);font-size:.95rem;letter-spacing:1px;color:var(--wht);margin-bottom:3px}
+.coach-handle{font-family:var(--fm);font-size:.6rem;color:var(--teal);letter-spacing:1px;margin-bottom:8px}
+.coach-role{font-size:.8rem;color:var(--dim);margin-bottom:10px;line-height:1.5}
+.coach-rank{display:inline-block;font-family:var(--fm);font-size:.56rem;letter-spacing:1.5px;text-transform:uppercase;color:#000;background:var(--sand);padding:3px 9px;clip-path:polygon(4px 0,100% 0,calc(100% - 4px) 100%,0 100%)}
+
+.mission{background:var(--bg3);border-bottom:1px solid var(--ln);padding:56px 48px;position:relative;overflow:hidden}
+.mission::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 50% 80% at 100% 50%,rgba(0,200,160,.04) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 0% 50%,rgba(200,169,110,.04) 0%,transparent 60%)}
+.ms-in{max-width:860px;margin:0 auto;text-align:center;position:relative;z-index:2}
+.ms-tag{font-family:var(--fm);font-size:.6rem;letter-spacing:3px;text-transform:uppercase;color:var(--teal);margin-bottom:14px}
+.ms-h{font-family:var(--fd);font-size:clamp(2rem,5vw,3.8rem);line-height:.95;letter-spacing:1px;color:var(--wht);margin-bottom:18px}
+.ms-h .sand{color:var(--sand)}
+.ms-p{font-size:.93rem;color:var(--mid);line-height:1.9;max-width:660px;margin:0 auto}
+
+.reg-sec{background:var(--bg)}
+.reg-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;margin-top:52px}
+.ri-title{font-family:var(--fd);font-size:1.9rem;letter-spacing:1px;color:var(--wht);margin-bottom:10px;line-height:1.1}
+.ri-body{font-size:.9rem;color:var(--dim);line-height:1.85;margin-bottom:26px}
+.ri-detail{border-top:1px solid var(--ln);padding-top:20px}
+.rd{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--ln);font-size:.83rem}
+.rd:last-child{border-bottom:none}
+.rd-l{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);width:76px;flex-shrink:0;padding-top:2px}
+.rd-v{color:var(--txt)}
+
+.rform{display:flex;flex-direction:column;gap:1px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+.fgrp{display:flex;flex-direction:column;margin-bottom:1px}
+.flbl{font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:9px 13px 0;background:var(--bg2);border:1px solid var(--ln);border-bottom:none}
+.finp,.fsel,.fta{background:var(--bg2);border:1px solid var(--ln);border-top:none;color:var(--txt);padding:10px 13px 12px;font-family:var(--fb);font-size:.88rem;font-weight:300;outline:none;appearance:none;-webkit-appearance:none;width:100%;transition:border-color .15s}
+.finp:focus,.fsel:focus,.fta:focus{border-color:var(--teal);z-index:1;position:relative}
+.finp::placeholder,.fta::placeholder{color:var(--dim);opacity:.7}
+.fsel option{background:var(--bg2)}
+.fta{resize:none;min-height:88px}
+.prog-radios{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--ln);border:1px solid var(--ln);margin-bottom:1px}
+.pr-radio{display:none}
+.pr-lbl{display:block;padding:12px;background:var(--bg2);font-family:var(--fm);font-size:.6rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);cursor:pointer;text-align:center;transition:all .15s}
+.pr-radio:checked+.pr-lbl{background:var(--teal);color:#000}
+.pr-lbl:hover{color:var(--wht)}
+.fsub{font-family:var(--fm);font-size:.66rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:#000;background:var(--teal);border:none;padding:14px;cursor:pointer;width:100%;transition:background .15s}
+.fsub:hover{background:var(--teal2)}
+.ferr{font-family:var(--fm);font-size:.63rem;color:var(--red);letter-spacing:1px;padding:8px 0;display:none}
+.fsuccess{display:none;padding:52px 0;text-align:center}
+.fsuccess-icon{font-size:3.5rem;display:block;margin-bottom:14px;animation:pop .4s ease-out}
+@keyframes pop{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.fsuccess-title{font-family:var(--fd);font-size:1.7rem;letter-spacing:2px;color:var(--grn);margin-bottom:10px}
+.fsuccess-text{font-size:.88rem;color:var(--dim);line-height:1.8}
+
+.faq-sec{background:var(--bg2)}
+.faq-list{margin-top:52px;max-width:740px}
+.faq-item{border-bottom:1px solid var(--ln);overflow:hidden}
+.faq-q{padding:17px 0;display:flex;justify-content:space-between;align-items:center;cursor:pointer;font-size:.95rem;font-weight:300;color:var(--txt);transition:color .2s;gap:14px}
+.faq-q:hover{color:var(--wht)}
+.faq-ic{font-family:var(--fd);font-size:1.1rem;color:var(--teal);flex-shrink:0;transition:transform .3s}
+.faq-item.open .faq-ic{transform:rotate(45deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .35s ease,padding .35s;font-size:.86rem;color:var(--dim);line-height:1.8;padding:0}
+.faq-item.open .faq-a{max-height:220px;padding-bottom:16px}
+
+footer{border-top:1px solid var(--ln);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;background:var(--bg);flex-wrap:wrap;gap:14px}
+.foot-l{display:flex;flex-direction:column;gap:2px}
+.foot-parent{font-family:var(--fm);font-size:.56rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+.foot-brand{font-family:var(--fd);font-size:1rem;letter-spacing:3px;color:var(--sand)}
+.foot-r{font-family:var(--fm);font-size:.58rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)}
+
+.rv{opacity:0;transform:translateY(18px);transition:opacity .6s ease,transform .6s ease}
+.rv.on{opacity:1;transform:none}
+
+@media(max-width:900px){
+  nav,footer{padding:0 20px}
+  footer{padding:20px}
+  .hero,.sec{padding:58px 20px 48px}
+  .hero{grid-template-columns:1fr}
+  .hero-left{padding-right:0}
+  .hero-right{border-left:none;border-top:1px solid var(--ln);padding-left:0;padding-top:24px;margin-top:32px;flex-direction:row;flex-wrap:wrap}
+  .hstat{flex:1;min-width:110px;padding:14px 10px;border-right:1px solid var(--ln);border-bottom:none}
+  .hstat:last-child{border-right:none}
+  .ctx-band{padding:22px 20px;gap:20px}
+  .ctx-sep{display:none}
+  .about-grid,.prog-grid,.curr-grid,.reg-grid{grid-template-columns:1fr}
+  .coach-grid{grid-template-columns:repeat(2,1fr)}
+  .frow,.prog-radios{grid-template-columns:1fr}
+  .mission{padding:44px 20px}
+  nav .nav-links{display:none}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-left">
+    <span class="nav-parent">Shambala2056 · Дэд Төсөл</span>
+    <a class="nav-brand" href="#top"><span class="nav-dot"></span>CS2 ACADEMY</a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#about">Бидний тухай</a></li>
+    <li><a href="#programs">Хөтөлбөр</a></li>
+    <li><a href="#curriculum">Агуулга</a></li>
+    <li><a href="#register">Бүртгэл</a></li>
+  </ul>
+  <a class="nav-cta" href="#register">Элсэх</a>
+</nav>
+
+<section class="hero" id="top">
+  <div class="hero-bg"></div><div class="hero-grid"></div>
+  <div class="hero-left">
+    <div class="hero-bc">
+      <span>Shambala2056</span><span class="sep">/</span><span class="act">CS2 Academy</span>
+    </div>
+    <h1 class="hh">
+      <span class="stk">ДОРНОГОВЬ</span><br>
+      <span class="teal">CS2</span><br>
+      ACADEMY
+    </h1>
+    <div class="hero-tag">Говийн залуучуудыг дэлхийн тавцанд гарга</div>
+    <p class="hero-p">
+      <strong>Shambala2056 инженерийн суурины</strong> дижитал дэд төсөл. Дорноговийн залуучуудад мэргэжлийн CS2 сургалт олгож, eSports-оор тогтвортой орлого олох замыг нээнэ.
+    </p>
+    <div class="hero-btns">
+      <a class="btn-teal" href="#register">Одоо Элсэх</a>
+      <a class="btn-line" href="#about">Бидний тухай</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hstat"><div class="hstat-n" data-count="500">0<span class="teal">+</span></div><div class="hstat-l">Жилийн сурагч</div></div>
+    <div class="hstat"><div class="hstat-n" data-count="3">0</div><div class="hstat-l">Сургалтын хөтөлбөр</div></div>
+    <div class="hstat"><div class="hstat-n"><span class="sand">50</span></div><div class="hstat-l">га — Суурины нутаг</div></div>
+    <div class="hstat"><div class="hstat-n">2056</div><div class="hstat-l">Ирээдүйн он — том зорилго</div></div>
+  </div>
+</section>
+
+<div class="ctx-band rv">
+  <div class="ctx-item"><span class="ctx-icon">🏗️</span><div><div class="ctx-lbl">Харьяалах Төсөл</div><div class="ctx-val">Shambala2056 Инженерийн Суурин</div></div></div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item"><span class="ctx-icon">📍</span><div><div class="ctx-lbl">Байршил</div><div class="ctx-val">Дорноговь аймаг · Улаанбаатар</div></div></div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item"><span class="ctx-icon">🎯</span><div><div class="ctx-lbl">Зорилт бүлэг</div><div class="ctx-val">14–28 насны Дорноговийн залуучууд</div></div></div>
+  <div class="ctx-sep"></div>
+  <div class="ctx-item"><span class="ctx-icon">🌱</span><div><div class="ctx-lbl">Дэд Төслийн Чиглэл</div><div class="ctx-val">Дижитал / eSports / IT хөгжил</div></div></div>
+</div>
+
+<section class="sec about-sec" id="about">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="01">Бидний тухай</div>
+      <h2 class="sh">ЯАГААД <span class="teal">CS2</span><br><span class="stk">ACADEMY?</span></h2>
+    </div>
+    <div class="about-grid">
+      <div class="rv">
+        <p class="ab-txt"><strong>Shambala2056</strong> нь Дорноговь аймагт 50 га газарт байрлах, 36 жилийн урт хугацааны инженерийн суурины төсөл. Цөлжилтийн эсрэг ажиллахын зэрэгцээ байгалийн нөөц дуусаны дараа ч говийн залуучуудад тогтвортой орлогын эх үүсвэр бүтээхийг зорьдог.</p>
+        <p class="ab-txt">CS2 Academy нь энэ том зорилгын <strong>дижитал дэд төсөл</strong>. Дорноговийн залуучуудад дэлхийн зах зээлд нэвтрэх ур чадвар болох eSports мэргэжил олгоно. Газар, уул уурхайд тулаагүй — <strong>оюун ухаан, ур чадвараас</strong> орлого олох боломж.</p>
+        <p class="ab-txt">The MongolZ командын дэлхийн амжилтаас урам авсан Монголын CS2 зах зээл хурдтай өсч байна. Энэ давалгааг Дорноговийн залуучуудад хүртээмжтэй болгох нь манай үүрэг.</p>
+        <div class="sub-badge">CS2 Academy — Shambala2056 Дэд Төсөл</div>
+      </div>
+      <div class="rv">
+        <div class="parent-card">
+          <div class="pc-lbl">↑ Харьяалах Том Төсөл</div>
+          <div class="pc-name">SHAMBALA2056</div>
+          <div class="pc-sub">// ИНЖЕНЕРИЙН СУУРИН · ДОРНОГОВЬ · 2024–2056</div>
+          <div class="pc-row"><span class="pc-l">Талбай</span><span class="pc-v">50 га · Дорноговь аймаг</span></div>
+          <div class="pc-row"><span class="pc-l">Хугацаа</span><span class="pc-v">36 жилийн урт хугацааны төлөвлөгөө</span></div>
+          <div class="pc-row"><span class="pc-l">Үндсэн зорилго</span><span class="pc-v">Цөлжилт сааруулах + тогтвортой эдийн засаг</span></div>
+          <div class="pc-row"><span class="pc-l">Чиглэлүүд</span><span class="pc-v">Биоинженерчлэл, IT, сэргээгдэх эрчим хүч, судалгаа</span></div>
+          <div class="pc-row"><span class="pc-l">CS2 Academy</span><span class="pc-v">Дижитал дэд төсөл — eSports хөгжил</span></div>
+          <div class="pc-row"><span class="pc-l">Instagram</span><span class="pc-v">@shambala2056</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec prog-sec" id="programs">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="02">Сургалтын хөтөлбөр</div>
+      <h2 class="sh">ГУРВАН <span class="teal">ТҮВШНИЙ</span><br><span class="stk">ХӨТӨЛБӨР</span></h2>
+      <p class="sp">Туршлагаасаа хамаарч тохирох хөтөлбөрөө сонгоно уу.</p>
+    </div>
+    <div class="prog-grid rv">
+      <div class="prog p1">
+        <div class="prog-bar"></div>
+        <div class="prog-head">
+          <div class="prog-tag">Түвшин I · Суурь</div>
+          <div class="prog-name">BRONZE</div>
+          <div class="prog-mn">Шинэ тоглогчдод зориулсан</div>
+          <div class="prog-price">₮180,000 <small>/ сар</small></div>
+        </div>
+        <div class="prog-body">
+          <ul class="prog-list">
+            <li><span class="pck">✓</span><span>Aim болон механикийн суурь</span></li>
+            <li><span class="pck">✓</span><span>Counter-strafing, spray pattern</span></li>
+            <li><span class="pck">✓</span><span>Үндсэн газрын зургийн мэдлэг</span></li>
+            <li><span class="pck">✓</span><span>Анхдагч utility хэрэглэх</span></li>
+            <li><span class="pck">✓</span><span>8 долоо хоногийн хөтөлбөр</span></li>
+          </ul>
+          <button class="prog-btn" onclick="pick('BRONZE')">Сонгох →</button>
+        </div>
+      </div>
+      <div class="prog p2">
+        <div class="prog-bar"></div>
+        <div class="prog-head">
+          <div class="prog-tag">Түвшин II · Дунд</div>
+          <div class="prog-name">SILVER</div>
+          <div class="prog-mn">Суурь мэдлэгтэй тоглогчдод</div>
+          <div class="prog-price">₮280,000 <small>/ сар</small></div>
+        </div>
+        <div class="prog-body">
+          <ul class="prog-list">
+            <li><span class="pck">✓</span><span>Advanced aim — flick, tracking</span></li>
+            <li><span class="pck">✓</span><span>Map control болон rotation</span></li>
+            <li><span class="pck">✓</span><span>Тактикийн ойлголт, execute</span></li>
+            <li><span class="pck">✓</span><span>Demo review болон анализ</span></li>
+            <li><span class="pck">✓</span><span>12 долоо хоногийн хөтөлбөр</span></li>
+          </ul>
+          <button class="prog-btn" onclick="pick('SILVER')">Сонгох →</button>
+        </div>
+      </div>
+      <div class="prog p3">
+        <div class="prog-bar"></div>
+        <div class="prog-rec">Санал болгох</div>
+        <div class="prog-head">
+          <div class="prog-tag">Түвшин III · Мэргэжлийн</div>
+          <div class="prog-name">GOLD</div>
+          <div class="prog-mn">Pro тамирчин болохыг зорьсон</div>
+          <div class="prog-price">₮420,000 <small>/ сар</small></div>
+        </div>
+        <div class="prog-body">
+          <ul class="prog-list">
+            <li><span class="pck">✓</span><span>Pro-level utility болон IGL</span></li>
+            <li><span class="pck">✓</span><span>Anti-strat болон read</span></li>
+            <li><span class="pck">✓</span><span>Scrimmage + тэмцээний бэлтгэл</span></li>
+            <li><span class="pck">✓</span><span>1-on-1 хувийн коуч</span></li>
+            <li><span class="pck">✓</span><span>eSports recruitment дэмжлэг</span></li>
+          </ul>
+          <button class="prog-btn" onclick="pick('GOLD')">Сонгох →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec curr-sec" id="curriculum">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="03">Хичээлийн агуулга</div>
+      <h2 class="sh">БҮРЭН <span class="stk">ХӨТӨЛБӨР</span></h2>
+      <p class="sp">Олон улсын стандарт, Монгол хэлтэй орчноор.</p>
+    </div>
+    <div class="curr-grid rv">
+      <div class="cmod"><div class="cmod-n">01</div><div class="cmod-title">Aim Fundamentals</div><ul class="cmod-list"><li>Crosshair placement онол</li><li>Sensitivity тохиргоо</li><li>Flick болон tracking</li><li>Burst vs spray</li></ul></div>
+      <div class="cmod"><div class="cmod-n">02</div><div class="cmod-title">Movement Science</div><ul class="cmod-list"><li>Counter-strafing техник</li><li>Peek mechanics</li><li>Jiggle болон jump peek</li><li>Sound footstep</li></ul></div>
+      <div class="cmod"><div class="cmod-n">03</div><div class="cmod-title">Map Mastery</div><ul class="cmod-list"><li>Mirage, Inferno, Dust2</li><li>Anubis, Nuke, Ancient</li><li>Map control философи</li><li>CT / T side ялгаа</li></ul></div>
+      <div class="cmod"><div class="cmod-n">04</div><div class="cmod-title">Utility Usage</div><ul class="cmod-list"><li>Smoke lineups 100+</li><li>Molotov control</li><li>Flash setup болон blind</li><li>Util baiting стратеги</li></ul></div>
+      <div class="cmod"><div class="cmod-n">05</div><div class="cmod-title">Economy & Strategy</div><ul class="cmod-list"><li>Buy/eco/force шийдвэр</li><li>Pistol round стратеги</li><li>5v4, 4v3 advantage</li><li>Тэмцээний meta</li></ul></div>
+      <div class="cmod"><div class="cmod-n">06</div><div class="cmod-title">Mental & Team</div><ul class="cmod-list"><li>Tilt management</li><li>Callout болон shotcall</li><li>Багийн харилцааны дэг</li><li>VOD review методологи</li></ul></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec coach-sec">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="04">Дасгалжуулагчид</div>
+      <h2 class="sh">МАНАЙ <span class="teal">КОУЧУУД</span></h2>
+    </div>
+    <div class="coach-grid rv">
+      <div class="coach"><div class="coach-av" style="background:linear-gradient(135deg,#004030,#00c8a0)">SB</div><div class="coach-name">Shambala</div><div class="coach-handle">@shambala2056</div><div class="coach-role">Ерөнхий коуч · Стратеги · Академийн үүсгэн байгуулагч</div><div class="coach-rank">FACEIT LV 10</div></div>
+      <div class="coach"><div class="coach-av" style="background:linear-gradient(135deg,#203040,#6090c0)">AW</div><div class="coach-name">AwpMaster</div><div class="coach-handle">@awp_mn</div><div class="coach-role">AWP мэргэжилтэн · Rifle коуч</div><div class="coach-rank">GLOBAL ELITE</div></div>
+      <div class="coach"><div class="coach-av" style="background:linear-gradient(135deg,#102018,#22c55e)">ZR</div><div class="coach-name">ZeroRecoil</div><div class="coach-handle">@zerorecoil</div><div class="coach-role">Aim коуч · Utility мэргэжилтэн</div><div class="coach-rank">PREMIER 25K+</div></div>
+      <div class="coach"><div class="coach-av" style="background:linear-gradient(135deg,#301010,#e05820)">NX</div><div class="coach-name">NexusIGL</div><div class="coach-handle">@nexus_igl</div><div class="coach-role">IGL · Тактикийн зөвлөх</div><div class="coach-rank">ESL PRO LEAGUE</div></div>
+    </div>
+  </div>
+</section>
+
+<div class="mission rv">
+  <div class="ms-in">
+    <div class="ms-tag">// Shambala2056 · Дэд Төслийн Зорилго</div>
+    <h2 class="ms-h">ГОВИЙН ЗАЛУУС<br><span class="sand">ДЭЛХИЙН ТАВЦАНД</span></h2>
+    <p class="ms-p">Байгалийн нөөцөд тулаагүй, газар нутагт хамааралгүй — зөвхөн оюун ухаан, ур чадвараар орлого олох боломж бол eSports. Дорноговийн 14–28 насны залуучуудад энэ замыг нээх нь Shambala2056 CS2 Academy-н үүрэг.</p>
+  </div>
+</div>
+
+<section class="sec reg-sec" id="register">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="05">Элсэлт</div>
+      <h2 class="sh">БҮРТГЭЛИЙН <span class="teal">МАЯГТ</span></h2>
+    </div>
+    <div class="reg-grid">
+      <div class="rv">
+        <div class="ri-title">Академид элсэж, Дорноговийн eSports хөгжилд нэгд.</div>
+        <div class="ri-body">Маягтыг бөглөж илгээгээрэй. Бид 24 цагийн дотор холбоо барина. Дорноговийн залуучуудад тусгай нөхцөл олгоно.</div>
+        <div class="ri-detail">
+          <div class="rd"><div class="rd-l">Академи</div><div class="rd-v">Shambala2056 CS2 Academy</div></div>
+          <div class="rd"><div class="rd-l">Байршил</div><div class="rd-v">Улаанбаатар + Дорноговь (онлайн боломжтой)</div></div>
+          <div class="rd"><div class="rd-l">Нас</div><div class="rd-v">14 болон түүнээс дээш</div></div>
+          <div class="rd"><div class="rd-l">Хариу</div><div class="rd-v">24 цагийн дотор</div></div>
+          <div class="rd"><div class="rd-l">Холбоо</div><div class="rd-v">@shambala2056</div></div>
+        </div>
+      </div>
+      <div class="rv">
+        <div id="regWrap">
+          <div id="regBody" class="rform">
+            <div class="frow" style="margin-bottom:1px">
+              <div class="fgrp"><div class="flbl">Овог</div><input class="finp" type="text" id="ln" placeholder="Бат"></div>
+              <div class="fgrp"><div class="flbl">Нэр</div><input class="finp" type="text" id="fn" placeholder="Болд"></div>
+            </div>
+            <div class="frow" style="margin-bottom:1px">
+              <div class="fgrp"><div class="flbl">Имэйл</div><input class="finp" type="email" id="em" placeholder="name@email.com"></div>
+              <div class="fgrp"><div class="flbl">Утас</div><input class="finp" type="tel" id="ph" placeholder="+976 9900 0000"></div>
+            </div>
+            <div class="fgrp" style="margin-bottom:1px">
+              <div class="flbl">Аймаг / Байршил</div>
+              <select class="fsel" id="loc">
+                <option value="">— сонгох —</option>
+                <option>Дорноговь аймаг — Сайншанд</option>
+                <option>Дорноговь аймаг — Бусад сум</option>
+                <option>Улаанбаатар</option>
+                <option>Бусад аймаг</option>
+              </select>
+            </div>
+            <div class="fgrp" style="margin-bottom:1px">
+              <div class="flbl">Одоогийн ранк</div>
+              <select class="fsel" id="rnk">
+                <option value="">— сонгох —</option>
+                <option>Бүртгэлгүй / Шинэ</option>
+                <option>Silver I–IV</option>
+                <option>Gold Nova I–III</option>
+                <option>Master Guardian</option>
+                <option>Legendary Eagle+</option>
+                <option>Supreme / Global Elite</option>
+                <option>Premier 5k–15k</option>
+                <option>Premier 15k+</option>
+              </select>
+            </div>
+            <div style="margin-bottom:1px">
+              <div class="flbl" style="border:1px solid var(--ln);border-bottom:none;background:var(--bg2)">Хөтөлбөр сонгох</div>
+              <div class="prog-radios">
+                <input type="radio" name="prog" id="pb" class="pr-radio" value="BRONZE — ₮180,000/сар">
+                <label class="pr-lbl" for="pb">BRONZE</label>
+                <input type="radio" name="prog" id="ps" class="pr-radio" value="SILVER — ₮280,000/сар">
+                <label class="pr-lbl" for="ps">SILVER</label>
+                <input type="radio" name="prog" id="pg" class="pr-radio" value="GOLD — ₮420,000/сар">
+                <label class="pr-lbl" for="pg">GOLD</label>
+              </div>
+            </div>
+            <div class="fgrp" style="margin-bottom:1px">
+              <div class="flbl">Steam / FACEIT нэр (заавал биш)</div>
+              <input class="finp" type="text" id="stm" placeholder="steamcommunity.com/id/...">
+            </div>
+            <div class="fgrp" style="margin-bottom:1px">
+              <div class="flbl">Зорилго / Нэмэлт</div>
+              <textarea class="fta" id="msg" placeholder="Жишээ: FACEIT level 8 хүрэх, мэргэжлийн тамирчин болох..."></textarea>
+            </div>
+            <div class="ferr" id="ferr"></div>
+            <button class="fsub" onclick="doReg()">ЭЛСЭЛТ ИЛГЭЭХ →</button>
+          </div>
+          <div class="fsuccess" id="fsuccess">
+            <span class="fsuccess-icon">✓</span>
+            <div class="fsuccess-title">БҮРТГЭЛ АМЖИЛТТАЙ</div>
+            <div class="fsuccess-text" id="fst"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec faq-sec">
+  <div class="si">
+    <div class="rv">
+      <div class="slbl" data-n="06">Түгээмэл асуулт</div>
+      <h2 class="sh">АСУУЛТ <span class="teal">&</span> ХАРИУЛТ</h2>
+    </div>
+    <div class="faq-list rv">
+      <div class="faq-item">
+        <div class="faq-q" onclick="faq(this)">Shambala2056 CS2 Academy яагаад Дорноговийн дэд төсөл вэ?<span class="faq-ic">+</span></div>
+        <div class="faq-a">Shambala2056 инженерийн суурин нь Дорноговийн залуучуудад байгалийн нөөцөд тулаагүй тогтвортой орлогын эх үүсвэр бүтээхийг зорьдог. eSports бол газар, уул уурхайд хамааралгүй — зөвхөн ур чадвараас хамаарах дижитал эдийн засаг. CS2 Academy нь тэр том зорилгын дэд төсөл.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="faq(this)">Дорноговийн залуучуудад онцгой нөхцөл байдаг уу?<span class="faq-ic">+</span></div>
+        <div class="faq-a">Тийм. Дорноговь аймгийн бүртгэлтэй тоглогчид онлайн хөтөлбөрт тусгай хөнгөлөлтийн нөхцөлөөр элсэх боломжтой. Дорноговийн залуучуудыг дэмжих нь манай үндсэн зорилго.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="faq(this)">Хичээл онлайн байдаг уу? Сайншандаас суралцах боломжтой юу?<span class="faq-ic">+</span></div>
+        <div class="faq-a">Тийм, хичээлийн ихэнх хэсэг Discord болон онлайн платформоор явагдах тул Сайншанд болон Дорноговийн аль ч суманд интернэт холболт байвал элсэх боломжтой. 7 хоног бүрийн Бямба гаригийн офлайн хичээл Улаанбаатарт болдог.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="faq(this)">Сургалтыг дүүргэсний дараа ямар боломж нээгдэх вэ?<span class="faq-ic">+</span></div>
+        <div class="faq-a">Shambala2056 CS2 Academy-ийн гэрчилгээ, Монголын CS2 pro team болон клубуудтай холбох дэмжлэг, болон Shambala2056 инженерийн суурины дижитал экосистемийн нэг хэсэг болох боломж нээгдэнэ. Шилдэг төгсөгчид коуч, зохион байгуулагч болох эрх авна.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="faq(this)">Төлбөрийг хэрхэн төлөх вэ?<span class="faq-ic">+</span></div>
+        <div class="faq-a">Khan Bank, Golomt Bank дансаар болон QPay, SocialPay апп-уудаар төлөх боломжтой. Бүртгэл баталгаажсаны дараа дэлгэрэнгүй мэдээллийг имэйлээр илгээнэ.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-l">
+    <span class="foot-parent">Shambala2056 · Инженерийн Суурин · Дорноговь</span>
+    <span class="foot-brand">CS2 ACADEMY</span>
+  </div>
+  <div class="foot-r">© 2026 — Дэд Төсөл · Дижитал / eSports</div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(e=>e.forEach(x=>x.isIntersecting&&x.target.classList.add('on')),{threshold:.07});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+function runCount(el,target){
+  const suf=el.querySelector('.teal,.sand');const sufH=suf?suf.outerHTML:'';let v=0;
+  const t=setInterval(()=>{v+=target/60;if(v>=target){v=target;clearInterval(t);}el.innerHTML=Math.round(v).toLocaleString()+sufH;},18);
+}
+const cio=new IntersectionObserver(e=>{e.forEach(x=>{if(!x.isIntersecting)return;x.target.querySelectorAll('[data-count]').forEach(el=>runCount(el,+el.dataset.count));cio.unobserve(x.target);});},{threshold:.3});
+document.querySelectorAll('.hero-right').forEach(el=>cio.observe(el));
+
+function pick(name){
+  const map={BRONZE:'pb',SILVER:'ps',GOLD:'pg'};
+  const el=document.getElementById(map[name]);if(el)el.checked=true;
+  document.getElementById('register').scrollIntoView({behavior:'smooth'});
+}
+
+function faq(el){
+  const item=el.parentElement;const open=item.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(i=>i.classList.remove('open'));
+  if(!open)item.classList.add('open');
+}
+
+function doReg(){
+  const ln=document.getElementById('ln').value.trim();
+  const fn=document.getElementById('fn').value.trim();
+  const em=document.getElementById('em').value.trim();
+  const ph=document.getElementById('ph').value.trim();
+  const loc=document.getElementById('loc').value;
+  const rnk=document.getElementById('rnk').value;
+  const prog=document.querySelector('input[name="prog"]:checked')?.value||'';
+  const err=document.getElementById('ferr');
+  err.style.display='none';
+  const checks=[[!ln||!fn,'Нэрээ бүтнээр оруулна уу.'],[!em||!em.includes('@'),'Зөв имэйл хаяг оруулна уу.'],[!ph,'Утасны дугаараа оруулна уу.'],[!loc,'Байршлаа сонгоно уу.'],[!rnk,'Одоогийн ранкаа сонгоно уу.'],[!prog,'Хөтөлбөр сонгоно уу.']];
+  for(const[bad,msg]of checks){if(bad){err.textContent=msg;err.style.display='block';return;}}
+  document.getElementById('regBody').style.display='none';
+  document.getElementById('fsuccess').style.display='block';
+  document.getElementById('fst').innerHTML=`<strong style="color:var(--wht)">${ln} ${fn}</strong>-н бүртгэл хүлээн авлаа.<br>Байршил: <strong style="color:var(--sand)">${loc}</strong><br>Хөтөлбөр: <strong style="color:var(--teal)">${prog}</strong><br><br><strong>${em}</strong>-д <strong style="color:var(--teal)">24 цагийн дотор</strong> хариу илгээнэ.<br><br><span style="font-family:var(--fm);font-size:.7rem;color:var(--dim)">// SHAMBALA2056 · ГОВИЙН ЗАЛУУС ДЭЛХИЙН ТАВЦАНД //</span>`;
+}
+</script>
+</body>
+</html>

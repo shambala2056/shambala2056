@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="mn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Partner Program — Shambala2056 CS2 Academy</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink:    #0a0a0b;
+  --ink2:   #111114;
+  --ink3:   #18181d;
+  --wire:   #232328;
+  --wire2:  #2e2e36;
+  --dim:    #52525e;
+  --mid:    #8888a0;
+  --light:  #d4d4e0;
+  --white:  #f0f0f4;
+  --fire:   #ff4d00;
+  --fire2:  #ff7733;
+  --gold:   #c8a050;
+  --gold2:  #e8c070;
+  --silver: #909cb0;
+  --bronze: #a07050;
+  --green:  #22c55e;
+  --fd: 'Bebas Neue', sans-serif;
+  --fb: 'DM Sans', sans-serif;
+  --fm: 'DM Mono', monospace;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--ink);color:var(--light);font-family:var(--fb);font-weight:300;line-height:1.7;overflow-x:hidden}
+
+/* noise */
+body::before{content:'';position:fixed;inset:0;z-index:9000;pointer-events:none;opacity:.022;
+background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+background-size:180px 180px}
+
+/* NAV */
+nav{position:fixed;top:0;inset-x:0;z-index:500;height:56px;display:flex;align-items:center;justify-content:space-between;padding:0 48px;border-bottom:1px solid var(--wire);background:rgba(10,10,11,.96);backdrop-filter:blur(20px)}
+.nav-logo{font-family:var(--fd);font-size:1.35rem;letter-spacing:3px;color:var(--white);text-decoration:none;display:flex;align-items:center;gap:10px}
+.nav-dot{width:6px;height:6px;border-radius:50%;background:var(--fire);animation:pdot 2s infinite}
+@keyframes pdot{0%,100%{box-shadow:0 0 0 0 rgba(255,77,0,.6)}50%{box-shadow:0 0 0 5px rgba(255,77,0,0)}}
+.nav-links{display:flex;gap:36px;list-style:none}
+.nav-links a{font-family:var(--fm);font-size:.7rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);text-decoration:none;transition:color .2s}
+.nav-links a:hover{color:var(--white)}
+.nav-cta{font-family:var(--fm);font-size:.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;color:var(--ink);background:var(--fire);padding:9px 22px;border:none;cursor:pointer;text-decoration:none;transition:background .15s}
+.nav-cta:hover{background:var(--fire2)}
+
+/* HERO */
+.hero{min-height:100svh;display:grid;grid-template-columns:1fr 400px;align-items:end;padding:56px 48px 72px;position:relative;overflow:hidden;border-bottom:1px solid var(--wire)}
+.hero-bg{position:absolute;inset:0;pointer-events:none}
+.hero-bg::before{content:'';position:absolute;top:-10%;right:-5%;width:55%;height:130%;background:linear-gradient(160deg,rgba(255,77,0,.06) 0%,transparent 60%);clip-path:polygon(18% 0,100% 0,100% 100%,0% 100%)}
+.hero-bg::after{content:'';position:absolute;inset:0;background-image:linear-gradient(var(--wire) 1px,transparent 1px),linear-gradient(90deg,var(--wire) 1px,transparent 1px);background-size:80px 80px;opacity:.16;mask-image:linear-gradient(160deg,transparent 25%,black 75%)}
+
+.hero-left{position:relative;z-index:2}
+.hero-eyebrow{font-family:var(--fm);font-size:.68rem;font-weight:500;letter-spacing:3px;text-transform:uppercase;color:var(--fire);margin-bottom:28px;display:flex;align-items:center;gap:12px}
+.hero-eyebrow::before{content:'';display:block;width:32px;height:1px;background:var(--fire)}
+.hero-h1{font-family:var(--fd);font-size:clamp(4.5rem,10vw,9rem);line-height:.93;letter-spacing:2px;color:var(--white);margin-bottom:36px}
+.hero-h1 .fire{color:var(--fire)}
+.hero-h1 .stroke{color:transparent;-webkit-text-stroke:1px var(--wire2)}
+.hero-p{font-size:1rem;font-weight:300;color:var(--mid);max-width:480px;line-height:1.8;margin-bottom:44px}
+.hero-btns{display:flex;gap:16px;align-items:center}
+.btn-fire{font-family:var(--fm);font-size:.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:var(--fire);color:var(--ink);padding:14px 32px;border:none;cursor:pointer;text-decoration:none;display:inline-block;transition:background .15s,transform .1s}
+.btn-fire:hover{background:var(--fire2);transform:translateY(-1px)}
+.btn-wire{font-family:var(--fm);font-size:.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;background:transparent;color:var(--mid);padding:13px 32px;border:1px solid var(--wire2);cursor:pointer;text-decoration:none;display:inline-block;transition:all .15s}
+.btn-wire:hover{border-color:var(--light);color:var(--light)}
+
+.hero-right{position:relative;z-index:2;border-left:1px solid var(--wire);padding-left:48px;display:flex;flex-direction:column}
+.hstat{padding:28px 0;border-bottom:1px solid var(--wire)}
+.hstat:last-child{border-bottom:none}
+.hstat-n{font-family:var(--fd);font-size:3rem;letter-spacing:1px;color:var(--white);line-height:1;margin-bottom:5px}
+.hstat-n .fs{color:var(--fire)}
+.hstat-l{font-family:var(--fm);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+
+/* SECTION */
+.sec{padding:96px 48px;border-bottom:1px solid var(--wire);position:relative}
+.sec-in{max-width:1200px;margin:0 auto}
+.sec-lbl{font-family:var(--fm);font-size:.66rem;letter-spacing:3px;text-transform:uppercase;color:var(--dim);display:flex;align-items:center;gap:12px;margin-bottom:18px}
+.sec-lbl::before{content:attr(data-n);color:var(--fire);font-size:.62rem}
+.sec-h{font-family:var(--fd);font-size:clamp(2.4rem,5vw,4.8rem);line-height:.95;letter-spacing:1px;color:var(--white);margin-bottom:18px}
+.sec-h .stroke{color:transparent;-webkit-text-stroke:1px var(--wire2)}
+.sec-h .fire{color:var(--fire)}
+.sec-p{font-size:.97rem;color:var(--mid);line-height:1.8;max-width:520px}
+
+/* WHY */
+.why-sec{background:var(--ink2)}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--wire);border:1px solid var(--wire);margin-top:60px}
+.why-card{background:var(--ink2);padding:36px 32px;transition:background .2s;position:relative;overflow:hidden}
+.why-card::after{content:'';position:absolute;bottom:0;left:0;width:0;height:2px;background:var(--fire);transition:width .3s}
+.why-card:hover{background:var(--ink3)}
+.why-card:hover::after{width:100%}
+.why-num{font-family:var(--fd);font-size:3.8rem;color:var(--wire2);line-height:1;margin-bottom:18px;transition:color .2s}
+.why-card:hover .why-num{color:var(--fire)}
+.why-title{font-family:var(--fm);font-size:.78rem;font-weight:500;letter-spacing:1.5px;text-transform:uppercase;color:var(--white);margin-bottom:10px}
+.why-text{font-size:.88rem;color:var(--dim);line-height:1.75}
+
+/* TIERS */
+.tiers-sec{background:var(--ink)}
+.tiers-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--wire);border:1px solid var(--wire);margin-top:64px}
+.tier{background:var(--ink);display:flex;flex-direction:column;transition:background .2s;position:relative}
+.tier:hover{background:var(--ink2)}
+.tier-bar{height:3px}
+.tier.bronze .tier-bar{background:var(--bronze)}
+.tier.silver .tier-bar{background:var(--silver)}
+.tier.gold   .tier-bar{background:linear-gradient(90deg,var(--gold),var(--gold2))}
+.tier-head{padding:36px 32px 28px;border-bottom:1px solid var(--wire)}
+.tier-badge{font-family:var(--fm);font-size:.63rem;letter-spacing:3px;text-transform:uppercase;margin-bottom:18px;display:inline-block}
+.tier.bronze .tier-badge{color:var(--bronze)}
+.tier.silver .tier-badge{color:var(--silver)}
+.tier.gold   .tier-badge{color:var(--gold)}
+.tier-name{font-family:var(--fd);font-size:2.6rem;letter-spacing:1px;color:var(--white);line-height:1;margin-bottom:6px}
+.tier-mn{font-size:.85rem;color:var(--dim);margin-bottom:22px}
+.tier-price{font-family:var(--fd);font-size:2rem;letter-spacing:1px;color:var(--white)}
+.tier-price small{font-family:var(--fm);font-size:.68rem;color:var(--dim);font-weight:400;letter-spacing:1px;vertical-align:middle;margin-left:4px}
+.tier-body{padding:28px 32px 32px;flex:1;display:flex;flex-direction:column}
+.tier-feats{list-style:none;flex:1;margin-bottom:28px}
+.tier-feats li{font-size:.87rem;color:var(--mid);padding:10px 0;border-bottom:1px solid var(--wire);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
+.tier-feats li:last-child{border-bottom:none}
+.fck{color:var(--fire);font-size:.75rem;flex-shrink:0;margin-top:2px;font-weight:500}
+.fno{color:var(--wire2);font-size:.75rem;flex-shrink:0;margin-top:2px}
+.fno~span{color:var(--wire2)}
+.tier-btn{display:block;width:100%;font-family:var(--fm);font-size:.7rem;font-weight:500;letter-spacing:2px;text-transform:uppercase;padding:14px;border:1px solid var(--wire2);background:transparent;color:var(--mid);cursor:pointer;transition:all .2s;text-align:center}
+.tier.bronze .tier-btn:hover{border-color:var(--bronze);color:var(--bronze);background:rgba(160,112,80,.08)}
+.tier.silver .tier-btn:hover{border-color:var(--silver);color:var(--silver);background:rgba(144,156,176,.08)}
+.tier.gold .tier-btn{background:var(--gold);color:var(--ink);border-color:var(--gold)}
+.tier.gold .tier-btn:hover{background:var(--gold2);border-color:var(--gold2)}
+.tier-rec{position:absolute;top:14px;right:14px;font-family:var(--fm);font-size:.58rem;letter-spacing:2px;text-transform:uppercase;color:var(--ink);background:var(--gold);padding:3px 10px}
+
+/* REACH */
+.reach-sec{background:var(--ink3)}
+.reach-row{display:grid;grid-template-columns:repeat(6,1fr);gap:1px;background:var(--wire);border:1px solid var(--wire);margin-top:64px}
+.rcell{background:var(--ink3);padding:36px 20px;text-align:center}
+.rcell-n{font-family:var(--fd);font-size:2.5rem;letter-spacing:1px;color:var(--white);display:block;margin-bottom:8px}
+.rcell-n .fs{color:var(--fire)}
+.rcell-l{font-family:var(--fm);font-size:.62rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim)}
+
+/* PROCESS */
+.process-sec{background:var(--ink2)}
+.steps{margin-top:64px;border-top:1px solid var(--wire)}
+.step{display:grid;grid-template-columns:110px 1fr 1fr;gap:44px;padding:42px 0;border-bottom:1px solid var(--wire);align-items:start;transition:background .2s}
+.step:hover{background:rgba(255,77,0,.02)}
+.step-num{font-family:var(--fd);font-size:4rem;color:var(--wire2);line-height:1;letter-spacing:1px}
+.step-sub{font-family:var(--fm);font-size:.65rem;letter-spacing:2px;text-transform:uppercase;color:var(--fire);margin-bottom:6px}
+.step-title{font-family:var(--fd);font-size:1.7rem;letter-spacing:1px;color:var(--white);margin-bottom:10px}
+.step-text{font-size:.88rem;color:var(--dim);line-height:1.8}
+
+/* CONTACT */
+.contact-sec{background:var(--ink)}
+.contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:96px;align-items:start;margin-top:64px}
+.ci-title{font-family:var(--fd);font-size:2rem;letter-spacing:1px;color:var(--white);margin-bottom:14px;line-height:1.1}
+.ci-body{font-size:.92rem;color:var(--dim);line-height:1.8;margin-bottom:36px}
+.ci-detail{border-top:1px solid var(--wire);padding-top:24px}
+.cd-row{display:flex;gap:16px;padding:13px 0;border-bottom:1px solid var(--wire);font-size:.87rem}
+.cd-lbl{font-family:var(--fm);font-size:.63rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);width:76px;flex-shrink:0;padding-top:2px}
+.cd-val{color:var(--light)}
+
+/* FORM */
+.cform{display:flex;flex-direction:column;gap:1px}
+.frow{display:grid;grid-template-columns:1fr 1fr;gap:1px}
+.fgrp{display:flex;flex-direction:column;gap:0}
+.flbl{font-family:var(--fm);font-size:.63rem;letter-spacing:2px;text-transform:uppercase;color:var(--dim);padding:10px 14px 0;background:var(--ink2);border:1px solid var(--wire);border-bottom:none}
+.finp,.fsel,.fta{background:var(--ink2);border:1px solid var(--wire);border-top:none;color:var(--light);padding:10px 14px 13px;font-family:var(--fb);font-size:.92rem;font-weight:300;outline:none;appearance:none;-webkit-appearance:none;width:100%;transition:border-color .15s}
+.finp:focus,.fsel:focus,.fta:focus{border-color:var(--fire);z-index:1;position:relative}
+.finp::placeholder,.fta::placeholder{color:var(--wire2)}
+.fsel option{background:var(--ink2)}
+.fta{resize:none;min-height:96px}
+.tier-radios{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--wire);border:1px solid var(--wire)}
+.t-radio{display:none}
+.t-radio-lbl{display:block;padding:13px;background:var(--ink2);font-family:var(--fm);font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim);cursor:pointer;text-align:center;transition:all .15s}
+.t-radio:checked+.t-radio-lbl{background:var(--fire);color:var(--ink)}
+.t-radio-lbl:hover{color:var(--white)}
+.fsub{font-family:var(--fm);font-size:.7rem;font-weight:500;letter-spacing:2.5px;text-transform:uppercase;color:var(--ink);background:var(--fire);border:none;padding:15px;cursor:pointer;width:100%;transition:background .15s}
+.fsub:hover{background:var(--fire2)}
+.ferr{font-family:var(--fm);font-size:.68rem;color:#f87171;letter-spacing:1px;padding:8px 0;display:none}
+.fsuccess{display:none;padding:56px 0;text-align:center}
+.fsuccess-icon{font-family:var(--fd);font-size:4.5rem;color:var(--green);display:block;margin-bottom:14px;animation:pop .4s ease-out}
+@keyframes pop{from{transform:scale(.5);opacity:0}to{transform:scale(1);opacity:1}}
+.fsuccess-title{font-family:var(--fd);font-size:1.9rem;letter-spacing:2px;color:var(--white);margin-bottom:10px}
+.fsuccess-text{font-size:.9rem;color:var(--dim);line-height:1.8}
+
+/* FOOTER */
+footer{border-top:1px solid var(--wire);padding:32px 48px;display:flex;align-items:center;justify-content:space-between;background:var(--ink)}
+.foot-logo{font-family:var(--fd);font-size:1.1rem;letter-spacing:3px;color:var(--white)}
+.foot-copy{font-family:var(--fm);font-size:.63rem;letter-spacing:1.5px;text-transform:uppercase;color:var(--dim)}
+
+/* REVEAL */
+.rv{opacity:0;transform:translateY(22px);transition:opacity .65s ease,transform .65s ease}
+.rv.on{opacity:1;transform:none}
+
+@media(max-width:900px){
+  nav{padding:0 20px}
+  .nav-links{display:none}
+  .hero{grid-template-columns:1fr;padding:70px 20px 52px}
+  .hero-right{border-left:none;border-top:1px solid var(--wire);padding-left:0;padding-top:28px;margin-top:36px;flex-direction:row;flex-wrap:wrap}
+  .hstat{flex:1;min-width:110px;padding:18px 12px;border-bottom:none;border-right:1px solid var(--wire)}
+  .hstat:last-child{border-right:none}
+  .sec{padding:56px 20px}
+  .why-grid,.tiers-grid{grid-template-columns:1fr}
+  .reach-row{grid-template-columns:repeat(3,1fr)}
+  .step{grid-template-columns:60px 1fr;gap:20px}
+  .step>*:last-child{grid-column:2}
+  .step-num{font-size:2.6rem}
+  .contact-grid{grid-template-columns:1fr;gap:44px}
+  footer{flex-direction:column;gap:10px;text-align:center;padding:24px 20px}
+  .frow{grid-template-columns:1fr}
+  .tier-radios{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#top"><span class="nav-dot"></span>SHAMBALA2056</a>
+  <ul class="nav-links">
+    <li><a href="#why">Яагаад</a></li>
+    <li><a href="#tiers">Багцууд</a></li>
+    <li><a href="#process">Процесс</a></li>
+    <li><a href="#contact">Холбогдох</a></li>
+  </ul>
+  <a class="nav-cta" href="#contact">Санал Илгээх</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg"></div>
+  <div class="hero-left">
+    <div class="hero-eyebrow">Partner Program 2026</div>
+    <h1 class="hero-h1">
+      <span class="stroke">ESPORTS</span><br>
+      INVEST<br>
+      <span class="fire">MONGOLIA</span>
+    </h1>
+    <p class="hero-p">Монголын хамгийн хурдан өсч буй CS2 сургалтын платформд таны брэнд нэрийг нэмж, 500+ залуу тоглогч болон 12,000+ дагагч сүлжээнд хүрнэ.</p>
+    <div class="hero-btns">
+      <a class="btn-fire" href="#tiers">Багцууд харах</a>
+      <a class="btn-wire" href="#contact">Холбогдох</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hstat">
+      <div class="hstat-n" data-count="500">0<span class="fs">+</span></div>
+      <div class="hstat-l">Сурагч / жил</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n" data-count="12000">0<span class="fs">+</span></div>
+      <div class="hstat-l">Сарын хүрэлт</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n" data-count="8">0</div>
+      <div class="hstat-l">Тэмцээн / жил</div>
+    </div>
+    <div class="hstat">
+      <div class="hstat-n" data-count="95">0<span class="fs">%</span></div>
+      <div class="hstat-l">Амжилтын хувь</div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="sec why-sec" id="why">
+  <div class="sec-in">
+    <div class="rv">
+      <div class="sec-lbl" data-n="01">Яагаад ивээн тэтгэх вэ</div>
+      <h2 class="sec-h">ТАНЫ БРЭНД<br><span class="stroke">ХААНА ГАРНА</span></h2>
+    </div>
+    <div class="why-grid rv">
+      <div class="why-card">
+        <div class="why-num">01</div>
+        <div class="why-title">Нэр Дагуул</div>
+        <div class="why-text">Академийн бүх материал, тэмцээн, тэмдэглэгээнд таны брэндийн нэр дагалдана. "X компанийн дэмжлэгтэй Shambala2056 CS2 Academy."</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">02</div>
+        <div class="why-title">Зорилтот Насны Бүлэг</div>
+        <div class="why-text">14–28 насны идэвхтэй хэрэглэгч, худалдан авах шийдвэрт шууд нөлөөлдөг, технологид дуртай Монгол залуучуудад хүрнэ.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">03</div>
+        <div class="why-title">Олон Суваг</div>
+        <div class="why-text">Discord, YouTube, Facebook, TikTok, Instagram — нийт 5 дижитал суваг дээр тогтмол контент. Нэг хөрөнгө оруулалт, олон цэгийн хүрэлт.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">04</div>
+        <div class="why-title">Тэмцээний Visibility</div>
+        <div class="why-text">Жилд 8 тэмцээн. LED дэлгэц, баннер, MC дурдалт, stream overlay — тэмцээн бүрт live хүрэлт.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">05</div>
+        <div class="why-title">Нийгмийн Үнэ Цэн</div>
+        <div class="why-text">Монголын залуучуудын eSports хөгжилд хувь нэмэр оруулж буй компани гэсэн эерэг дүр төрх — PR мэдэгдэл дагалдана.</div>
+      </div>
+      <div class="why-card">
+        <div class="why-num">06</div>
+        <div class="why-title">Ил Тод Тайлан</div>
+        <div class="why-text">Impression, reach, engagement, click-through бүхий PDF тайлан сар бүр. Хөрөнгө оруулалтын үр дүнг тодорхой хэмжинэ.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIERS -->
+<section class="sec tiers-sec" id="tiers">
+  <div class="sec-in">
+    <div class="rv">
+      <div class="sec-lbl" data-n="02">Тэтгэлгийн Багцууд</div>
+      <h2 class="sec-h">ГУРВАН<br><span class="fire">ШАТНЫ</span> БАГЦ</h2>
+      <p class="sec-p">₮5–20 сая хэмжээний жижиг болон дунд бизнест зориулсан. Нэг жилийн гэрээ.</p>
+    </div>
+    <div class="tiers-grid rv">
+
+      <div class="tier bronze">
+        <div class="tier-bar"></div>
+        <div class="tier-head">
+          <div class="tier-badge">Bronze Partner</div>
+          <div class="tier-name">BRONZE</div>
+          <div class="tier-mn">Хүрэл Ивээн Тэтгэгч</div>
+          <div class="tier-price">₮5,000,000 <small>/ жил</small></div>
+        </div>
+        <div class="tier-body">
+          <ul class="tier-feats">
+            <li><span class="fck">✓</span><span>Академийн нэрэнд брэнд нэр</span></li>
+            <li><span class="fck">✓</span><span>Вебсайтад лого + холбоос</span></li>
+            <li><span class="fck">✓</span><span>Discord-д тэтгэгчийн дурдалт</span></li>
+            <li><span class="fck">✓</span><span>Сарын 1 пост (Facebook / IG)</span></li>
+            <li><span class="fck">✓</span><span>Тэмцээнд баннер байршуулалт</span></li>
+            <li><span class="fck">✓</span><span>Сар тутмын тайлан</span></li>
+            <li><span class="fno">—</span><span>YouTube видео дурдалт</span></li>
+            <li><span class="fno">—</span><span>Exclusive тэмцээний нэр</span></li>
+          </ul>
+          <button class="tier-btn" onclick="pick('BRONZE','₮5,000,000')">Энэ Багц Сонгох →</button>
+        </div>
+      </div>
+
+      <div class="tier silver">
+        <div class="tier-bar"></div>
+        <div class="tier-head">
+          <div class="tier-badge">Silver Partner</div>
+          <div class="tier-name">SILVER</div>
+          <div class="tier-mn">Мөнгөн Ивээн Тэтгэгч</div>
+          <div class="tier-price">₮10,000,000 <small>/ жил</small></div>
+        </div>
+        <div class="tier-body">
+          <ul class="tier-feats">
+            <li><span class="fck">✓</span><span>Академийн нэрэнд брэнд нэр (мөнгөн)</span></li>
+            <li><span class="fck">✓</span><span>Вебсайт hero-д том лого</span></li>
+            <li><span class="fck">✓</span><span>Discord VIP тэтгэгч байр</span></li>
+            <li><span class="fck">✓</span><span>Сарын 3 пост (FB / IG / TikTok)</span></li>
+            <li><span class="fck">✓</span><span>Тэмцээнд LED баннер + MC дурдалт</span></li>
+            <li><span class="fck">✓</span><span>YouTube сар тутмын дурдалт</span></li>
+            <li><span class="fck">✓</span><span>Сарын тайлан + хагас жилийн дүн</span></li>
+            <li><span class="fno">—</span><span>Exclusive тэмцээний нэр</span></li>
+          </ul>
+          <button class="tier-btn" onclick="pick('SILVER','₮10,000,000')">Энэ Багц Сонгох →</button>
+        </div>
+      </div>
+
+      <div class="tier gold">
+        <div class="tier-bar"></div>
+        <div class="tier-rec">Санал болгох</div>
+        <div class="tier-head">
+          <div class="tier-badge">Gold Partner</div>
+          <div class="tier-name">GOLD</div>
+          <div class="tier-mn">Алтан Ивээн Тэтгэгч</div>
+          <div class="tier-price">₮20,000,000 <small>/ жил</small></div>
+        </div>
+        <div class="tier-body">
+          <ul class="tier-feats">
+            <li><span class="fck">✓</span><span>Академийн нэрэнд брэнд нэр (алтан)</span></li>
+            <li><span class="fck">✓</span><span>Бүх материалд тэргүүлэх лого</span></li>
+            <li><span class="fck">✓</span><span>Бүх суваг дахь байнгын дурдалт</span></li>
+            <li><span class="fck">✓</span><span>7 хоног бүрийн пост + Story</span></li>
+            <li><span class="fck">✓</span><span>YouTube бүр видео дурдалт</span></li>
+            <li><span class="fck">✓</span><span><strong>1 тэмцээн таны брэндийн нэрээр</strong></span></li>
+            <li><span class="fck">✓</span><span>Тэмцээнд exclusive stand + мерч</span></li>
+            <li><span class="fck">✓</span><span>PR мэдэгдэл + хэвлэл мэдээлэл</span></li>
+          </ul>
+          <button class="tier-btn" onclick="pick('GOLD','₮20,000,000')">Энэ Багц Сонгох →</button>
+        </div>
+      </div>
+
+    </div>
+    <p class="rv" style="margin-top:18px;font-family:var(--fm);font-size:.65rem;letter-spacing:1.5px;color:var(--dim);text-align:center">
+      ДЭЭРХИ БАГЦААС ӨӨР НӨХЦӨЛ ХҮСВЭЛ — ХОЛБОГДОНО УУ, ТУСГАЙ САНАЛЫГ БЭЛТГЭНЭ.
+    </p>
+  </div>
+</section>
+
+<!-- REACH -->
+<section class="sec reach-sec">
+  <div class="sec-in">
+    <div class="rv">
+      <div class="sec-lbl" data-n="03">Хүрэлтийн тоо</div>
+      <h2 class="sec-h">БРЭНД ХААНА<br><span class="stroke">ХҮРЭХ ВЭ</span></h2>
+    </div>
+    <div class="reach-row rv">
+      <div class="rcell"><span class="rcell-n" data-count="500">0<span class="fs">+</span></span><span class="rcell-l">Сурагч / жил</span></div>
+      <div class="rcell"><span class="rcell-n" data-count="12000">0<span class="fs">+</span></span><span class="rcell-l">Нийгмийн хүрэлт / сар</span></div>
+      <div class="rcell"><span class="rcell-n" data-count="3200">0<span class="fs">+</span></span><span class="rcell-l">Discord гишүүд</span></div>
+      <div class="rcell"><span class="rcell-n" data-count="8">0</span><span class="rcell-l">Тэмцээн / жил</span></div>
+      <div class="rcell"><span class="rcell-n" data-count="48">0</span><span class="rcell-l">YouTube видео / жил</span></div>
+      <div class="rcell"><span class="rcell-n" data-count="5000">0<span class="fs">+</span></span><span class="rcell-l">Тоглогчийн сүлжээ</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESS -->
+<section class="sec process-sec" id="process">
+  <div class="sec-in">
+    <div class="rv">
+      <div class="sec-lbl" data-n="04">Хэрхэн ажилладаг</div>
+      <h2 class="sec-h">ПАРТНЕРШИПИЙН<br><span class="stroke">ПРОЦЕСС</span></h2>
+    </div>
+    <div class="steps rv">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div><div class="step-sub">Эхний алхам</div><div class="step-title">Санал & Хэлэлцүүлэг</div></div>
+        <div class="step-text">Маягт илгээснээс хойш ажлын 2 өдрийн дотор бид холбоо барина. Зорилго, хүлээлт, тохиролцоог хамт тодорхойлж гэрээ байгуулна.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div><div class="step-sub">7 хоног</div><div class="step-title">Брэнд Нэгтгэл</div></div>
+        <div class="step-text">Лого, өнгөний код, материалыг хүлээн аваад вебсайт, Discord, нийгмийн сүлжээ, тэмцээний бүх материалд нэгтгэнэ.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div><div class="step-sub">Зарлал</div><div class="step-title">Олон Нийтэд Мэдээлнэ</div></div>
+        <div class="step-text">Хамтын ажиллагааг нийгмийн сүлжээнд тусгай пост болон PR мэдэгдлээр зарлана. Таны компанийн хуудас tag хийгдэнэ.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div><div class="step-sub">Тогтмол</div><div class="step-title">Сарын Тайлан</div></div>
+        <div class="step-text">Impression, reach, engagement, click-through зэрэг бүх метрикийг PDF тайланд хийж сар бүрийн эхэнд илгээнэ.</div>
+      </div>
+      <div class="step">
+        <div class="step-num">05</div>
+        <div><div class="step-sub">Жилийн эцэс</div><div class="step-title">Үр Дүн & Дараагийн Жил</div></div>
+        <div class="step-text">Жилийн ерөнхий үр дүнг хамт үнэлж, дараагийн жилийн стратегийг боловсруулна. Урт хугацааны хамтрагч болно.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="sec contact-sec" id="contact">
+  <div class="sec-in">
+    <div class="rv">
+      <div class="sec-lbl" data-n="05">Холбоо барих</div>
+      <h2 class="sec-h">САНАЛ<br><span class="fire">ИЛГЭЭХ</span></h2>
+    </div>
+    <div class="contact-grid">
+      <div class="rv">
+        <div class="ci-title">Хамтын ажиллагаа эхлүүлцгээе.</div>
+        <div class="ci-body">Маягтыг бөглөж илгээгээрэй. Бид ажлын 2 өдрийн дотор имэйл болон утсаар холбоо барина. Тусгай нөхцөл хүсвэл тэмдэглэлийн хэсэгт бичнэ үү.</div>
+        <div class="ci-detail">
+          <div class="cd-row"><div class="cd-lbl">Академи</div><div class="cd-val">Shambala2056 CS2 Academy</div></div>
+          <div class="cd-row"><div class="cd-lbl">Байршил</div><div class="cd-val">Улаанбаатар, Монгол</div></div>
+          <div class="cd-row"><div class="cd-lbl">Имэйл</div><div class="cd-val"><a href="/cdn-cgi/l/email-protection" class="__cf_email__" data-cfemail="30405142445e5542704358515d52515c51020005061e5d5e">[email&#160;protected]</a></div></div>
+          <div class="cd-row"><div class="cd-lbl">Хариу</div><div class="cd-val">Ажлын 2 өдөр</div></div>
+        </div>
+      </div>
+      <div class="rv">
+        <div id="cformWrap">
+          <div id="formBody" class="cform">
+            <div class="frow" style="margin-bottom:1px">
+              <div class="fgrp"><div class="flbl">Компанийн нэр</div><input class="finp" type="text" id="co" placeholder="Нэр ХХК"></div>
+              <div class="fgrp"><div class="flbl">Холбоо барих нэр</div><input class="finp" type="text" id="cn" placeholder="Нэр Овог"></div>
+            </div>
+            <div class="frow" style="margin-bottom:1px">
+              <div class="fgrp"><div class="flbl">Имэйл</div><input class="finp" type="email" id="ce" placeholder="info@company.mn"></div>
+              <div class="fgrp"><div class="flbl">Утас</div><input class="finp" type="tel" id="cp" placeholder="+976 9900 0000"></div>
+            </div>
+            <div style="margin-bottom:1px">
+              <div class="flbl" style="border:1px solid var(--wire);border-bottom:none">Сонирхсон багц</div>
+              <div class="tier-radios">
+                <input type="radio" name="tier" id="tb" class="t-radio" value="BRONZE — ₮5,000,000/жил">
+                <label class="t-radio-lbl" for="tb">🥉 BRONZE</label>
+                <input type="radio" name="tier" id="ts" class="t-radio" value="SILVER — ₮10,000,000/жил">
+                <label class="t-radio-lbl" for="ts">🥈 SILVER</label>
+                <input type="radio" name="tier" id="tg" class="t-radio" value="GOLD — ₮20,000,000/жил">
+                <label class="t-radio-lbl" for="tg">🥇 GOLD</label>
+              </div>
+            </div>
+            <div class="fgrp" style="margin-bottom:1px"><div class="flbl">Брэнд / Зорилго / Нэмэлт</div><textarea class="fta" id="cm" placeholder="Компанийн үйл ажиллагаа, хүлээлт, эсвэл тусгай хүсэлт..."></textarea></div>
+            <div class="ferr" id="ferr"></div>
+            <button class="fsub" onclick="doSubmit()">САНАЛ ИЛГЭЭХ →</button>
+          </div>
+          <div class="fsuccess" id="fsuccess">
+            <span class="fsuccess-icon">✓</span>
+            <div class="fsuccess-title">ХҮЛЭЭН АВЛАА</div>
+            <div class="fsuccess-text" id="fst"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="foot-logo">SHAMBALA2056</div>
+  <div class="foot-copy">© 2026 CS2 Academy — Partner Program — Ulaanbaatar, Mongolia</div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// reveal
+const io = new IntersectionObserver(e=>{e.forEach(x=>x.isIntersecting&&x.target.classList.add('on'))},{threshold:.08});
+document.querySelectorAll('.rv').forEach(el=>io.observe(el));
+
+// counters
+function runCount(el,target){
+  const suf=el.querySelector('.fs')?.outerHTML||'';
+  let v=0;
+  const t=setInterval(()=>{
+    v+=target/65; if(v>=target){v=target;clearInterval(t);}
+    el.innerHTML=Math.round(v).toLocaleString()+suf;
+  },18);
+}
+const cio=new IntersectionObserver(e=>{
+  e.forEach(x=>{
+    if(!x.isIntersecting)return;
+    x.target.querySelectorAll('[data-count]').forEach(el=>runCount(el,+el.dataset.count));
+    cio.unobserve(x.target);
+  });
+},{threshold:.3});
+document.querySelectorAll('.hero-right,.reach-row').forEach(el=>cio.observe(el));
+
+// tier pick
+function pick(name){
+  const map={BRONZE:'tb',SILVER:'ts',GOLD:'tg'};
+  const el=document.getElementById(map[name]);
+  if(el)el.checked=true;
+  document.getElementById('contact').scrollIntoView({behavior:'smooth'});
+}
+
+// submit
+function doSubmit(){
+  const co=document.getElementById('co').value.trim();
+  const cn=document.getElementById('cn').value.trim();
+  const ce=document.getElementById('ce').value.trim();
+  const cp=document.getElementById('cp').value.trim();
+  const tier=document.querySelector('input[name="tier"]:checked')?.value||'';
+  const err=document.getElementById('ferr');
+  err.style.display='none';
+  const checks=[[!co,'Компанийн нэрийг оруулна уу.'],[!cn,'Холбоо барих хүний нэрийг оруулна уу.'],[!ce||!ce.includes('@'),'Зөв имэйл хаяг оруулна уу.'],[!cp,'Утасны дугаараа оруулна уу.'],[!tier,'Сонирхсон багцаа сонгоно уу.']];
+  for(const[bad,msg]of checks){if(bad){err.textContent=msg;err.style.display='block';return;}}
+  document.getElementById('formBody').style.display='none';
+  document.getElementById('fsuccess').style.display='block';
+  document.getElementById('fst').innerHTML=`<strong style="color:var(--white)">${co}</strong>-н санал амжилттай
