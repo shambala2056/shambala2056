@@ -8,3 +8,9 @@ Thumbs.db
 
 # Logs
 *.log
+
+# Environment — Firebase нууц мэдээлэл
+.env
+
+# Build-ийн үед автоматаар үүсгэгддэг
+js/firebase-config.js
